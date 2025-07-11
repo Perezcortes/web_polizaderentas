@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Script from 'next/script';
+import Script from "next/script";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -17,12 +17,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Póliza de Rentas",
-  description: "Nuestra tecnología revoluciona la protección jurídica en el arrendamiento inmobiliario.",
-  metadataBase: new URL('https://polizaderentas.com'),
+  description:
+    "Nuestra tecnología revoluciona la protección jurídica en el arrendamiento inmobiliario.",
+  metadataBase: new URL("https://polizaderentas.com"),
   openGraph: {
-    images: '/almacenamiento/images/og.jpg',
-    url: 'https://polizaderentas.com/',
-    type: 'website',
+    images: "/almacenamiento/images/og.jpg",
+    url: "https://polizaderentas.com/",
+    type: "website",
   },
   keywords: "",
   authors: [],
@@ -36,18 +37,26 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <link rel="icon" href="/images/icon.png" type="image/gif" sizes="16x16" />
-        {/* CSS Files - Considera mover estos a un archivo global */}
-        <link href="/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="/css/plugins.css" rel="stylesheet" />
-        <link href="/css/swiper.css" rel="stylesheet" />
-        <link href="/css/style.css" rel="stylesheet" />
-        <link href="/css/coloring.css" rel="stylesheet" />
-        <link href="/css/estilos.css" rel="stylesheet" />
-        <link href="/css/colors/scheme-01.css" rel="stylesheet" id="colors" />
+        <link
+          rel="icon"
+          href="/images/icon.png"
+          type="image/gif"
+          sizes="16x16"
+        />
+
+        {/* CSS externos: asegúrate de tener estos archivos en /public/css/ */}
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/plugins.css" />
+        <link rel="stylesheet" href="/css/swiper.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/coloring.css" />
+        <link rel="stylesheet" href="/css/estilos.css" />
+        <link rel="stylesheet" href="/css/colors/scheme-01.css" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {/* Meta Pixel Code */}
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {/* Facebook Pixel */}
         <Script id="fb-pixel" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s){
@@ -63,14 +72,17 @@ export default function RootLayout({
             fbq('track', 'PageView');
           `}
         </Script>
-        <noscript>
-          <img height="1" width="1" style={{display:'none'}} 
-            src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1" 
-          />
-        </noscript>
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1" />`,
+          }}
+        />
 
-        {/* Google tag (gtag.js) */}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-3HT5BR97DT" strategy="afterInteractive" />
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-3HT5BR97DT"
+          strategy="afterInteractive"
+        />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
@@ -80,31 +92,32 @@ export default function RootLayout({
           `}
         </Script>
 
+        {/* Contenido */}
         <div id="wrapper">
           <Navbar />
           <main>{children}</main>
           <Footer />
         </div>
 
-        {/* Scripts al final del body */}
+        {/* Scripts personalizados al final */}
         <Script src="/js/plugins.js" strategy="lazyOnload" />
         <Script src="/js/designesia.js" strategy="lazyOnload" />
+        <Script src="/js/swiper.js" strategy="lazyOnload" />
         <Script src="/js/custom-marquee.js" strategy="lazyOnload" />
-        <Script src="/js/custom-swiper-1.js" strategy="lazyOnload" />
-        
+
+        {/* Metricool */}
         <Script id="metricool" strategy="afterInteractive">
           {`
-            function loadScript(a){
-              var b=document.getElementsByTagName("head")[0],
-              c=document.createElement("script");
-              c.type="text/javascript",
-              c.src="https://tracker.metricool.com/resources/be.js",
-              c.onreadystatechange=a,
-              c.onload=a,
-              b.appendChild(c)
+            function loadScript(callback){
+              var head = document.getElementsByTagName("head")[0];
+              var script = document.createElement("script");
+              script.type = "text/javascript";
+              script.src = "https://tracker.metricool.com/resources/be.js";
+              script.onload = callback;
+              head.appendChild(script);
             }
             loadScript(function(){
-              beTracker.t({hash:"e7b9beb5ef17e78a4fad2f402d03de0f"})
+              beTracker.t({hash:"e7b9beb5ef17e78a4fad2f402d03de0f"});
             });
           `}
         </Script>

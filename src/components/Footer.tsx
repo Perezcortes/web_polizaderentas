@@ -1,5 +1,6 @@
 // components/Footer.tsx
 import React from "react";
+import Link from 'next/link';
 
 export default function Footer() {
   return (
@@ -42,7 +43,7 @@ export default function Footer() {
                 <div className="widget">
                   <h5>Enlaces</h5>
                   <ul>
-                    <li><a href="nosotros.php">Nosotros</a></li>
+                    <li><a href="about/">Nosotros</a></li>
                     <li><a href="servicios.php">Servicios Jurídicos</a></li>
                     <li><a href="poliza_juridica.php">Póliza Jurídica</a></li>
                     <li><a href="convenio_prevencion.php">Convenio de Prevención de Conflictos</a></li>

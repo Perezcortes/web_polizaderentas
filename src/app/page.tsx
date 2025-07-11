@@ -1,7 +1,15 @@
-// app/page.tsx
+'use client';
+
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay, Parallax } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/parallax';
+import 'swiper/css/scrollbar';
 
 export default function Home() {
   return (
@@ -29,132 +37,125 @@ export default function Home() {
         <link href="/css/estilos.css" rel="stylesheet" type="text/css" />
         {/* color scheme */}
         <link id="colors" href="/css/colors/scheme-01.css" rel="stylesheet" type="text/css" />
-
-        {/* Meta Pixel Code */}
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            !function(f,b,e,v,n,t,s){
-              if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)
-            }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '217583817249537');
-            fbq('track', 'PageView');
-          `
-        }} />
-        <noscript>
-          <img height="1" width="1" style={{display:'none'}} 
-            src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1" 
-          />
-        </noscript>
-
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3HT5BR97DT"></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-3HT5BR97DT');
-          `
-        }} />
       </Head>
 
       <div id="wrapper">
         <div className="no-bottom no-top" id="content">
           <div id="top"></div>
 
+          {/* Hero Slider - Convertido a React Swiper */}
           <section className="text-light no-top no-bottom position-relative z-1000">
             <div className="v-center">
-              <div className="swiper">
-                <div className="swiper-wrapper">
-                  {/* Slides */}
-                  <div className="swiper-slide" data-jarallax-element="150">
-                    <div className="swiper-inner" data-bgimage="url(/images/slider/banner-1.jpg)">
-                      <div className="sw-caption">
-                        <div className="container">
-                          <div className="row gx-5 align-items-center">
-                            <div className="col-lg-7 mb-sm-30 offset-lg-1">
-                              <h1 className="slider-title font-50 d-none d-sm-block">Póliza de Rentas</h1>
-                              <h2 className="slider-title font-40 d-block d-sm-none">Póliza de Rentas</h2>
-                              <p className="fs-4 wow fadeInRight">
-                                ¡Prevenir problemas, preveer riesgos y proteger a nuestros clientes! Descubre cómo convertimos la <b>seguridad de tus rentas</b> en una experiencia excepcional para ti.
-                              </p>
-                              <Link className="btn-main mb10 mt20" href="/poliza_juridica">Conoce más</Link>
-                            </div>
+              <Swiper
+                modules={[Navigation, Pagination, Autoplay, Parallax]}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                direction="horizontal"
+                loop={true}
+                speed={1200}
+                parallax={true}
+                pagination={{ el: '.swiper-pagination', type: 'fraction', clickable: true }}
+                navigation={{
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+                }}
+                className="swiper"
+              >
+                <SwiperSlide>
+                  <div 
+                    className="swiper-inner"
+                    style={{
+                      backgroundImage: 'url(/images/slider/banner-1.jpg)',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                  >
+                    <div className="sw-caption">
+                      <div className="container">
+                        <div className="row gx-5 align-items-center">
+                          <div className="col-lg-7 mb-sm-30 offset-lg-1">
+                            <h1 className="slider-title font-50 d-none d-sm-block">Póliza de Rentas</h1>
+                            <h2 className="slider-title font-40 d-block d-sm-none">Póliza de Rentas</h2>
+                            <p className="fs-4 wow fadeInRight">
+                              ¡Prevenir problemas, preveer riesgos y proteger a nuestros clientes! Descubre cómo convertimos la <b>seguridad de tus rentas</b> en una experiencia excepcional para ti.
+                            </p>
+                            <Link className="btn-main mb10 mt20" href="/poliza_juridica">Conoce más</Link>
                           </div>
                         </div>
                       </div>
-                      <div className="sw-overlay s2"></div>
                     </div>
+                    <div className="sw-overlay s2"></div>
                   </div>
+                </SwiperSlide>
 
-                  {/* Slides */}
-                  <div className="swiper-slide" data-jarallax-element="150">
-                    <div className="swiper-inner" data-bgimage="url(/images/slider/banner-4.jpg)">
-                      <div className="sw-caption">
-                        <div className="container">
-                          <div className="row gx-5 align-items-center">
-                            <div className="col-lg-7 mb-sm-30 offset-lg-1">
-                              <h2 className="slider-title font-50 d-none d-sm-block">La Red de Abogados más GRANDE de México</h2>
-                              <h2 className="slider-title font-40 d-block d-sm-none">La Red de Abogados más GRANDE de México</h2>
-                              <p className="fs-4 wow fadeInRight">
-                                Investigación profesional al inquilino, contrato de arrendamiento profesional y acompañamiento desde la firma y en toda la vigencia del contrato.
-                                <br />
-                                <br />
-                                ¡Encuentra tu sucursal más cercana y haz de tus rentas un negocio tranquilo!
-                              </p>
-                              <Link className="btn-main mb10" href="/sucursales">Ubica tu sucursal</Link>
-                            </div>
+                <SwiperSlide>
+                  <div 
+                    className="swiper-inner"
+                    style={{
+                      backgroundImage: 'url(/images/slider/banner-4.jpg)',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                  >
+                    <div className="sw-caption">
+                      <div className="container">
+                        <div className="row gx-5 align-items-center">
+                          <div className="col-lg-7 mb-sm-30 offset-lg-1">
+                            <h2 className="slider-title font-50 d-none d-sm-block">La Red de Abogados más GRANDE de México</h2>
+                            <h2 className="slider-title font-40 d-block d-sm-none">La Red de Abogados más GRANDE de México</h2>
+                            <p className="fs-4 wow fadeInRight">
+                              Investigación profesional al inquilino, contrato de arrendamiento profesional y acompañamiento desde la firma y en toda la vigencia del contrato.
+                              <br />
+                              <br />
+                              ¡Encuentra tu sucursal más cercana y haz de tus rentas un negocio tranquilo!
+                            </p>
+                            <Link className="btn-main mb10" href="/sucursales">Ubica tu sucursal</Link>
                           </div>
                         </div>
                       </div>
-                      <div className="sw-overlay s2"></div>
                     </div>
+                    <div className="sw-overlay s2"></div>
                   </div>
+                </SwiperSlide>
 
-                  {/* Slides */}
-                  <div className="swiper-slide" data-jarallax-element="150">
-                    <div className="swiper-inner" data-bgimage="url(/images/slider/banner-5.jpg)">
-                      <div className="sw-caption">
-                        <div className="container">
-                          <div className="row gx-5 align-items-center">
-                            <div className="col-lg-7 mb-sm-30 offset-lg-1">
-                              <h2 className="slider-title font-50 d-none d-sm-block">¡Únete a nuestro éxito y haz crecer tu negocio con una franquicia de Póliza de Rentas!</h2>
-                              <h2 className="slider-title font-40 d-block d-sm-none">¡Únete a nuestro éxito y haz crecer tu negocio con una franquicia de Póliza de Rentas!</h2>
-                              <p className="fs-4 wow fadeInRight">
-                                Se líder en protección jurídico inmobiliaria en tu Ciudad, genera ingresos con un negocio probado y exitoso en todo México
-                              </p>
-                              <Link className="btn-main mb10" href="/sucursales">Sucursales</Link>
-                              <Link className="btn-line mb10" href="/franquicias#conoce">Conoce más</Link>
-                            </div>
+                <SwiperSlide>
+                  <div 
+                    className="swiper-inner"
+                    style={{
+                      backgroundImage: 'url(/images/slider/banner-5.jpg)',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                  >
+                    <div className="sw-caption">
+                      <div className="container">
+                        <div className="row gx-5 align-items-center">
+                          <div className="col-lg-7 mb-sm-30 offset-lg-1">
+                            <h2 className="slider-title font-50 d-none d-sm-block">¡Únete a nuestro éxito y haz crecer tu negocio con una franquicia de Póliza de Rentas!</h2>
+                            <h2 className="slider-title font-40 d-block d-sm-none">¡Únete a nuestro éxito y haz crecer tu negocio con una franquicia de Póliza de Rentas!</h2>
+                            <p className="fs-4 wow fadeInRight">
+                              Se líder en protección jurídico inmobiliaria en tu Ciudad, genera ingresos con un negocio probado y exitoso en todo México
+                            </p>
+                            <Link className="btn-main mb10" href="/sucursales">Sucursales</Link>
+                            <Link className="btn-line mb10" href="/franquicias#conoce">Conoce más</Link>
                           </div>
                         </div>
                       </div>
-                      <div className="sw-overlay s2"></div>
                     </div>
+                    <div className="sw-overlay s2"></div>
                   </div>
-                </div>
-                {/* If we need pagination */}
-                <div className="swiper-pagination"></div>
+                </SwiperSlide>
+              </Swiper>
 
-                {/* If we need navigation buttons */}
-                <div className="swiper-button-prev d-block d-lg-none mt-60"></div>
-                <div className="swiper-button-next d-block d-lg-none mt-60"></div>
-
-                <div className="swiper-button-prev d-none d-lg-block"></div>
-                <div className="swiper-button-next d-none d-lg-block"></div>
-
-                {/* If we need scrollbar */}
-                <div className="swiper-scrollbar"></div>
-              </div>
+              <div className="swiper-button-prev d-block d-lg-none mt-60"></div>
+              <div className="swiper-button-next d-block d-lg-none mt-60"></div>
+              <div className="swiper-button-prev d-none d-lg-block"></div>
+              <div className="swiper-button-next d-none d-lg-block"></div>
+              <div className="swiper-pagination"></div>
+              <div className="swiper-scrollbar"></div>
             </div>
           </section>
 
+          {/* Resto del contenido se mantiene igual */}
           <section className="text-light bg-dark-1">
             <div className="container">
               <div className="row">
@@ -426,9 +427,7 @@ export default function Home() {
       {/* Javascript Files */}
       <script src="/js/plugins.js"></script>
       <script src="/js/designesia.js"></script>
-      <script src="/js/swiper.js"></script>
       <script src="/js/custom-marquee.js"></script>
-      <script src="/js/custom-swiper-1.js"></script>
       <script dangerouslySetInnerHTML={{
         __html: `
           function loadScript(a){
