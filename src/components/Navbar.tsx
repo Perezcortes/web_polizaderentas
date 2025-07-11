@@ -196,22 +196,22 @@ export default function Navbar() {
                         </Link>
                       </li>
                       <li>
-                        <Link href="/poliza_juridica" style={{ color: "white" }}>
+                        <Link href="/services/poliza_juridica" style={{ color: "white" }}>
                           Póliza de Protección Jurídica
                         </Link>
                       </li>
                       <li>
-                        <Link href="/convenio_transaccion" style={{ color: "white" }}>
+                        <Link href="/services/convenio_transaccion" style={{ color: "white" }}>
                           Convenio de transacción
                         </Link>
                       </li>
                       <li>
-                        <Link href="/convenio_prevencion" style={{ color: "white" }}>
+                        <Link href="/services/convenio_prevencion" style={{ color: "white" }}>
                           Convenio de Prevención de Conflictos
                         </Link>
                       </li>
                       <li>
-                        <Link href="/firma_electronica" style={{ color: "white" }}>
+                        <Link href="/services/firma_electronica" style={{ color: "white" }}>
                           Firma Electrónica
                         </Link>
                       </li>
@@ -235,7 +235,7 @@ export default function Navbar() {
                 </ul>
 
                 <div className="menu_side_area">
-                  <Link href="/franchises" className="btn-main">
+                  <Link href="/franquicias" className="btn-main">
                     Franquicias
                   </Link>
                   <span id="menu-btn"></span>

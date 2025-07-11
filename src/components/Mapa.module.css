@@ -1,0 +1,48 @@
+.mapContainer {
+  width: 100%;
+  margin: 2rem 0;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mexicoMap {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+}
+
+.mexicoMap path {
+  fill: #e9ecef;
+  stroke: #fff;
+  stroke-width: 1px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.mexicoMap path:hover {
+  fill: #ced4da;
+  stroke-width: 2px;
+}
+
+.mexicoMap path.estado-activo {
+  fill: #4CAF50;
+  stroke: #2E7D32;
+}
+
+.mexicoMap path.estado-activo:hover {
+  fill: #3e8e41;
+  stroke-width: 2px;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .mapContainer {
+    padding: 10px;
+  }
+  
+  .mexicoMap {
+    max-height: 400px;
+  }
+}
