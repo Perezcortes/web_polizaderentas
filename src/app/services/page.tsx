@@ -39,31 +39,31 @@ export default function ServicesPage() {
       icon: '/images/svg/collaboration-svgrepo-com.svg',
       title: 'Póliza Jurídica',
       desc: 'Nos encargamos de protegerte como propietario y garantizar la seguridad de tu inmueble durante todo el arrendamiento.',
-      link: '/poliza_juridica'
+      link: '/services/poliza_juridica'
     },
     {
       icon: '/images/svg/embedded-live-content-svgrepo-com.svg',
       title: 'Convenio de Prevención de Conflictos',
       desc: 'Asegura que tu contrato de arrendamiento tenga validez legal mediante un convenio de mediación privada, evitando conflictos antes de que sucedan.',
-      link: '/convenio_prevencion'
+      link: '/services/convenio_prevencion'
     },
     {
       icon: '/images/svg/lock-svgrepo-com.svg',
       title: 'Convenio de Transacción',
       desc: 'Te apoyamos con un Convenio de Transacción firmado ante Notario Público, brindándote máxima seguridad jurídica.',
-      link: '/convenio_transaccion'
+      link: '/services/convenio_transaccion'
     },
     {
       icon: '/images/svg/search.svg',
       title: 'Investigación de inquilinos',
       desc: 'Evaluamos la solvencia de cada persona asegurando su capacidad de pago mensual, brindando tranquilidad y seguridad.',
-      link: '/investigacion_inquilinos'
+      link: '/services/investigacion_inquilinos'
     },
     {
       icon: '/images/svg/firma.svg',
       title: 'Firma electrónica',
       desc: 'Usamos Firma Electrónica Avanzada certificada para contratos de arrendamiento válidos ante la Secretaría de Economía.',
-      link: '/firma_electronica'
+      link: '/services/firma_electronica'
     }
   ];
 
