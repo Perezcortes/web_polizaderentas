@@ -10,6 +10,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/parallax';
 import 'swiper/css/scrollbar';
+import './styles.css';
 
 export default function Home() {
   return (
@@ -43,7 +44,7 @@ export default function Home() {
         <div className="no-bottom no-top" id="content">
           <div id="top"></div>
 
-          {/* Hero Slider - Convertido a React Swiper */}
+          {/* Hero Slider */}
           <section className="text-light no-top no-bottom position-relative z-1000">
             <div className="v-center">
               <Swiper
@@ -61,14 +62,7 @@ export default function Home() {
                 className="swiper"
               >
                 <SwiperSlide>
-                  <div 
-                    className="swiper-inner"
-                    style={{
-                      backgroundImage: 'url(/images/slider/banner-1.jpg)',
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center'
-                    }}
-                  >
+                  <div className="swiper-inner slide-banner-1">
                     <div className="sw-caption">
                       <div className="container">
                         <div className="row gx-5 align-items-center">
@@ -78,7 +72,7 @@ export default function Home() {
                             <p className="fs-4 wow fadeInRight">
                               ¡Prevenir problemas, preveer riesgos y proteger a nuestros clientes! Descubre cómo convertimos la <b>seguridad de tus rentas</b> en una experiencia excepcional para ti.
                             </p>
-                            <Link className="btn-main mb10 mt20" href="/poliza_juridica">Conoce más</Link>
+                            <Link className="btn-main mb10 mt20" href="/services/poliza_juridica">Conoce más</Link>
                           </div>
                         </div>
                       </div>
@@ -88,14 +82,7 @@ export default function Home() {
                 </SwiperSlide>
 
                 <SwiperSlide>
-                  <div 
-                    className="swiper-inner"
-                    style={{
-                      backgroundImage: 'url(/images/slider/banner-4.jpg)',
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center'
-                    }}
-                  >
+                  <div className="swiper-inner slide-banner-2">
                     <div className="sw-caption">
                       <div className="container">
                         <div className="row gx-5 align-items-center">
@@ -118,14 +105,7 @@ export default function Home() {
                 </SwiperSlide>
 
                 <SwiperSlide>
-                  <div 
-                    className="swiper-inner"
-                    style={{
-                      backgroundImage: 'url(/images/slider/banner-5.jpg)',
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center'
-                    }}
-                  >
+                  <div className="swiper-inner slide-banner-3">
                     <div className="sw-caption">
                       <div className="container">
                         <div className="row gx-5 align-items-center">
@@ -155,7 +135,7 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Resto del contenido se mantiene igual */}
+          {/* Sección de protección */}
           <section className="text-light bg-dark-1">
             <div className="container">
               <div className="row">
@@ -194,6 +174,7 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Sección de estadísticas */}
           <section>
             <div className="container">
               <div className="row">
@@ -228,6 +209,7 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Sección de pasos */}
           <section className="no-top no-bottom">
             <div className="container">
               <div className="row g-4">
@@ -269,13 +251,14 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Sección Quiénes somos */}
           <section className="bg-dark-1 text-light">
             <div className="container">
               <div className="row align-items-center gx-5">
                 <div className="col-lg-6 mb-sm-20 position-relative">
                   <div className="images-deco-1">
-                    <Image src="/images/misc/1.jpg" width={500} height={300} className="d-img-1 wow zoomIn" data-wow-delay="0s" alt="Quienes somos" />
-                    <Image src="/images/misc/2.png" width={200} height={100} className="shadow-sm d-img-2 wow zoomIn" data-wow-delay=".5s" data-jarallax-element="100" alt="logo" />
+                    <Image src="/images/misc/1.jpg" width={627} height={419} className="d-img-1 wow zoomIn" data-wow-delay="0s" alt="Quienes somos" />
+                    <Image src="/images/misc/2.png" width={200} height={200} className="shadow-sm d-img-2 wow zoomIn" data-wow-delay=".5s" data-jarallax-element="100" alt="logo" />
                     <div className="d-img-3 bg-color wow zoomIn" data-wow-delay=".6s" data-jarallax-element="-50"></div>
                   </div>
                 </div>
@@ -287,13 +270,14 @@ export default function Home() {
                   <p><b>¿Eres asesor inmobiliario?</b> Trabajamos contigo para asegurar el éxito de tus operaciones de arrendamiento. Con nuestro apoyo, no solo ofrecerás un servicio más profesional y de mejor calidad a tus clientes, sino que también simplificará tus actividades diarias al contar con el respaldo de un equipo experto en prevención y resolución de conflictos.</p>
                   <hr className="s2" />
                   <div className="spacer-10"></div>
-                  <Link className="btn-main mb10" href="/nosotros">Conoce más</Link>
+                  <Link className="btn-main mb10" href="/about">Conoce más</Link>
                   <Link className="btn-main mb10" href="/sucursales">Nuestras sucursales</Link>
                 </div>
               </div>
             </div>
           </section>
 
+          {/* Sección FAQ */}
           <section className="bo-bottom">
             <div className="container">
               <div className="row align-items-center gx-5">
@@ -340,6 +324,7 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Sección Blog */}
           <section className="bo-bottom">
             <div className="container">
               <div className="row">
@@ -348,8 +333,6 @@ export default function Home() {
                   <h2 className="wow fadeInUp" data-wow-delay=".2s">Blog y noticias</h2>
                 </div>
               </div>
-            </div>
-            <div className="container">
               <div className="row sequence">
                 <div className="col-lg-4 col-sm-6 mb-sm-20 gallery-item">
                   <div className="de-item wow jarallax">
@@ -396,6 +379,7 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Sección final */}
           <section className="no-top">
             <div className="container">
               <div className="row">

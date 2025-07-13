@@ -99,12 +99,6 @@ export default function RootLayout({
           <Footer />
         </div>
 
-        {/* Scripts personalizados al final */}
-        <Script src="/js/plugins.js" strategy="lazyOnload" />
-        <Script src="/js/designesia.js" strategy="lazyOnload" />
-        <Script src="/js/swiper.js" strategy="lazyOnload" />
-        <Script src="/js/custom-marquee.js" strategy="lazyOnload" />
-
         {/* Metricool */}
         <Script id="metricool" strategy="afterInteractive">
           {`

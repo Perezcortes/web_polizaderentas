@@ -1,4 +1,5 @@
-// components/Footer.tsx
+"use client";
+
 import React from "react";
 import Link from 'next/link';
 
@@ -32,7 +33,7 @@ export default function Footer() {
                 </a>
               </div>
               <div className="mt-4">
-                <a href="franquicias.php" className="btn-main">Adquiere tus franquicias</a>
+                <a href="/franquicias" className="btn-main">Adquiere tus franquicias</a>
               </div>
             </div>
           </div>
@@ -43,15 +44,15 @@ export default function Footer() {
                 <div className="widget">
                   <h5>Enlaces</h5>
                   <ul>
-                    <li><a href="about/">Nosotros</a></li>
-                    <li><a href="servicios.php">Servicios Jurídicos</a></li>
-                    <li><a href="poliza_juridica.php">Póliza Jurídica</a></li>
-                    <li><a href="convenio_prevencion.php">Convenio de Prevención de Conflictos</a></li>
-                    <li><a href="convenio_transaccion.php">Convenio de Transacción</a></li>
-                    <li><a href="investigacion_inquilinos.php">Investigación de Inquilinos</a></li>
-                    <li><a href="sucursales.php">Sucursales</a></li>
-                    <li><a href="blog.php">Blog</a></li>
-                    <li><a href="contacto.php">Contacto</a></li>
+                    <li><a href="/about">Nosotros</a></li>
+                    <li><a href="/services">Servicios Jurídicos</a></li>
+                    <li><a href="/services/poliza_juridica">Póliza Jurídica</a></li>
+                    <li><a href="/services/convenio_prevencion">Convenio de Prevención de Conflictos</a></li>
+                    <li><a href="/services/convenio_transaccion">Convenio de Transacción</a></li>
+                    <li><a href="/services/investigacion_inquilinos">Investigación de Inquilinos</a></li>
+                    <li><a href="/sucursales">Sucursales</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/contacto">Contacto</a></li>
                   </ul>
                 </div>
               </div>
@@ -94,8 +95,8 @@ export default function Footer() {
             <h5>Accesos</h5>
             <div className="row">
               <div className="col-lg-4">
-                <a className="btn-main mb10 mt20" href="sucursales.php">Sucursales</a>
-                <a className="btn-main mb10" href="poliza_juridica.php">Sistema Polizas</a>
+                <a className="btn-main mb10 mt20" href="/sucursales">Sucursales</a>
+                <a className="btn-main mb10" href="/services/poliza_juridica">Sistema Polizas</a>
               </div>
             </div>
           </div>
