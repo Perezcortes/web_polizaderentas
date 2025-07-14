@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Script from 'next/script';
 import Swal from 'sweetalert2';
 import '../contacto/style.css';
+import { useReInitVisualScripts } from '../../hooks/useReInitVisualScripts';
+
 
 // Extiende la interfaz Window para incluir jQuery y $
 declare global {
@@ -16,6 +18,8 @@ declare global {
 }
 
 export default function ContactPage() {
+    useReInitVisualScripts();
+
     const [formData, setFormData] = useState({
         nombre: '',
         apellido: '',
@@ -89,14 +93,6 @@ export default function ContactPage() {
                 <link rel="preload" href="https://code.jquery.com/jquery-3.6.0.min.js" as="script" />
                 <link rel="preload" href="/css/bootstrap.min.css" as="style" />
                 <link rel="preload" href="/css/style.css" as="style" />
-
-                {/* Hojas de estilo */}
-                <link rel="stylesheet" href="/css/bootstrap.min.css" />
-                <link rel="stylesheet" href="/css/plugins.css" />
-                <link rel="stylesheet" href="/css/swiper.css" />
-                <link rel="stylesheet" href="/css/style.css" />
-                <link rel="stylesheet" href="/css/coloring.css" />
-                <link rel="stylesheet" href="/css/colors/scheme-01.css" />
 
                 {/* Meta Pixel Code */}
                 <script dangerouslySetInnerHTML={{

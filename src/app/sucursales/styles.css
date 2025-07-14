@@ -1,0 +1,89 @@
+.mapContainer {
+  width: 100%;
+  margin: 2rem 0;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mexicoMap {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+}
+
+.mexicoMap path {
+  fill: #e9ecef;
+  stroke: #fff;
+  stroke-width: 1px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.mexicoMap path:hover {
+  fill: #ced4da;
+  stroke-width: 2px;
+}
+
+.mexicoMap path.estado-activo {
+  fill: #4CAF50;
+  stroke: #2E7D32;
+}
+
+.mexicoMap path.estado-activo:hover {
+  fill: #3e8e41;
+  stroke-width: 2px;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .mapContainer {
+    padding: 10px;
+  }
+  
+  .mexicoMap {
+    max-height: 400px;
+  }
+}
+/* Estilos para la paginación */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.pagination button {
+  color: rgba(187, 161, 85);
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid rgba(187, 161, 85);
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: rgba(187, 161, 85);
+  color: white;
+}
+
+.pagination .active {
+  background-color: rgba(187, 161, 85);
+  color: white;
+  font-weight: bold;
+}
+
+.pagination .disabled {
+  color: #ccc;
+  border-color: #ccc;
+  pointer-events: none;
+}
+
+.pagination .ellipsis {
+  padding: 8px 12px;
+  color: #666;
+}

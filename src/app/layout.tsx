@@ -46,6 +46,11 @@ export default function RootLayout({
 
         {/* CSS externos: asegúrate de tener estos archivos en /public/css/ */}
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/bootstrap.rtl.min.css" />
+        <link rel="stylesheet" href="/css/jquery.countdown.css" />
+        <link rel="stylesheet" href="/css/jqvmap.css" />
+        <link rel="stylesheet" href="/css/mdb.min.css" />
+        <link rel="stylesheet" href="/css/mdb.rtl.min.css" />
         <link rel="stylesheet" href="/css/plugins.css" />
         <link rel="stylesheet" href="/css/swiper.css" />
         <link rel="stylesheet" href="/css/style.css" />
@@ -98,6 +103,12 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
         </div>
+
+        {/* Scripts personalizados al final */}
+        <Script src="/js/plugins.js" strategy="lazyOnload" />
+        <Script src="/js/designesia.js" strategy="lazyOnload" /> {/* ultima seccion video de youtube */}
+        <Script src="/js/swiper.js" strategy="lazyOnload" />
+        <Script src="/js/custom-marquee.js" strategy="lazyOnload" />
 
         {/* Metricool */}
         <Script id="metricool" strategy="afterInteractive">
