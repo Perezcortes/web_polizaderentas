@@ -11,8 +11,12 @@ import 'swiper/css/pagination';
 import 'swiper/css/parallax';
 import 'swiper/css/scrollbar';
 import './styles.css';
+import { useReInitVisualScripts } from '../hooks/useReInitVisualScripts';
+
 
 export default function Home() {
+  useReInitVisualScripts();
+
   return (
     <>
       <Head>
@@ -28,16 +32,6 @@ export default function Home() {
         <meta property="og:url" content="https://polizaderentas.com/" />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://polizaderentas.com/" />
-
-        {/* CSS Files */}
-        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap" />
-        <link href="/css/plugins.css" rel="stylesheet" type="text/css" />
-        <link href="/css/swiper.css" rel="stylesheet" type="text/css" />
-        <link href="/css/style.css" rel="stylesheet" type="text/css" />
-        <link href="/css/coloring.css" rel="stylesheet" type="text/css" />
-        <link href="/css/estilos.css" rel="stylesheet" type="text/css" />
-        {/* color scheme */}
-        <link id="colors" href="/css/colors/scheme-01.css" rel="stylesheet" type="text/css" />
       </Head>
 
       <div id="wrapper">
@@ -257,8 +251,8 @@ export default function Home() {
               <div className="row align-items-center gx-5">
                 <div className="col-lg-6 mb-sm-20 position-relative">
                   <div className="images-deco-1">
-                    <Image src="/images/misc/1.jpg" width={627} height={419} className="d-img-1 wow zoomIn" data-wow-delay="0s" alt="Quienes somos" />
-                    <Image src="/images/misc/2.png" width={200} height={200} className="shadow-sm d-img-2 wow zoomIn" data-wow-delay=".5s" data-jarallax-element="100" alt="logo" />
+                    <Image src="/images/misc/1.jpg" width={481} height={321} className="d-img-1 wow zoomIn" data-wow-delay="0s" alt="Quienes somos" />
+                    <Image src="/images/misc/2.png" width={175} height={175} className="shadow-sm d-img-2 wow zoomIn" data-wow-delay=".5s" data-jarallax-element="100" alt="logo" />
                     <div className="d-img-3 bg-color wow zoomIn" data-wow-delay=".6s" data-jarallax-element="-50"></div>
                   </div>
                 </div>

@@ -59,7 +59,7 @@ export default function SucursalesPage() {
   const handleStateClick = (stateId: string) => {
     setSelectedState(stateId);
     setShowAll(false);
-    
+
     // Scroll to branches section
     const branchesDiv = document.getElementById('branches');
     if (branchesDiv) {
@@ -72,11 +72,38 @@ export default function SucursalesPage() {
     setShowAll(false);
   };
 
+  const ITEMS_PER_PAGE = 6;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Aplica filtro
   const filteredOffices = selectedState === 'todos' || showAll
     ? offices
-    : offices.filter(office => 
-        office.estado.toLowerCase().replace(/ /g, '-') === selectedState
-      );
+    : offices.filter(office =>
+      office.estado.toLowerCase().replace(/ /g, '-') === selectedState
+    );
+
+  // ⚠️ El total de páginas debe depender de los resultados filtrados
+  const totalPages = Math.ceil(filteredOffices.length / ITEMS_PER_PAGE);
+
+  // Obtén los elementos de la página actual
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentItems = filteredOffices.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  // Cambia de página
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+  const paginatedOffices = filteredOffices.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedState, showAll]);
+
+
 
   return (
     <>
@@ -96,16 +123,16 @@ export default function SucursalesPage() {
             loop={true}
             speed={1200}
             parallax={true}
-            pagination={{ 
-              el: '.swiper-pagination', 
-              type: 'fraction', 
-              clickable: true 
+            pagination={{
+              el: '.swiper-pagination',
+              type: 'fraction',
+              clickable: true
             }}
             className="swiper"
           >
             <SwiperSlide>
-              <div 
-                className="swiper-inner" 
+              <div
+                className="swiper-inner"
                 style={{
                   backgroundImage: 'url(/images/slider/banner-sucursales.jpg)',
                   backgroundSize: 'cover',
@@ -154,38 +181,32 @@ export default function SucursalesPage() {
       <section id="mapa">
         <div className="container">
           <div className="row">
-            <div className="col-lg-8">
+
+            {/* Columna izquierda: Título y filtros */}
+            <div className="col-lg-5 mb-4">
               <h2 className="wow fadeInUp" data-wow-delay=".2s">Nuestras Sucursales</h2>
-            </div>
-            <div className="col-lg-4">
-              <button 
-                type="button" 
-                className="subtitle s2 wow fadeInUp mb-3" 
+
+              <button
+                type="button"
+                className="subtitle s2 wow fadeInUp mb-3"
                 onClick={() => setShowAll(true)}
                 style={{ display: showAll ? 'none' : 'block' }}
               >
                 Ver todas las sucursales
               </button>
-              <button 
-                type="button" 
-                className="subtitle s2 wow fadeInUp mb-3" 
-                onClick={() => setShowAll(false)}
-                style={{ display: showAll ? 'block' : 'none' }}
-              >
-                Filtrar por estado
-              </button>
-              <select 
-                className="form-select" 
+
+              <select
+                className="form-select"
                 aria-label="Filtrar por estado"
                 id="filtroEstados"
                 value={selectedState}
                 onChange={handleStateChange}
-                style={{ display: showAll ? 'none' : 'block' }}
+                style={{ display: 'block' }}
               >
                 <option value="todos">Mostrar todos</option>
                 {uniqueStates.map(state => (
-                  <option 
-                    key={state} 
+                  <option
+                    key={state}
                     value={state.toLowerCase().replace(/ /g, '-')}
                   >
                     {state}
@@ -193,11 +214,9 @@ export default function SucursalesPage() {
                 ))}
               </select>
             </div>
-          </div>
-          
-          {/* Mapa de México */}
-          <div className="row mt-5">
-            <div className="col-12">
+
+            {/* Columna derecha: Mapa */}
+            <div className="col-lg-7">
               {isLoading ? (
                 <div className="text-center py-5">
                   <div className="spinner-border text-primary" role="status">
@@ -210,39 +229,34 @@ export default function SucursalesPage() {
               )}
             </div>
           </div>
+
+
         </div>
 
         {/* Sección de sucursales */}
         <section id="branches" className="">
           <div className="container">
             <div className="row" id="officeContainer">
-              {filteredOffices.length > 0 ? (
-                filteredOffices.map(office => (
-                  <div 
-                    key={office.id} 
+              {paginatedOffices.length > 0 ? (
+                paginatedOffices.map((office) => (
+                  <div
+                    key={office.id}
                     className="col-lg-4 col-md-6 mb-4 office-card"
                     data-estado={office.estado.toLowerCase().replace(/ /g, '-')}
                   >
                     <div className="card h-100">
                       <div className="card-body">
-                        <iframe 
-                          src={`https://www.openstreetmap.org/export/embed.html?bbox=${
-                            encodeURIComponent(parseFloat(office.lng) - 0.005)
-                          }%2C${
-                            encodeURIComponent(parseFloat(office.lat) - 0.005)
-                          }%2C${
-                            encodeURIComponent(parseFloat(office.lng) + 0.005)
-                          }%2C${
-                            encodeURIComponent(parseFloat(office.lat) + 0.005)
-                          }&layer=mapnik&marker=${
-                            encodeURIComponent(parseFloat(office.lat))
-                          }%2C${
-                            encodeURIComponent(parseFloat(office.lng))
-                          }`} 
-                          width="100%" 
-                          height="300" 
-                          style={{ border: 0 }} 
-                          allowFullScreen 
+                        <iframe
+                          src={`https://www.openstreetmap.org/export/embed.html?bbox=${encodeURIComponent(parseFloat(office.lng) - 0.005)
+                            }%2C${encodeURIComponent(parseFloat(office.lat) - 0.005)
+                            }%2C${encodeURIComponent(parseFloat(office.lng) + 0.005)
+                            }%2C${encodeURIComponent(parseFloat(office.lat) + 0.005)
+                            }&layer=mapnik&marker=${encodeURIComponent(parseFloat(office.lat))
+                            }%2C${encodeURIComponent(parseFloat(office.lng))}`}
+                          width="100%"
+                          height="300"
+                          style={{ border: 0 }}
+                          allowFullScreen
                           loading="lazy"
                         />
                         <h5 className="card-title mt-3">{office.nombre_suc}</h5>
@@ -251,11 +265,7 @@ export default function SucursalesPage() {
                           <strong>Email:</strong> {office.email_suc}<br />
                           <strong>Teléfono:</strong> {office.telefono_suc}<br />
                         </p>
-                        <Link 
-                          className="btn-main mb10" 
-                          href={`/sucursales/${office.id}`}
-                          passHref
-                        >
+                        <Link className="btn-main mb10" href={`/sucursales/${office.id}`} passHref>
                           Ver más
                         </Link>
                       </div>
@@ -268,6 +278,81 @@ export default function SucursalesPage() {
                 </div>
               )}
             </div>
+
+            {/* Paginación */}
+            {totalPages >= 1 && (
+              <div className="pagination">
+                {/* Botón Anterior */}
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage <= 1}
+                  className={currentPage <= 1 ? 'disabled' : ''}
+                >
+                  « Anterior
+                </button>
+
+                {/* Mostrar siempre la primera página */}
+                <button
+                  onClick={() => handlePageChange(1)}
+                  className={currentPage === 1 ? 'active' : ''}
+                >
+                  1
+                </button>
+
+                {/* Mostrar puntos suspensivos si hay páginas ocultas al inicio */}
+                {currentPage > 3 && <span className="ellipsis">...</span>}
+
+                {/* Mostrar página anterior si no es la primera */}
+                {currentPage > 2 && currentPage - 1 <= totalPages && (
+                  <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                  >
+                    {currentPage - 1}
+                  </button>
+                )}
+
+                {/* Mostrar página actual si no es la primera ni la última */}
+                {currentPage !== 1 && currentPage !== totalPages && (
+                  <button
+                    onClick={() => handlePageChange(currentPage)}
+                    className="active"
+                  >
+                    {currentPage}
+                  </button>
+                )}
+
+                {/* Mostrar página siguiente si no es la última */}
+                {currentPage < totalPages - 1 && (
+                  <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                  >
+                    {currentPage + 1}
+                  </button>
+                )}
+
+                {/* Mostrar puntos suspensivos si hay páginas ocultas al final */}
+                {currentPage < totalPages - 2 && <span className="ellipsis">...</span>}
+
+                {/* Mostrar siempre la última página si hay más de 1 página */}
+                {totalPages > 1 && (
+                  <button
+                    onClick={() => handlePageChange(totalPages)}
+                    className={currentPage === totalPages ? 'active' : ''}
+                  >
+                    {totalPages}
+                  </button>
+                )}
+
+                {/* Botón Siguiente */}
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage >= totalPages}
+                  className={currentPage >= totalPages ? 'disabled' : ''}
+                >
+                  Siguiente »
+                </button>
+              </div>
+            )}
           </div>
         </section>
       </section>
@@ -278,19 +363,19 @@ export default function SucursalesPage() {
           <div className="row align-items-center gx-5">
             <div className="col-lg-6 mb-sm-20 position-relative">
               <div className="images-deco-1">
-                <Image 
-                  src="/images/misc/1.png" 
-                  className="d-img-1 wow zoomIn" 
-                  data-wow-delay="0s" 
+                <Image
+                  src="/images/misc/1.png"
+                  className="d-img-1 wow zoomIn"
+                  data-wow-delay="0s"
                   alt="quienes somos"
                   width={300}
                   height={300}
                 />
-                <Image 
-                  src="/images/misc/2.png" 
-                  className="d-img-2 wow zoomIn" 
-                  data-wow-delay=".5s" 
-                  data-jarallax-element="100" 
+                <Image
+                  src="/images/misc/2.png"
+                  className="d-img-2 wow zoomIn"
+                  data-wow-delay=".5s"
+                  data-jarallax-element="100"
                   alt="logo"
                   width={200}
                   height={200}
