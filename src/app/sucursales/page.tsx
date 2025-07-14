@@ -11,6 +11,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Mapa from '../../components/mapa';
+import './styles.css';
 
 interface Office {
   id: number;
