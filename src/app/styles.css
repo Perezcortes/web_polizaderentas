@@ -46,3 +46,21 @@
 .slide-banner-3 {
   background-image: url('/images/slider/banner-5.jpg');
 }
+
+/* Contenedor responsivo */
+.video-responsive-container {
+  width: 100%;
+}
+
+/* Ajustes específicos para móvil */
+@media (max-width: 768px) {
+  .video-responsive-container {
+    paddingBottom: '75%'; /* 4:3 para mejor visualización en vertical */
+    margin: '15px 0'; /* Espaciado vertical */
+    borderRadius: '0.5rem'; /* Bordes más suaves */
+  }
+  
+  .video-iframe {
+    transform: scale(1.05); /* Pequeño zoom para aprovechar espacio */
+  }
+}

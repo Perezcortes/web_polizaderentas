@@ -217,24 +217,29 @@ export default function SucursalPage() {
               >
                 <SwiperSlide>
                   <div
-                    className="swiper-inner"
-                    style={{
-                      backgroundImage: 'url(/images/slider/sucursal.png)',
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                      minHeight: '50vh'
-                    }}
+                    className="swiper-slide"
+                    data-jarallax-element="150"
                   >
-                    <div className="sw-caption">
-                      <div className="container">
-                        <div className="row gx-5 align-items-center">
-                          <div className="col-lg-7 mb-sm-30 offset-lg-1">
-                            <h1 className="slider-title font-50">{office.nombre_suc}</h1>
+                    <div
+                      className="swiper-inner"
+                      style={{
+                        backgroundImage: 'url(/images/slider/sucursal.png)',
+                        backgroundSize: 'cover',
+                        backgroundPosition:  '1% center',
+                        minHeight: '80vh', // o usa minHeight si quieres que crezca dinámicamente
+                      }}
+                    >
+                      <div className="sw-caption">
+                        <div className="container">
+                          <div className="row gx-5 align-items-center">
+                            <div className="col-lg-7 mb-sm-30 offset-lg-1">
+                              <h1 className="slider-title font-50">{office.nombre_suc}</h1>
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <div className="sw-overlay s2"></div>
                     </div>
-                    <div className="sw-overlay s2"></div>
                   </div>
                 </SwiperSlide>
               </Swiper>

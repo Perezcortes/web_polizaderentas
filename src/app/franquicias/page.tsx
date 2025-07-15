@@ -20,18 +20,19 @@ import Link from 'next/link';
 import Script from 'next/script';
 
 export default function FranchisesPage() {
+
   return (
     <>
       <Head>
         <title>Franquicias - Póliza de Rentas</title>
         <meta name="description" content="Invierte en el servicio jurídico de mayor crecimiento en México con nuestras franquicias" />
         <link rel="icon" href="/images/icon.png" type="image/gif" sizes="16x16" />
-        
+
         {/* Preload de recursos críticos */}
         <link rel="preload" href="https://code.jquery.com/jquery-3.6.0.min.js" as="script" />
         <link rel="preload" href="/css/bootstrap.min.css" as="style" />
         <link rel="preload" href="/css/style.css" as="style" />
-        
+
         {/* Hojas de estilo */}
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/css/plugins.css" />
@@ -67,8 +68,8 @@ export default function FranchisesPage() {
           `
         }} />
         <noscript>
-          <img height="1" width="1" style={{display:'none'}} 
-            src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1" 
+          <img height="1" width="1" style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1"
           />
         </noscript>
 
@@ -85,9 +86,9 @@ export default function FranchisesPage() {
       </Head>
 
       {/* Cargar jQuery con mayor control */}
-      <Script 
+      <Script
         id="jquery-js"
-        src="https://code.jquery.com/jquery-3.6.0.min.js" 
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
         strategy="beforeInteractive"
         onLoad={() => {
           if (typeof window !== 'undefined' && window.jQuery && !window.$) {
@@ -106,10 +107,10 @@ export default function FranchisesPage() {
             loop={true}
             speed={1200}
             parallax={true}
-            pagination={{ 
-              el: '.swiper-pagination', 
-              type: 'fraction', 
-              clickable: true 
+            pagination={{
+              el: '.swiper-pagination',
+              type: 'fraction',
+              clickable: true
             }}
             className="swiper"
           >
@@ -129,12 +130,12 @@ export default function FranchisesPage() {
                         <p className="fs-4 wow fadeInRight">
                           Agenda una sesión Informativa personalizada con nuestro Director de Expansión y conoce los detalles de nuestro modelo de negocio.
                         </p>
-                        <a className="btn-main mb10 mt20" href="https://formulario.franquicias.polizaderentas.com/" target="_blank" rel="noopener noreferrer">
-                          Inicia tu proceso
-                        </a>
-                        <Link className="btn-line mb10" href="#conoce">
-                          Conoce más
-                        </Link>
+                        <div className="d-flex">
+                          <a className="btn-main me-1" href="https://formulario.franquicias.polizaderentas.com/" target="_blank" rel="noopener noreferrer">
+                            Inicia tu proceso
+                          </a>
+                          <Link className="btn-line" href="#conoce">Conoce más</Link>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -181,31 +182,48 @@ export default function FranchisesPage() {
       <section className="no-top mt-5" id="conoce">
         <div className="container">
           <div className="row align-items-center">
+            {/* Texto */}
             <div className="col-lg-6 col-md-6 col-sm-12 mt-5" style={{ textAlign: 'justify' }}>
-              <h2>¿Qué es una Póliza Jurídica?</h2>
-              <p>Es un contrato de prestación de servicios jurídicos que protege a un propietario e inquilino en un proceso de arrendamiento.</p>
-              <p>Contamos con presencia en todo el país. Regístrate para conocer los detalles sobre nuestras franquicias y únete hoy mismo.</p>
-              <a 
-                className="btn-main mb10 mt20" 
-                href="https://formulario.franquicias.polizaderentas.com/" 
-                target="_blank" 
+              <h2
+                style={{
+                  fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
+                  lineHeight: '1.2',
+                  marginBottom: '1rem',
+                }}
+              >
+                ¿Qué es una Póliza Jurídica?
+              </h2>
+              <p>
+                Es un contrato de prestación de servicios jurídicos que protege a un propietario e
+                inquilino en un proceso de arrendamiento.
+              </p>
+              <p>
+                Contamos con presencia en todo el país. Regístrate para conocer los detalles sobre
+                nuestras franquicias y únete hoy mismo.
+              </p>
+              <a
+                className="btn-main mb10 mt20"
+                href="https://formulario.franquicias.polizaderentas.com/"
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 Inicia tu proceso
               </a>
             </div>
-            <div className="col-lg-6 col-md-6 col-sm-12">
-              <Image 
-                src="/images/franquicias/img-1.png" 
-                alt="franquicias" 
-                width={600}
-                height={400}
+
+            {/* Imagen */}
+            <div className="col-lg-6 col-md-6 col-sm-12 text-center">
+              <img
+                src="/images/franquicias/img-1.png"
+                alt="franquicias"
                 className="img-fluid"
+                style={{ maxWidth: '100%', height: 'auto' }}
               />
             </div>
           </div>
         </div>
       </section>
+
 
       {/* Sección Modelo de negocio */}
       <section className="no-top">
@@ -213,17 +231,17 @@ export default function FranchisesPage() {
           <div className="row justify-content-center">
             <div className="col-lg-12 col-md-12 col-sm-12 mt-5 text-center">
               <h2>¿Porqué es un modelo de negocio de crecimiento exponencial?</h2>
-              <Image 
-                src="/images/franquicias/img-2.png" 
-                alt="franquicias" 
-                width={800}
-                height={500}
+              <Image
+                src="/images/franquicias/img-2.png"
+                alt="franquicias"
+                width={1160}
+                height={484}
                 className="img-fluid"
               />
-              <a 
-                className="btn-main mb10 mt20" 
-                href="https://formulario.franquicias.polizaderentas.com/" 
-                target="_blank" 
+              <a
+                className="btn-main mb10 mt20"
+                href="https://formulario.franquicias.polizaderentas.com/"
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 Inicia tu proceso
@@ -250,10 +268,10 @@ export default function FranchisesPage() {
                 <li>Reportes y evaluación de tu sucursal.</li>
               </ul>
               <div className="spacer-10"></div>
-              <a 
-                className="btn-main mb10 mt20" 
-                href="https://formulario.franquicias.polizaderentas.com/" 
-                target="_blank" 
+              <a
+                className="btn-main mb10 mt20"
+                href="https://formulario.franquicias.polizaderentas.com/"
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 Inicia tu proceso
@@ -263,16 +281,16 @@ export default function FranchisesPage() {
               <div className="images-deco-1">
                 <Image
                   src="/images/misc/img-3.png"
-                  width={500}
-                  height={300}
+                  width={581}
+                  height={389}
                   className="d-img-1 wow zoomIn img-fluid"
                   data-wow-delay="0s"
                   alt="franquicias"
                 />
                 <Image
                   src="/images/misc/2.png"
-                  width={200}
-                  height={100}
+                  width={180}
+                  height={180}
                   className="d-img-2 wow zoomIn"
                   data-wow-delay=".5s"
                   alt="logo"
@@ -290,11 +308,11 @@ export default function FranchisesPage() {
           <div className="row justify-content-center">
             <div className="col-lg-12 col-md-12 col-sm-12 mt-5 text-center">
               <h2>¿Cuánto puedo ganar con <br /> mi franquicia de Póliza de Rentas?</h2>
-              <Image 
-                src="/images/franquicias/img-4.png" 
-                alt="franquicias" 
-                width={800}
-                height={500}
+              <Image
+                src="/images/franquicias/img-4.png"
+                alt="franquicias"
+                width={889}
+                height={441}
                 className="img-fluid"
               />
             </div>
@@ -307,21 +325,21 @@ export default function FranchisesPage() {
                 <br />Aplicación digital para las inmobiliarias
                 <br />Herramientas digitales para investigación de inquilinos.
               </p>
-              <a 
-                className="btn-main mb10 mt20" 
-                href="https://formulario.franquicias.polizaderentas.com/" 
-                target="_blank" 
+              <a
+                className="btn-main mb10 mt20"
+                href="https://formulario.franquicias.polizaderentas.com/"
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 Inicia tu proceso
               </a>
             </div>
             <div className="col-lg-6 col-md-6 col-sm-12">
-              <Image 
-                src="/images/franquicias/img-5.png" 
-                alt="franquicias" 
-                width={600}
-                height={400}
+              <Image
+                src="/images/franquicias/img-5.png"
+                alt="franquicias"
+                width={778}
+                height={487}
                 className="img-fluid"
               />
             </div>
@@ -333,23 +351,23 @@ export default function FranchisesPage() {
       <div className="row container-fluid" style={{ backgroundColor: '#595959' }}>
         <div className="col-lg-12 col-md-12 col-sm-12 text-center">
           <div style={{ position: 'relative', display: 'inline-block' }}>
-            <Image 
-              src="/images/franquicias/img-6.png" 
-              alt="franquicias" 
+            <Image
+              src="/images/franquicias/img-6.png"
+              alt="franquicias"
               width={912}
               height={503}
               className="img-fluid"
             />
-            <a 
-              className="btn-main mb10 mt20" 
-              href="https://formulario.franquicias.polizaderentas.com/" 
-              target="_blank" 
+            <a
+              className="btn-main mb10 mt20"
+              href="https://formulario.franquicias.polizaderentas.com/"
+              target="_blank"
               rel="noopener noreferrer"
-              style={{ 
-                position: 'absolute', 
-                top: '80%', 
-                left: '80%', 
-                transform: 'translate(-50%, -50%)' 
+              style={{
+                position: 'absolute',
+                top: '80%',
+                left: '80%',
+                transform: 'translate(-50%, -50%)'
               }}
             >
               Inicia tu proceso

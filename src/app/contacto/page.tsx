@@ -303,8 +303,10 @@ export default function ContactPage() {
                                 inmuebles que buscan dar sus propiedades en arrendamiento.</p>
                             <hr className="s2" />
                             <div className="spacer-10"></div>
-                            <a className="btn-main mb10" href="/franquicias#conoce">Conoce más</a>
-                            <a className="btn-main mb10" href="/sucursales">Nuestras sucursales</a>
+                            <div className="d-flex">
+                            <a className="btn-main me-1" href="/franquicias#conoce">Conoce más</a>
+                            <a className="btn-main btn-line" href="/sucursales">Nuestras sucursales</a>
+                            </div>
                         </div>
                     </div>
                 </div>

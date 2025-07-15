@@ -1,8 +1,8 @@
 .post-content {
-  max-height: 100px;
+  max-height: none; /* No limitamos por altura */
   overflow: hidden;
-  transition: max-height 0.5s ease;
   position: relative;
+  line-height: 1.6;
 }
 
 .post-content.expanded {
@@ -10,13 +10,10 @@
 }
 
 .post-content:not(.expanded)::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 30px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  color: #666;
+  position: static;
+  background: none;
+  height: auto;
 }
 
 .read-more-btn {
@@ -28,6 +25,7 @@
   font-weight: bold;
   text-decoration: none;
   display: inline-block;
+  margin-top: 5px;
 }
 
 .read-more-btn i {

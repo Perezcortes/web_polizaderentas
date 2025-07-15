@@ -1,0 +1,15 @@
+.post-content {
+  max-height: none;
+  overflow: visible;
+  line-height: 1.8;
+}
+
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 15px 0;
+}
+
+.post-content p {
+  margin-bottom: 1.5em;
+}

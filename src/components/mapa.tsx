@@ -25,10 +25,10 @@ const Mapa: React.FC<MapaProps> = ({ offices, onStateClick }) => {
         if (offices.some(office => 
           office.estado.toLowerCase().replace(/ /g, '-') === estado
         )) {
-          console.log(`Estado activo: ${estado}, aplicando clase ${'estado-activo'}`);
+          //console.log(`Estado activo: ${estado}, aplicando clase ${'estado-activo'}`);
           path.classList.add('estado-activo');
         } else {
-          console.log(`Estado inactivo: ${estado}`);
+          //console.log(`Estado inactivo: ${estado}`);
           path.classList.remove('estado-activo');
         }
       });

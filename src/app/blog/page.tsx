@@ -48,11 +48,77 @@ export default function BlogPage() {
   const apiKey = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
   const cloudflareEndpoint = process.env.NEXT_PUBLIC_CLOUDFLARE_R2_ENDPOINT || 'https://default.endpoint.com';
 
+  const truncateHtml = (html: string, maxLength: number) => {
+    if (!html) return '';
+
+    // Primero, elimina las etiquetas HTML para calcular la longitud del texto real
+    const textContent = html.replace(/<[^>]*>/g, '');
+    if (textContent.length <= maxLength) return html;
+
+    // Ahora procesa el HTML para truncarlo correctamente
+    let result = '';
+    let textCount = 0;
+    let inTag = false;
+    let tagBuffer = '';
+    let openTags: string[] = [];
+
+    for (let i = 0; i < html.length && textCount < maxLength; i++) {
+      const char = html[i];
+
+      if (char === '<') {
+        inTag = true;
+        tagBuffer = char;
+        continue;
+      }
+
+      if (inTag) {
+        tagBuffer += char;
+        if (char === '>') {
+          inTag = false;
+          result += tagBuffer;
+
+          // Manejo de etiquetas
+          const isClosing = tagBuffer.startsWith('</');
+          const tagNameMatch = tagBuffer.match(/<\/?([^\s>]+)/);
+          if (tagNameMatch) {
+            const tagName = tagNameMatch[1].toLowerCase();
+            if (isClosing) {
+              // Cerrar la última etiqueta abierta correspondiente
+              const lastOpenTag = openTags.pop();
+              if (lastOpenTag !== tagName) {
+                // Esto indica HTML mal formado, pero lo manejamos
+                openTags = openTags.filter(t => t !== tagName);
+              }
+            } else if (!tagBuffer.endsWith('/>')) {
+              // Es una etiqueta de apertura (no auto-cerrada)
+              openTags.push(tagName);
+            }
+          }
+        }
+        continue;
+      }
+
+      // Contenido de texto
+      result += char;
+      textCount++;
+    }
+
+    // Añade el indicador de truncado
+    result += ' [...]';
+
+    // Cierra las etiquetas que quedaron abiertas
+    while (openTags.length > 0) {
+      result += `</${openTags.pop()}>`;
+    }
+
+    return result;
+  };
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         setLoading(true);
-        
+
         // Fetch main posts with pagination
         const postsResponse = await fetch(
           `${apiUrl}?page=${currentPage}&per_page=${postsPerPage}`,
@@ -96,8 +162,8 @@ export default function BlogPage() {
 
   const truncateText = (text: string, maxLength: number) => {
     if (!text) return '';
-    return text.length > maxLength 
-      ? text.substring(0, maxLength) + '...' 
+    return text.length > maxLength
+      ? text.substring(0, maxLength) + '...'
       : text;
   };
 
@@ -120,8 +186,8 @@ export default function BlogPage() {
     return (
       <div className="pagination">
         {/* Botón Anterior */}
-        <button 
-          onClick={() => handlePageChange(currentPage - 1)} 
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage <= 1}
           className={currentPage <= 1 ? 'disabled' : ''}
         >
@@ -156,8 +222,8 @@ export default function BlogPage() {
         )}
 
         {/* Botón Siguiente */}
-        <button 
-          onClick={() => handlePageChange(currentPage + 1)} 
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage >= totalPages}
           className={currentPage >= totalPages ? 'disabled' : ''}
         >
@@ -175,12 +241,12 @@ export default function BlogPage() {
         <meta name="keywords" content="blog, arrendamiento, inquilinos, propietarios, noticias inmobiliarias" />
         <meta name="author" content="Póliza de Rentas" />
         <link rel="icon" href="/images/icon.png" type="image/gif" sizes="16x16" />
-        
+
         {/* Preload de recursos críticos */}
         <link rel="preload" href="https://code.jquery.com/jquery-3.6.0.min.js" as="script" />
         <link rel="preload" href="/css/bootstrap.min.css" as="style" />
         <link rel="preload" href="/css/style.css" as="style" />
-        
+
         {/* Hojas de estilo */}
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/css/plugins.css" />
@@ -191,7 +257,7 @@ export default function BlogPage() {
 
         {/* Font Awesome */}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-        
+
         {/* Meta Pixel Code */}
         <script dangerouslySetInnerHTML={{
           __html: `
@@ -218,8 +284,8 @@ export default function BlogPage() {
           `
         }} />
         <noscript>
-          <img height="1" width="1" style={{display:'none'}} 
-            src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1" 
+          <img height="1" width="1" style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1"
           />
         </noscript>
 
@@ -236,9 +302,9 @@ export default function BlogPage() {
       </Head>
 
       {/* Cargar jQuery con mayor control */}
-      <Script 
+      <Script
         id="jquery-js"
-        src="https://code.jquery.com/jquery-3.6.0.min.js" 
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
         strategy="beforeInteractive"
         onLoad={() => {
           if (typeof window !== 'undefined' && window.jQuery && !window.$) {
@@ -257,10 +323,10 @@ export default function BlogPage() {
             loop={true}
             speed={1200}
             parallax={true}
-            pagination={{ 
+            pagination={{
               el: '.swiper-pagination',
               type: 'fraction', // Cambiado a tipo 'fraction' para mostrar números
-              clickable: true 
+              clickable: true
             }}
             navigation={{
               nextEl: '.swiper-button-next',
@@ -366,10 +432,19 @@ export default function BlogPage() {
                 <div className="col-lg-8 col-md-6 mb10">
                   {loading && (
                     <div className="text-center py-5">
-                      <div className="spinner-border text-warning" role="status">
+                      <div
+                        className="spinner-border"
+                        style={{
+                          width: '3rem',
+                          height: '3rem',
+                          borderWidth: '0.25em',
+                          borderColor: '#bdad5d transparent #bdad5d transparent'
+                        }}
+                        role="status"
+                      >
                         <span className="visually-hidden">Cargando...</span>
                       </div>
-                      <p className="mt-2">Cargando publicaciones...</p>
+                      <p className="mt-2" style={{ color: '#bdad5d' }}>Cargando publicaciones...</p>
                     </div>
                   )}
 
@@ -386,35 +461,38 @@ export default function BlogPage() {
                   )}
 
                   {posts.map((post) => {
-                    const imageUrl = post.url_img 
+                    const imageUrl = post.url_img
                       ? `${cloudflareEndpoint}/${post.url_img.replace(/^\//, '')}`
                       : '/images/default-blog.jpg';
 
                     return (
                       <div key={post.id} className="mb-5 post-item wow fadeInUp">
-                        <Image 
-                          src={imageUrl} 
-                          alt={post.titulo} 
+                        <Image
+                          src={imageUrl}
+                          alt={post.titulo}
                           width={800}
                           height={450}
                           className="img-fluid rounded shadow-sm"
                           style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'cover' }}
                         />
-                        
+
                         <h3 className="mt-4 mb-20 enlace-blog" data-wow-delay=".2s">
                           <Link href={`/blog/${post.slug}`} style={{ color: 'rgba(187,161,85)' }}>
                             {post.titulo}
                           </Link>
                         </h3>
-                        
+
                         <div className="post-meta mb-3">
                           <span className="text-muted">Póliza de Rentas - {formatDate(post.created_at)}</span>
                         </div>
-                        
-                        <div className="post-content" dangerouslySetInnerHTML={{ __html: post.contenido }} />
-                        
+
+                        <div
+                          className="post-content"
+                          dangerouslySetInnerHTML={{ __html: truncateHtml(post.contenido, 200) }}
+                        />
+
                         <Link href={`/blog/${post.slug}`} className="read-more-btn mt-2">
-                          LEER MÁS <i className="fas fa-chevron-down"></i>
+                          LEER MÁS
                         </Link>
                         <hr className="my-4" />
                       </div>
@@ -432,7 +510,16 @@ export default function BlogPage() {
                   <div className="py-2 ps-4 borde">
                     {loading ? (
                       <div className="text-center py-3">
-                        <div className="spinner-border text-warning spinner-border-sm" role="status">
+                        <div
+                          className="spinner-border spinner-border-sm"
+                          style={{
+                            width: '1.5rem',
+                            height: '1.5rem',
+                            borderWidth: '0.2em',
+                            borderColor: '#bdad5d transparent #bdad5d transparent'
+                          }}
+                          role="status"
+                        >
                           <span className="visually-hidden">Cargando...</span>
                         </div>
                       </div>
@@ -440,21 +527,21 @@ export default function BlogPage() {
                       <p className="text-muted">No se pudieron cargar los artículos recientes</p>
                     ) : (
                       recentPosts.map((post, index) => {
-                        const imageUrl = post.url_img 
+                        const imageUrl = post.url_img
                           ? `${cloudflareEndpoint}/${post.url_img.replace(/^\//, '')}`
                           : '/images/default-thumb.jpg';
 
                         return (
                           <div key={post.id}>
-                            <div 
-                              className="row mb-3 recent-post-item" 
+                            <div
+                              className="row mb-3 recent-post-item"
                               style={{ cursor: 'pointer' }}
                               onClick={() => router.push(`/blog/${post.slug}`)}
                             >
                               <div className="col-4">
-                                <Image 
-                                  src={imageUrl} 
-                                  alt={post.titulo} 
+                                <Image
+                                  src={imageUrl}
+                                  alt={post.titulo}
                                   width={100}
                                   height={80}
                                   className="img-fluid rounded"
