@@ -95,8 +95,8 @@ export default function Footer() {
             <h5>Accesos</h5>
             <div className="row">
               <div className="col-lg-4">
-                <a className="btn-main mb10 mt20" href="/sucursales">Sucursales</a>
-                <a className="btn-main mb10" href="/services/poliza_juridica">Sistema Polizas</a>
+                <a className="btn-main mb-3" href="/sucursales">Sucursales</a> {/* mb-3 = margin-bottom 1rem */}
+                <a className="btn-main mt-3" href="/services/poliza_juridica">Sistema Polizas</a> {/* mt-3 = margin-top 1rem */}
               </div>
             </div>
           </div>

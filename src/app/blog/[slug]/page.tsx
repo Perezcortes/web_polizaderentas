@@ -1,12 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
-import '../blog-styles.css';
+import '../[slug]/styles.css';
 
 interface BlogPost {
   id: number;
@@ -17,77 +17,110 @@ interface BlogPost {
   created_at: string;
 }
 
+// Tiempo de validez de la caché (1 hora)
+const CACHE_EXPIRATION_TIME = 60 * 60 * 1000;
+
 export default function PostDetail() {
+  const router = useRouter();
   const { slug } = useParams();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);
   const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
 
   // Configuración desde variables de entorno
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/posts';
   const apiKey = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
   const cloudflareEndpoint = process.env.NEXT_PUBLIC_CLOUDFLARE_R2_ENDPOINT || 'https://default.endpoint.com';
 
+  // Función para obtener datos con caché
+  const fetchWithCache = async (key: string, fetchFn: () => Promise<any>) => {
+    // Verificar si tenemos datos en caché
+    const cachedData = localStorage.getItem(key);
+    const now = new Date().getTime();
+
+    if (cachedData) {
+      const { data, timestamp } = JSON.parse(cachedData);
+      // Si los datos están frescos, usarlos
+      if (now - timestamp < CACHE_EXPIRATION_TIME) {
+        return data;
+      }
+    }
+
+    // Si no, hacer la petición
+    const freshData = await fetchFn();
+    // Guardar en caché
+    localStorage.setItem(key, JSON.stringify({
+      data: freshData,
+      timestamp: now
+    }));
+    return freshData;
+  };
+
   useEffect(() => {
     const fetchPostData = async () => {
       try {
         setLoading(true);
+        setError(null);
 
-        // Fetch post details
-        const postResponse = await fetch(`${apiUrl}/${slug}`, {
-          headers: { 'Authorization': `Bearer ${apiKey}` }
+        // Obtener el post principal con caché
+        const postData = await fetchWithCache(`post-${slug}`, async () => {
+          const response = await fetch(`${apiUrl}/${slug}`, {
+            headers: { 'Authorization': `Bearer ${apiKey}` }
+          });
+          if (!response.ok) throw new Error('Error al cargar el artículo');
+          return await response.json();
         });
-
-        if (!postResponse.ok) throw new Error('Error al cargar el artículo');
-        const postData = await postResponse.json();
         setPost(postData.data || postData);
 
-        // Fetch recent posts
-        const recentResponse = await fetch(`${apiUrl}?limit=5`, {
-          headers: { 'Authorization': `Bearer ${apiKey}` }
+        // Obtener posts recientes con caché
+        const recentData = await fetchWithCache('recent-posts', async () => {
+          const response = await fetch(`${apiUrl}?limit=5`, {
+            headers: { 'Authorization': `Bearer ${apiKey}` }
+          });
+          if (!response.ok) throw new Error('Error al cargar artículos recientes');
+          return await response.json();
         });
-
-        if (!recentResponse.ok) throw new Error('Error al cargar artículos recientes');
-        const recentData = await recentResponse.json();
         setRecentPosts(recentData.data || recentData);
 
-        // Fetch related posts (next 2 posts)
-        const allPostsResponse = await fetch(`${apiUrl}?limit=10&order=desc`, {
-          headers: { 'Authorization': `Bearer ${apiKey}` }
+        // Obtener posts relacionados con caché
+        const relatedData = await fetchWithCache('all-posts', async () => {
+          const response = await fetch(`${apiUrl}?limit=10&order=desc`, {
+            headers: { 'Authorization': `Bearer ${apiKey}` }
+          });
+          if (!response.ok) throw new Error('Error al cargar artículos relacionados');
+          return await response.json();
         });
+        const allPosts = relatedData.data || relatedData;
 
-        if (!allPostsResponse.ok) throw new Error('Error al cargar artículos relacionados');
-        const allPostsData = await allPostsResponse.json();
-        const allPosts = allPostsData.data || allPostsData;
+        // Encontrar el post actual
+        const currentIndex = allPosts.findIndex((p: BlogPost) => p.slug === slug);
 
-        // Find current post index
-        let currentIndex = -1;
-        for (let i = 0; i < allPosts.length; i++) {
-          if (allPosts[i].slug === slug) {
-            currentIndex = i;
-            break;
-          }
-        }
+        // Obtener los siguientes 2 posts
+        const related = currentIndex !== -1
+          ? allPosts.slice(currentIndex + 1, currentIndex + 3)
+          : allPosts.slice(0, 2);
 
-        // Get next 2 posts
-        if (currentIndex !== -1) {
-          setRelatedPosts(allPosts.slice(currentIndex + 1, currentIndex + 3));
-        } else {
-          setRelatedPosts(allPosts.slice(0, 2));
-        }
+        setRelatedPosts(related);
 
         setLoading(false);
       } catch (err) {
         console.error('Error fetching post data:', err);
-        setError('Error al cargar el artículo. Por favor intenta más tarde.');
-        setLoading(false);
+
+        if (retryCount < 2) {
+          // Reintentar después de 1 segundo
+          setTimeout(() => setRetryCount(retryCount + 1), 1000);
+        } else {
+          setError('Error al cargar el artículo. Por favor intenta más tarde.');
+          setLoading(false);
+        }
       }
     };
 
     fetchPostData();
-  }, [slug, apiUrl, apiKey]);
+  }, [slug, apiUrl, apiKey, retryCount]);
 
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -103,27 +136,57 @@ export default function PostDetail() {
 
   if (loading) {
     return (
-      <div className="text-center py-5">
-        <div className="spinner-border text-warning" role="status">
+      <div className="text-center py-5" style={{ minHeight: '50vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        <div
+          className="spinner-border"
+          style={{
+            width: '3rem',
+            height: '3rem',
+            borderWidth: '0.25em',
+            borderColor: '#bdad5d transparent #bdad5d transparent'
+          }}
+          role="status"
+        >
           <span className="visually-hidden">Cargando...</span>
         </div>
-        <p className="mt-2">Cargando artículo...</p>
+        <p className="mt-3 fs-5" style={{ color: '#bdad5d' }}>Cargando artículo...</p>
       </div>
     );
   }
 
+
   if (error) {
     return (
-      <div className="alert alert-danger text-center py-5">
-        {error}
+      <div className="container py-5">
+        <div className="alert alert-danger text-center py-5">
+          {error}
+          <button
+            className="btn btn-warning mt-3"
+            onClick={() => {
+              setRetryCount(0);
+              setLoading(true);
+              setError(null);
+            }}
+          >
+            Reintentar
+          </button>
+        </div>
       </div>
     );
   }
 
   if (!post) {
     return (
-      <div className="alert alert-warning text-center py-5">
-        No se encontró el artículo solicitado.
+      <div className="container py-5">
+        <div className="alert alert-warning text-center py-5">
+          No se encontró el artículo solicitado.
+          <button
+            className="btn btn-warning mt-3"
+            onClick={() => router.push('/blog')}
+          >
+            Volver al blog
+          </button>
+        </div>
       </div>
     );
   }
@@ -223,6 +286,7 @@ export default function PostDetail() {
                       height={450}
                       className="img-fluid rounded shadow-sm"
                       style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'cover' }}
+                      priority
                     />
                   )}
 
@@ -244,23 +308,17 @@ export default function PostDetail() {
                     <div id="related-posts" className="row mt-4">
                       <h4 className="color-dor mb-4">Artículos relacionados</h4>
                       <div className="row">
-                        {relatedPosts.map(relatedPost => {
-                          const imageUrl = relatedPost.url_img
-                            ? `${cloudflareEndpoint}/${relatedPost.url_img.replace(/^\//, '')}`
-                            : '/images/default-blog.jpg';
-
-                          return (
-                            <div key={relatedPost.id} className="col-md-6 mb-4">
-                              <div
-                                className="card h-100 related-post-card"
-                                onClick={() => window.location.href = `/blog/${relatedPost.slug}`}
-                                style={{ cursor: 'pointer' }}
-                              >
+                        {relatedPosts.map(relatedPost => (
+                          <div key={relatedPost.id} className="col-md-6 mb-4">
+                            <Link href={`/blog/${relatedPost.slug}`}>
+                              <div className="card h-100 related-post-card" style={{ cursor: 'pointer' }}>
                                 <Image
-                                  src={imageUrl}
+                                  src={relatedPost.url_img
+                                    ? `${cloudflareEndpoint}/${relatedPost.url_img.replace(/^\//, '')}`
+                                    : '/images/default-blog.jpg'}
                                   width={400}
                                   height={200}
-                                  className="related-post-img"
+                                  className="card-img-top related-post-img"
                                   alt={relatedPost.titulo}
                                 />
                                 <div className="card-body">
@@ -268,9 +326,9 @@ export default function PostDetail() {
                                   <p className="card-text"><small className="text-muted">{formatDate(relatedPost.created_at)}</small></p>
                                 </div>
                               </div>
-                            </div>
-                          );
-                        })}
+                            </Link>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   )}
@@ -288,31 +346,27 @@ export default function PostDetail() {
                       recentPosts.map((recentPost, index) => {
                         if (recentPost.slug === slug) return null;
 
-                        const imageUrl = recentPost.url_img
-                          ? `${cloudflareEndpoint}/${recentPost.url_img.replace(/^\//, '')}`
-                          : '/images/default-thumb.jpg';
-
                         return (
                           <div key={recentPost.id}>
-                            <div
-                              className="row mb-3 recent-post-item"
-                              style={{ cursor: 'pointer' }}
-                              onClick={() => window.location.href = `/blog/${recentPost.slug}`}
-                            >
-                              <div className="col-4">
-                                <Image
-                                  src={imageUrl}
-                                  width={100}
-                                  height={80}
-                                  className="recent-post-image"
-                                  alt={recentPost.titulo}
-                                />
+                            <Link href={`/blog/${recentPost.slug}`} passHref legacyBehavior>
+                              <div className="row mb-3 recent-post-item" style={{ cursor: 'pointer' }}>
+                                <div className="col-4">
+                                  <Image
+                                    src={recentPost.url_img
+                                      ? `${cloudflareEndpoint}/${recentPost.url_img.replace(/^\//, '')}`
+                                      : '/images/default-thumb.jpg'}
+                                    width={100}
+                                    height={80}
+                                    className="recent-post-image"
+                                    alt={recentPost.titulo}
+                                  />
+                                </div>
+                                <div className="col-8">
+                                  <p className="recent-post-title">{truncateText(recentPost.titulo, 60)}</p>
+                                  <small className="recent-post-date">Póliza de Rentas - {formatDate(recentPost.created_at)}</small>
+                                </div>
                               </div>
-                              <div className="col-8">
-                                <p className="recent-post-title">{truncateText(recentPost.titulo, 60)}</p>
-                                <small className="recent-post-date">Póliza de Rentas - {formatDate(recentPost.created_at)}</small>
-                              </div>
-                            </div>
+                            </Link>
                             {index < recentPosts.length - 1 && <hr className="my-2" />}
                           </div>
                         );

@@ -4,8 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useHasMounted } from "../hooks/useHasMounted"; 
+import { useReInitVisualScripts } from '../hooks/useReInitVisualScripts';
 
 export default function Navbar() {
+  useReInitVisualScripts();
   const hasMounted = useHasMounted();
   const [scrolled, setScrolled] = useState(false);
 

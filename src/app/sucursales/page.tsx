@@ -13,6 +13,13 @@ import Link from 'next/link';
 import Mapa from '../../components/mapa';
 import './styles.css';
 
+declare global {
+  interface Window {
+    jQuery?: any;
+    $?: any;
+  }
+}
+
 interface Office {
   id: number;
   nombre_suc: string;

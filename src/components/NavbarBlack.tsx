@@ -48,13 +48,13 @@ export default function NavbarBlack() {
                     <li><Link href="/" className="menu-item" style={{ color: 'white' }}>Inicio</Link></li>
                     <li><Link href="/about" className="menu-item" style={{ color: 'white' }}>Nosotros</Link></li>
                     <li className="menu-item-has-children has-child">
-                      <a className="menu-item" href="#" style={{ color: 'white' }}>Servicios</a>
+                      <a className="menu-item" href="/services" style={{ color: 'white' }}>Servicios</a>
                       <ul className="sub-menu" style={{ backgroundColor: "#1E1E1E", borderColor: "#1E1E1E" }}>
-                        <li><Link href="/investigacion_inquilinos" style={{ color: "white" }}>Investigación de Inquilinos</Link></li>
-                        <li><Link href="/poliza_juridica" style={{ color: "white" }}>Póliza de Protección Jurídica</Link></li>
-                        <li><Link href="/convenio_transaccion" style={{ color: "white" }}>Convenio de transacción</Link></li>
-                        <li><Link href="/convenio_prevencion" style={{ color: "white" }}>Convenio de Prevención de Conflictos</Link></li>
-                        <li><Link href="/firma_electronica" style={{ color: "white" }}>Firma Electrónica</Link></li>
+                        <li><Link href="/services/investigacion_inquilinos" style={{ color: "white" }}>Investigación de Inquilinos</Link></li>
+                        <li><Link href="/services/poliza_juridica" style={{ color: "white" }}>Póliza de Protección Jurídica</Link></li>
+                        <li><Link href="/services/convenio_transaccion" style={{ color: "white" }}>Convenio de transacción</Link></li>
+                        <li><Link href="/services/convenio_prevencion" style={{ color: "white" }}>Convenio de Prevención de Conflictos</Link></li>
+                        <li><Link href="/services/firma_electronica" style={{ color: "white" }}>Firma Electrónica</Link></li>
                       </ul>
                     </li>
                     <li><Link href="/sucursales" className="menu-item" style={{ color: 'white' }}>Sucursales</Link></li>
@@ -113,13 +113,13 @@ export default function NavbarBlack() {
                   <li><Link href="/" className="menu-item" style={{ color: 'white' }}>Inicio</Link></li>
                   <li><Link href="/about" className="menu-item" style={{ color: 'white' }}>Nosotros</Link></li>
                   <li className="menu-item-has-children has-child">
-                    <a className="menu-item" href="#" style={{ color: 'white' }}>Servicios</a>
+                    <a className="menu-item" href="/services" style={{ color: 'white' }}>Servicios</a>
                     <ul className="sub-menu" style={{ backgroundColor: "#1E1E1E", borderColor: "#1E1E1E" }}>
-                      <li><Link href="/investigacion_inquilinos" style={{ color: "white" }}>Investigación de Inquilinos</Link></li>
-                      <li><Link href="/poliza_juridica" style={{ color: "white" }}>Póliza de Protección Jurídica</Link></li>
-                      <li><Link href="/convenio_transaccion" style={{ color: "white" }}>Convenio de transacción</Link></li>
-                      <li><Link href="/convenio_prevencion" style={{ color: "white" }}>Convenio de Prevención de Conflictos</Link></li>
-                      <li><Link href="/firma_electronica" style={{ color: "white" }}>Firma Electrónica</Link></li>
+                      <li><Link href="/services/investigacion_inquilinos" style={{ color: "white" }}>Investigación de Inquilinos</Link></li>
+                      <li><Link href="/services/poliza_juridica" style={{ color: "white" }}>Póliza de Protección Jurídica</Link></li>
+                      <li><Link href="/services/convenio_transaccion" style={{ color: "white" }}>Convenio de transacción</Link></li>
+                      <li><Link href="/services/convenio_prevencion" style={{ color: "white" }}>Convenio de Prevención de Conflictos</Link></li>
+                      <li><Link href="/services/firma_electronica" style={{ color: "white" }}>Firma Electrónica</Link></li>
                     </ul>
                   </li>
                   <li><Link href="/sucursales" className="menu-item" style={{ color: 'white' }}>Sucursales</Link></li>

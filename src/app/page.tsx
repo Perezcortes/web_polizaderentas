@@ -12,9 +12,10 @@ import 'swiper/css/parallax';
 import 'swiper/css/scrollbar';
 import './styles.css';
 import { useReInitVisualScripts } from '../hooks/useReInitVisualScripts';
+import RecentPosts from '../components/RecentPosts';
 
 
-export default function Home() {
+export default function Home() {  
   useReInitVisualScripts();
 
   return (
@@ -109,8 +110,10 @@ export default function Home() {
                             <p className="fs-4 wow fadeInRight">
                               Se líder en protección jurídico inmobiliaria en tu Ciudad, genera ingresos con un negocio probado y exitoso en todo México
                             </p>
-                            <Link className="btn-main mb10" href="/sucursales">Sucursales</Link>
-                            <Link className="btn-line mb10" href="/franquicias#conoce">Conoce más</Link>
+                            <div className="d-flex">
+                              <Link className="btn-main me-1" href="/secretaria">Sucursales</Link> {/* margen derecho */}
+                              <Link className="btn-line" href="/franquicias#conoce">Conoce más</Link>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -264,8 +267,10 @@ export default function Home() {
                   <p><b>¿Eres asesor inmobiliario?</b> Trabajamos contigo para asegurar el éxito de tus operaciones de arrendamiento. Con nuestro apoyo, no solo ofrecerás un servicio más profesional y de mejor calidad a tus clientes, sino que también simplificará tus actividades diarias al contar con el respaldo de un equipo experto en prevención y resolución de conflictos.</p>
                   <hr className="s2" />
                   <div className="spacer-10"></div>
-                  <Link className="btn-main mb10" href="/about">Conoce más</Link>
-                  <Link className="btn-main mb10" href="/sucursales">Nuestras sucursales</Link>
+                  <div className="d-flex">
+                    <Link className="btn-main me-1" href="/about">Conoce más</Link>
+                    <Link className="btn-main btn-line" href="/sucursales">Nuestras sucursales</Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -310,8 +315,19 @@ export default function Home() {
                 </div>
                 <div className="col-lg-6 mb-sm-20 position-relative">
                   <div className="content">
-                    <Image src="/images/services/convenio-prevencion-conflictos/preguntas.png" width={600} height={400} className="img-fluid posicion-imagen" alt="sucursales" />
-                    <Link className="btn-main mb10 bg-gris posicion-boton" href="/sucursales">Sucursales</Link>
+                    <Image
+                      src="/images/services/convenio-prevencion-conflictos/preguntas.png"
+                      width={600}
+                      height={400}
+                      className="img-fluid posicion-imagen"
+                      alt="sucursales"
+                    />
+                    <Link
+                      href="/sucursales"
+                      className="btn-main mb10 bg-gris posicion-boton"
+                    >
+                      Sucursales
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -327,50 +343,10 @@ export default function Home() {
                   <h2 className="wow fadeInUp" data-wow-delay=".2s">Blog y noticias</h2>
                 </div>
               </div>
-              <div className="row sequence">
-                <div className="col-lg-4 col-sm-6 mb-sm-20 gallery-item">
-                  <div className="de-item wow jarallax">
-                    <div className="d-overlay">
-                      <div className="d-label"></div>
-                      <div className="d-text">
-                        <h4>Arrendamiento Inmobiliario en México: Navegando con Éxito la Ley de Extinción de Dominio</h4>
-                        <Link className="btn-main btn-fullwidth btn-white" href="/arrendamiento">Ver más</Link>
-                      </div>
-                    </div>
-                    <Image src="/images/study-case/card1.png" width={400} height={300} className="img-fluid" alt="Arrendamiento" />
-                  </div>
-                </div>
-
-                <div className="col-lg-4 col-sm-6 mb-sm-20 gallery-item">
-                  <div className="de-item wow">
-                    <div className="d-overlay">
-                      <div className="d-label"></div>
-                      <div className="d-text">
-                        <h4>Protege tu Inversión: Estafas Comunes en el Arrendamiento Inmobiliario y Cómo Resguardarte con Pólizas Jurídicas de Arrendamiento</h4>
-                        <Link className="btn-main btn-fullwidth btn-white" href="/protege">Ver más</Link>
-                      </div>
-                    </div>
-                    <Image src="/images/study-case/card2.png" width={400} height={300} className="img-fluid" alt="Protege" />
-                  </div>
-                </div>
-
-                <div className="col-lg-4 col-sm-6 mb-sm-20 gallery-item">
-                  <div className="de-item wow">
-                    <div className="d-overlay">
-                      <div className="d-label"></div>
-                      <div className="d-text">
-                        <h4>Contrato de exclusividad inmobiliaria-¿Qué debe incluir?¿Cuáles son las obligaciones y derechos del asesor?</h4>
-                        <Link className="btn-main btn-fullwidth btn-white" href="/contrato-exclusividad">Ver más</Link>
-                      </div>
-                    </div>
-                    <Image src="/images/study-case/card3.png" width={400} height={300} className="img-fluid" alt="Contrato" />
-                  </div>
-                </div>
-                <div className="col-lg-12 d-flex justify-content-center">
-                  <Link className="btn-main mt-5" href="/blog">Ver más artículos</Link>
-                </div>
-              </div>
             </div>
+
+            {/* Componente de posts recientes - Mantiene los estilos originales */}
+            <RecentPosts />
           </section>
 
           {/* Sección final */}
@@ -379,11 +355,19 @@ export default function Home() {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="padding60 sm-padding40 rounded-30 jarallax text-light">
-                    <Image src="/images/background/banner.jpg" width={1200} height={400} className="jarallax-img" alt="como lo hacemos" />
+                    <Image
+                      src="/images/background/banner.jpg"
+                      width={1200}
+                      height={400}
+                      className="jarallax-img"
+                      alt="como lo hacemos"
+                    />
                     <div className="row">
                       <div className="col-lg-6">
                         <div className="subtitle s2 wow fadeInUp mb-3">Cómo lo hacemos</div>
-                        <h2 className="mb20 wow fadeInUp" data-wow-delay=".2s">CONTRATA CON PÓLIZA DE RENTAS SOMOS LA MEJOR OPCIÓN EN EL MERCADO NACIONAL</h2>
+                        <h2 className="mb20 wow fadeInUp" data-wow-delay=".2s">
+                          CONTRATA CON PÓLIZA DE RENTAS SOMOS LA MEJOR OPCIÓN EN EL MERCADO NACIONAL
+                        </h2>
 
                         <div className="s2 mb-4">
                           Con <b>Póliza de Rentas</b>, obtienes la máxima protección para tu propiedad. Nuestro exclusivo <b>Triángulo de la Seguridad</b> —basado en <b>prevenir, prever y proteger</b>— te brinda las herramientas necesarias para asegurar un <b>negocio inmobiliario sólido y rentable</b>. Además, gracias a nuestra rigurosa <b>investigación de inquilinos,</b> garantizamos la <b>prevención de problemas</b> y ofrecemos total <b>tranquilidad</b> gracias a nuestras pólizas jurídicas.
@@ -391,7 +375,35 @@ export default function Home() {
                       </div>
 
                       <div className="col-lg-6">
-                        <iframe width="100%" className="wow fadeInUp rounded-4 my-4 border-16" height="300" src="https://www.youtube.com/embed/e6nYd5wZ5dQ?si=pAGgv95KUX39kEQZ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                        {/* Contenedor responsivo mejorado */}
+                        <div className="wow fadeInUp video-responsive-container"
+                          style={{
+                            position: 'relative',
+                            paddingBottom: '56.25%', // 16:9
+                            borderRadius: '1rem',
+                            overflow: 'hidden',
+                            margin: '0 auto', // Centrado en móvil
+                            maxWidth: '100%' // Evita desbordamiento
+                          }}>
+
+                          {/* Iframe optimizado */}
+                          <iframe
+                            className="video-iframe"
+                            src="https://www.youtube.com/embed/e6nYd5wZ5dQ?si=pAGgv95KUX39kEQZ"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            style={{
+                              position: 'absolute',
+                              top: 0,
+                              left: 0,
+                              width: '100%',
+                              height: '100%',
+                              border: 'none',
+                              backgroundColor: 'transparent' // Elimina fondo negro
+                            }}
+                          ></iframe>
+                        </div>
                       </div>
                     </div>
                   </div>
