@@ -13,3 +13,74 @@
 .post-content p {
   margin-bottom: 1.5em;
 }
+
+.recent-post-item {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.recent-post-title {
+  color: #644f0a; /* Dorado */
+  font-weight: 4000; /* Peso normal */
+  font-size: 1.05rem; /* Ajusta tamaño si lo quieres más discreto */
+  margin: 0;
+  line-height: 1.2; /* Para que no se vea amontonado */
+  margin-bottom: 18px; /* espacio entre título y fecha */
+}
+
+.recent-post-date {
+  color: #000; /* Negro para la fecha */
+  font-size: 0.95rem;
+  margin-top: 18px; /* o el valor que quieras */
+}
+
+/* Imagen dentro de la columna */
+.recent-post-image {
+  width: 100%; /* Ocupa todo el ancho de la columna */
+  height: 80px; /* Fija altura */
+  object-fit: cover; /* Mantiene proporción */
+}
+
+
+/* Contenedor principal */
+#related-posts h4.color-dor {
+  font-size: 1.5rem; /* Ajusta el tamaño del título de la sección */
+  font-weight: bold;
+}
+
+/* Card title (Título del post) */
+.related-post-card .card-title {
+  font-size: 1rem; /* Ajusta el tamaño del título dentro de la tarjeta */
+  font-weight: 600;
+  color: #333;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+/* Texto adicional (fecha) */
+.related-post-card .card-text small {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* Imagen dentro de la card */
+.related-post-img {
+  object-fit: cover;
+  height: 180px; /* Ajusta la altura */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* Ajuste general para la card */
+.related-post-card {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: #fff;
+}
+
+.related-post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}

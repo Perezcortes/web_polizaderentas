@@ -120,8 +120,13 @@ export default function ContactPage() {
           `
                 }} />
                 <noscript>
-                    <img height="1" width="1" style={{ display: 'none' }}
+                    <Image
                         src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1"
+                        alt="facebook-pixel"
+                        width={1}
+                        height={1}
+                        style={{ display: "none" }}
+                        unoptimized
                     />
                 </noscript>
 
@@ -273,41 +278,52 @@ export default function ContactPage() {
             <section className="bg-dark-1 text-light">
                 <div className="container">
                     <div className="row align-items-center gx-5">
+
                         <div className="col-lg-6 mb-sm-20 position-relative">
                             <div className="images-deco-1">
-                                <Image
-                                    src="/images/misc/1.png"
-                                    width={500}
-                                    height={300}
+                                <img
+                                    src="images/misc/1.png"
                                     className="d-img-1 wow zoomIn"
                                     data-wow-delay="0s"
                                     alt="quienes somos"
                                 />
-                                <Image
-                                    src="/images/misc/2.png"
-                                    width={200}
-                                    height={100}
+                                <img
+                                    src="images/misc/2.png"
                                     className="d-img-2 wow zoomIn"
                                     data-wow-delay=".5s"
+                                    data-jarallax-element="100"
                                     alt="logo"
                                 />
-                                <div className="d-img-3 bg-color wow zoomIn" data-wow-delay=".6s"></div>
+                                <div
+                                    className="d-img-3 bg-color wow zoomIn"
+                                    data-wow-delay=".6s"
+                                    data-jarallax-element="-50"
+                                ></div>
                             </div>
                         </div>
 
                         <div className="col-lg-6">
                             <div className="subtitle s2 wow fadeInUp mb-3">Quiénes somos</div>
-                            <h2 className="wow fadeInUp" data-wow-delay=".2s">Acerca de <br /> Póliza de Rentas</h2>
-                            <p className="wow fadeInUp">Somos una empresa dedicada a proteger el patrimonio de las personas,
-                                nuestros servicios están destinados a propietarios, inmobiliarias o administradores de
-                                inmuebles que buscan dar sus propiedades en arrendamiento.</p>
+                            <h2 className="wow fadeInUp" data-wow-delay=".2s">
+                                Acerca de <br /> Póliza de Rentas
+                            </h2>
+                            <p className="wow fadeInUp">
+                                Somos una empresa dedicada a proteger el patrimonio de las personas,
+                                nuestros servicios están destinados a propietarios, inmobiliarias o
+                                administradores de inmuebles que buscan dar sus propiedades en arrendamiento.
+                            </p>
                             <hr className="s2" />
                             <div className="spacer-10"></div>
                             <div className="d-flex">
-                            <a className="btn-main me-1" href="/franquicias#conoce">Conoce más</a>
-                            <a className="btn-main btn-line" href="/sucursales">Nuestras sucursales</a>
+                                <a className="btn-main me-1" href="/franquicias#conoce">
+                                    Conoce más
+                                </a>
+                                <a className="btn-main btn-line" href="/sucursales">
+                                    Nuestras sucursales
+                                </a>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </section>

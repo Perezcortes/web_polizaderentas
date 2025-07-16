@@ -1,29 +1,4 @@
-.images-deco-1 .d-img-1,.images-deco-1 .d-img-2,.images-deco-1 .d-img-3{
-  border-radius:20px;
-  -moz-border-radius:20px;
-  -webkit-border-radius:20px;
-}
-.images-deco-1 .d-img-1{
-  position: relative;
-  z-index: 1;
-  width: 90%;
-  margin: 5%;
-}
-.images-deco-1 .d-img-2{
-  width: 30%;
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-}
-.images-deco-1 .d-img-3{  
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  bottom: -20px;
-  right: 0;
-  margin: 5%;
-}
+
 
 .slide-banner-1,
 .slide-banner-2,
@@ -64,3 +39,5 @@
     transform: scale(1.05); /* Pequeño zoom para aprovechar espacio */
   }
 }
+
+/* Imagen Acerca de Póliza de Rentas */

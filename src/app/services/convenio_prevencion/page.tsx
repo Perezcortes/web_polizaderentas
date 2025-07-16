@@ -18,12 +18,12 @@ export default function ConvenioPrevencionPage() {
         <title>Convenio de Prevención de Conflictos - Póliza de Rentas</title>
         <meta name="description" content="Nuestra tecnología revoluciona la protección jurídica en el arrendamiento inmobiliario. Forma parte del futuro de la seguridad para propietarios e inquilinos." />
         <link rel="icon" href="/images/icon.png" type="image/gif" sizes="16x16" />
-        
+
         {/* Preload de recursos críticos */}
         <link rel="preload" href="https://code.jquery.com/jquery-3.6.0.min.js" as="script" />
         <link rel="preload" href="/css/bootstrap.min.css" as="style" />
         <link rel="preload" href="/css/style.css" as="style" />
-        
+
         {/* Hojas de estilo */}
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/css/plugins.css" />
@@ -58,8 +58,8 @@ export default function ConvenioPrevencionPage() {
           `
         }} />
         <noscript>
-          <img height="1" width="1" style={{display:'none'}} 
-            src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1" 
+          <img height="1" width="1" style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1"
           />
         </noscript>
 
@@ -76,9 +76,9 @@ export default function ConvenioPrevencionPage() {
       </Head>
 
       {/* Cargar jQuery con mayor control */}
-      <Script 
+      <Script
         id="jquery-js"
-        src="https://code.jquery.com/jquery-3.6.0.min.js" 
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
         strategy="beforeInteractive"
         onLoad={() => {
           if (typeof window !== 'undefined' && window.jQuery && !window.$) {
@@ -97,10 +97,10 @@ export default function ConvenioPrevencionPage() {
             loop={true}
             speed={1200}
             parallax={true}
-            pagination={{ 
-              el: '.swiper-pagination', 
-              type: 'fraction', 
-              clickable: true 
+            pagination={{
+              el: '.swiper-pagination',
+              type: 'fraction',
+              clickable: true
             }}
             navigation={{
               nextEl: '.swiper-button-next',
@@ -109,8 +109,8 @@ export default function ConvenioPrevencionPage() {
             className="swiper"
           >
             <SwiperSlide>
-              <div 
-                className="swiper-inner" 
+              <div
+                className="swiper-inner"
                 style={{
                   backgroundImage: 'url(/images/services/convenio-prevencion-conflictos/convenio-prevencion-conflictos-01.jpg)',
                   backgroundSize: 'cover',
@@ -124,12 +124,14 @@ export default function ConvenioPrevencionPage() {
                       <div className="col-lg-7 mb-sm-30">
                         <div className="subtitle s2 mb-3">Nuestros Servicios</div>
                         <h1 className="slider-title">Convenio de prevención de conflictos</h1>
-                        <Link className="btn-main mb10 mt20" href="#como-funciona">
-                          Cómo funciona
-                        </Link>
-                        <Link className="btn-main mb10 mt20" href="/sucursales">
-                          Sucursales
-                        </Link>
+                        <div className="d-flex">
+                          <Link className="btn-main me-1" href="#como-funciona">
+                            Cómo funciona
+                          </Link>
+                          <Link className="btn-main btn-line" href="/sucursales">
+                            Sucursales
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -149,26 +151,41 @@ export default function ConvenioPrevencionPage() {
       </section>
 
       {/* Sección Cómo funciona */}
-      <section id="como-funciona">
+      <section>
         <div className="container">
-          <div className="row gx-5 justify-content-center align-items-center">
+          <div className="row gx-5 justify-content-center">
             <div className="col-lg-5">
-              <div className="subtitle s2 mb-3">Cómo funciona</div>
-              <h2 className="mb20">¿Cómo funciona?</h2>
-              <p>Tu contrato de arrendamiento se perfecciona de manera judicial al celebrarlo mediante un convenido de mediación privada. Consecuentemente, si se incumple, podrás solicitar su ejecución de manera directa vía judicial, con un procedimiento más ágil que el tradicional, ya que en muchas ocasiones el sistema judicial no cuenta con la capacidad suficiente para dar celeridad a los procesos.</p>
-              <Link className="btn-main mb10 mt20" href="/sucursales">
-                Sucursales
-              </Link>
+              <div className="subtitle s2 wow fadeInUp mb-3">Cómo funciona</div>
+              <h2 className="wow fadeInUp mb20" data-wow-delay=".2s">¿Cómo funciona?</h2>
+              <p>
+                Tu contrato de arrendamiento se perfecciona de manera judicial al celebrarlo mediante un convenio de mediación privada.
+                Consecuentemente, si se incumple, podrás solicitar su ejecución de manera directa vía judicial, con un procedimiento más ágil que el tradicional,
+                ya que en muchas ocasiones el sistema judicial no cuenta con la capacidad suficiente para dar celeridad a los procesos.
+              </p>
+
+              {/* Lista desactivada */}
+              {/*
+        <ul className="list-unstyled">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-file-earmark-lock-fill" viewBox="0 0 16 16">
+              <path d="M7 7a1 1 0 0 1 2 0v1H7zM6 9.3c0-.042.02-.107.105-.175A.64.64 0 0 1 6.5 9h3a.64.64 0 0 1 .395.125c.085.068.105.133.105.175v2.4c0 .042-.02.107-.105.175A.64.64 0 0 1 9.5 12h-3a.64.64 0 0 1-.395-.125C6.02 11.807 6 11.742 6 11.7z" />
+              <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M10 7v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V9.3c0-.627.46-1.058 1-1.224V7a2 2 0 1 1 4 0" />
+            </svg>
+            <br />
+            Tu contrato de arrendamiento se perfecciona de manera judicial...
+          </li>
+        </ul>
+        */}
+
+              <a className="btn-main mb10 mt20" href="/sucursales">Sucursales</a>
               <div className="spacer-single"></div>
             </div>
 
             <div className="col-lg-5">
-              <Image 
-                src="/images/services/convenio-prevencion-conflictos/convenio-prevencion-conflictos-02.jpg" 
-                width={600} 
-                height={400}
-                className="img-fluid rounded-30" 
-                alt="Convenio de prevención de conflictos" 
+              <img
+                src="/images/services/convenio-prevencion-conflictos/convenio-prevencion-conflictos-02.jpg"
+                className="img-fluid rounded-30"
+                alt="conflicto"
               />
             </div>
           </div>
@@ -179,7 +196,7 @@ export default function ConvenioPrevencionPage() {
       <section className="no-top">
         <div className="container">
           <div className="row g-5">
-            <div className="col-lg-6">
+            <div className="col-lg-6 wow fadeInLeft">
               <div className="padding40 bg-grey rounded-30 h-100">
                 <h3>¿Ante quién se celebran?</h3>
                 <p>Tu convenio de mediación Privada se deberá celebrar ante la presencia de un Mediador Privado Certificado por el Centro de Justicia Alternativa de la Ciudad de México.</p>
@@ -196,16 +213,18 @@ export default function ConvenioPrevencionPage() {
                   <li>No necesitas de tantos trámites costosos de investigaciones, ni el temer demasiada documentación.</li>
                 </ul>
                 <p><em>Tu convenio de mediación tendrá vigencia por el tiempo que dure tu contrato de arrendamiento.</em></p>
-                <Link className="btn-main mb10 mt20" href="/sucursales">
-                  Sucursales
-                </Link>
-                <Link className="btn-main mb10 mt20" href="/sucursales">
-                  Ubica tu sucursal
-                </Link>
+                <div className="d-flex">
+                  <Link className="btn-main me-1" href="/sucursales">
+                    Sucursales
+                  </Link>
+                  <Link className="btn-main btn-line" href="/sucursales">
+                    Ubica tu sucursal
+                  </Link>
+                </div>
               </div>
             </div>
 
-            <div className="col-lg-6">
+            <div className="col-lg-6 wow fadeInRight">
               <div className="padding40 bg-color-2 rounded-30 h-100">
                 <h3>Documentos necesarios para llevar acabo el trámite</h3>
                 <ul>
@@ -220,22 +239,37 @@ export default function ConvenioPrevencionPage() {
               </div>
             </div>
 
-            <div className="col-lg-4">
+            <div className="col-lg-4 wow fadeInLeft">
               <div className="padding60 sm-padding40 rounded-30 bg-color h-100 text-light">
-                <h2 className="mb20">Refuerzo legal</h2>
-                <p>Tu contrato de arrendamiento adquiere fuerza legal mediante la firma de un convenio de mediación mercantil.</p>
+                <div className="row">
+                  <div className="col-lg-12">
+                    <h2 className="mb20 wow fadeInUp" data-wow-delay=".2s">Refuerzo legal</h2>
+                    <p>Tu contrato de arrendamiento adquiere fuerza legal mediante la firma de un convenio de mediación mercantil.</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="col-lg-4">
+            <div className="col-lg-4 wow fadeInLeft">
               <div className="padding60 sm-padding40 rounded-30 bg-color h-100 text-light">
-                <h2 className="mb20">Máxima confianza</h2>
-                <p>El convenio se firma ante un Mediador Certificado y se inscribe en el Tribunal Superior de Justicia Alternativa.</p>
+                <div className="row">
+                  <div className="col-lg-12">
+                    <h2 className="mb20 wow fadeInUp" data-wow-delay=".2s">Máxima confianza</h2>
+                    <p>El convenio se firma ante un Mediador Certificado y se inscribe en el Tribunal Superior de Justicia Alternativa.
+
+                      Agiliza el proceso judicial
+                      En caso de incumplimiento, el trámite judicial es </p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="col-lg-4">
+            <div className="col-lg-4 wow fadeInLeft">
               <div className="padding60 sm-padding40 rounded-30 bg-color h-100 text-light">
-                <h2 className="mb20">Agiliza el proceso judicial</h2>
-                <p>En caso de incumplimiento, el trámite judicial es mucho más ágil, lo que te permitirá recuperar tu inmueble rápidamente.</p>
+                <div className="row">
+                  <div className="col-lg-12">
+                    <h2 className="mb20 wow fadeInUp" data-wow-delay=".2s">Agiliza el proceso judicial</h2>
+                    <p>En caso de incumplimiento, el trámite judicial es mucho más ágil, lo que te permitirá recuperar tu inmueble rápidamente.</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

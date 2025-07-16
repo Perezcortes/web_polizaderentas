@@ -11,6 +11,9 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Mapa from '../../components/mapa';
+import RecentPosts from '../../components/RecentPosts';
+import { useReInitVisualScripts } from '../../hooks/useReInitVisualScripts';
+
 import './styles.css';
 
 declare global {
@@ -36,6 +39,8 @@ interface Office {
 }
 
 export default function SucursalesPage() {
+  useReInitVisualScripts();
+
   const [offices, setOffices] = useState<Office[]>([]);
   const [uniqueStates, setUniqueStates] = useState<string[]>([]);
   const [selectedState, setSelectedState] = useState<string>('todos');
@@ -369,43 +374,64 @@ export default function SucursalesPage() {
       <section className="bg-dark-1 text-light">
         <div className="container">
           <div className="row align-items-center gx-5">
+
             <div className="col-lg-6 mb-sm-20 position-relative">
               <div className="images-deco-1">
-                <Image
-                  src="/images/misc/1.png"
+                <img
+                  src="images/misc/1.png"
                   className="d-img-1 wow zoomIn"
                   data-wow-delay="0s"
                   alt="quienes somos"
-                  width={300}
-                  height={300}
                 />
-                <Image
-                  src="/images/misc/2.png"
+                <img
+                  src="images/misc/2.png"
                   className="d-img-2 wow zoomIn"
                   data-wow-delay=".5s"
                   data-jarallax-element="100"
                   alt="logo"
-                  width={200}
-                  height={200}
                 />
-                <div className="d-img-3 bg-color wow zoomIn" data-wow-delay=".6s" data-jarallax-element="-50"></div>
+                <div
+                  className="d-img-3 bg-color wow zoomIn"
+                  data-wow-delay=".6s"
+                  data-jarallax-element="-50"
+                ></div>
               </div>
             </div>
 
             <div className="col-lg-6">
               <div className="subtitle s2 wow fadeInUp mb-3">Quiénes somos</div>
-              <h2 className="wow fadeInUp" data-wow-delay=".2s">Acerca de <br /> Póliza de Rentas</h2>
-              <p className="wow fadeInUp">Somos una empresa dedicada a proteger el patrimonio de las personas,
-                nuestros servicios están destinados a propietarios, inmobiliarias o administradores de
-                inmuebles que buscan dar sus propiedades en arrendamiento.</p>
+              <h2 className="wow fadeInUp" data-wow-delay=".2s">
+                Acerca de <br /> Póliza de Rentas
+              </h2>
+              <p className="wow fadeInUp">
+                Somos una empresa dedicada a proteger el patrimonio de las personas,
+                nuestros servicios están destinados a propietarios, inmobiliarias o
+                administradores de inmuebles que buscan dar sus propiedades en arrendamiento.
+              </p>
               <hr className="s2" />
               <div className="spacer-10"></div>
-              <Link className="btn-main mb10" href="/franquicias#conoce">
+              <a className="btn-main mb10" href="/franquicias#conoce">
                 Conoce más
-              </Link>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Sección Blog */}
+      <section className="bo-bottom">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6">
+              <div className="subtitle wow fadeInUp mb-3">Blog</div>
+              <h2 className="wow fadeInUp" data-wow-delay=".2s">Blog y noticias</h2>
             </div>
           </div>
         </div>
+
+        {/* Componente de posts recientes - Mantiene los estilos originales */}
+        <RecentPosts />
       </section>
     </>
   );
