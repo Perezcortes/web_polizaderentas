@@ -4,6 +4,7 @@ import "./globals.css";
 import Script from "next/script";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { headers } from "next/headers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,11 +30,19 @@ export const metadata: Metadata = {
   authors: [],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  //  Obtenemos headers en SSR
+  const headersList = await headers();
+  const pathname = headersList.get("x-invoke-path") || "";
+
+  //  Ocultar Navbar en /blog/[slug]
+  const hideGlobalNavbar =
+    pathname.startsWith("/blog/[slug]/") && pathname.split("/").length === 3;
+
   return (
     <html lang="es">
       <head>
@@ -44,7 +53,7 @@ export default function RootLayout({
           sizes="16x16"
         />
 
-        {/* CSS externos: asegúrate de tener estos archivos en /public/css/ */}
+        {/* CSS externos */}
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/css/bootstrap.rtl.min.css" />
         <link rel="stylesheet" href="/css/jquery.countdown.css" />
@@ -99,14 +108,14 @@ export default function RootLayout({
 
         {/* Contenido */}
         <div id="wrapper">
-          <Navbar />
+          {!hideGlobalNavbar && <Navbar />}
           <main>{children}</main>
           <Footer />
         </div>
 
-        {/* Scripts personalizados al final */}
+        {/* Scripts personalizados */}
         <Script src="/js/plugins.js" strategy="lazyOnload" />
-        <Script src="/js/designesia.js" strategy="lazyOnload" /> {/* ultima seccion video de youtube */}
+        <Script src="/js/designesia.js" strategy="lazyOnload" />
         <Script src="/js/swiper.js" strategy="lazyOnload" />
         <Script src="/js/custom-marquee.js" strategy="lazyOnload" />
 

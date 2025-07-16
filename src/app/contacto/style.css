@@ -6,3 +6,19 @@
   justify-content: center !important;
   align-items: center !important;
 }
+
+.jarallax-img {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+@media screen and (max-width: 1330px) {
+  .jarallax-img {
+    margin-top: 5% !important;
+    height: 100% !important;
+  }
+}

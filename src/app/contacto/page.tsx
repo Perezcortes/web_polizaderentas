@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Script from 'next/script';
 import Swal from 'sweetalert2';
-import '../contacto/style.css';
+import './style.css';
 import { useReInitVisualScripts } from '../../hooks/useReInitVisualScripts';
 
 
@@ -158,15 +158,8 @@ export default function ContactPage() {
             <Script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" strategy="lazyOnload" />
 
             {/* Banner superior */}
-            <section className="text-light jarallax">
-                <Image
-                    src="/images/slider/banner3.jpg"
-                    alt="Banner de contacto"
-                    width={1920}
-                    height={600}
-                    className="jarallax-img custom-banner-img"
-                />
-
+            <section id="poliza" className="text-light jarallax">
+                <img src="/images/slider/banner3.jpg" className="jarallax-img" alt="banner3" />
                 <div className="container">
                     <div className="row text-center">
                         <div className="col-lg-8 offset-lg-2">
@@ -182,78 +175,50 @@ export default function ContactPage() {
                 <div className="container">
                     <div className="row">
                         <div className="row col-lg-12 col-md-6" data-wow-delay="0s">
-                            {/* Formulario de contacto */}
+
+                            {/* Formulario */}
                             <div className="col-lg-6 p-4 pb-2 bg-grey">
                                 <h4>Envía tus datos y un agente de Póliza de Rentas se pondrá en contacto contigo</h4>
 
-                                <form className="formulario-informes" id="contactoForm" onSubmit={handleSubmit}>
+                                <form className="formulario-informes" id="contactoForm">
                                     <div className="mb-3">
                                         <label htmlFor="nombre" className="form-label">Nombre</label>
-                                        <input
-                                            type="text"
-                                            name="nombre"
-                                            className="form-control"
-                                            value={formData.nombre}
-                                            onChange={handleChange}
-                                            required
-                                        />
+                                        <input type="text" name="nombre" className="form-control" id="nombre" required />
                                     </div>
+
                                     <div className="mb-3">
                                         <label htmlFor="apellido" className="form-label">Primer Apellido</label>
-                                        <input
-                                            type="text"
-                                            name="apellido"
-                                            className="form-control"
-                                            value={formData.apellido}
-                                            onChange={handleChange}
-                                            required
-                                        />
+                                        <input type="text" name="apellido" className="form-control" id="apellido" required />
                                     </div>
+
                                     <div className="mb-3">
                                         <label htmlFor="email" className="form-label">Correo electrónico</label>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            className="form-control"
-                                            value={formData.email}
-                                            onChange={handleChange}
-                                            required
-                                        />
+                                        <input type="email" name="email" className="form-control" id="email" aria-describedby="emailHelp" required />
                                     </div>
+
                                     <div className="mb-3">
                                         <label htmlFor="numero" className="form-label">WhatsApp</label>
-                                        <input
-                                            type="number"
-                                            name="numero"
-                                            className="form-control"
-                                            value={formData.numero}
-                                            onChange={handleChange}
-                                            required
-                                        />
+                                        <input type="number" name="numero" className="form-control" id="numero" required />
                                     </div>
+
                                     <div className="mb-3">
                                         <label htmlFor="mensaje" className="form-label">Soy un</label>
-                                        <select
-                                            name="type"
-                                            className="form-control"
-                                            value={formData.type}
-                                            onChange={handleChange}
-                                            required
-                                        >
+                                        <select name="type" className="form-control" required>
                                             <option value="Propietario">Propietario</option>
                                             <option value="Inquilino">Inquilino</option>
                                             <option value="Asesor Inmobiliario">Asesor Inmobiliario</option>
                                             <option value="Director Inmobiliario">Director Inmobiliario</option>
                                         </select>
                                     </div>
-                                    <div>
-                                        <input type="hidden" name="captcha" value={formData.captcha} />
-                                        <input type="hidden" name="id" value={formData.id} />
-                                    </div>
+
+                                    <input type="hidden" name="captcha" value="" />
+                                    <input type="hidden" name="id" value="" />
+
                                     <button type="submit" className="btn btn-primary">Enviar</button>
                                 </form>
                             </div>
 
+                            {/* Espacio */}
                             <br /><br />
 
                             {/* Mapa */}
@@ -266,9 +231,9 @@ export default function ContactPage() {
                                     allowFullScreen
                                     loading="lazy"
                                     referrerPolicy="no-referrer-when-downgrade"
-                                    title="Ubicación de Póliza de Rentas"
-                                ></iframe>
+                                />
                             </div>
+
                         </div>
                     </div>
                 </div>

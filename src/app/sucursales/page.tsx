@@ -13,6 +13,7 @@ import Link from 'next/link';
 import Mapa from '../../components/mapa';
 import RecentPosts from '../../components/RecentPosts';
 import { useReInitVisualScripts } from '../../hooks/useReInitVisualScripts';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './styles.css';
 
