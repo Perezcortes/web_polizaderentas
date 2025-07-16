@@ -1,0 +1,41 @@
+.card-custom {
+  background-color: rgb(187, 161, 85); /* dorado */
+  color: white;
+  padding: 60px 40px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  text-align: left;
+  max-width: 100%;
+}
+
+.card-custom:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+  font-family: "Plus Jakarta Sans", Helvetica, Arial, sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.card-text {
+  font-family: "Inter Tight", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+@media (max-width: 576px) {
+  .card-custom {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+  }
+
+  .card-text {
+    font-size: 0.95rem;
+  }
+}

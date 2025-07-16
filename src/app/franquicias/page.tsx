@@ -256,17 +256,29 @@ export default function FranchisesPage() {
         <div className="container">
           <div className="row align-items-center gx-5">
             <div className="col-lg-6">
-              <h2 className="wow fadeInUp" data-wow-delay=".2s">¿Qué incluye la <br /> franquicia?</h2>
+              <h2 className="wow fadeInUp" data-wow-delay=".2s">
+                ¿Qué incluye la <br /> franquicia?
+              </h2>
               <ul>
                 <li>Licenciamiento de la Marca</li>
-                <li>Acceso a la plataforma de gestión para todos tus colaboradores, clientes e inmobiliarias.</li>
-                <li>Micrositio de la sucursal y de todos tus colaboradores.</li>
+                <li>
+                  Acceso a la plataforma de gestión para todos tus colaboradores, clientes e inmobiliarias.
+                </li>
+                <li>
+                  Micrositio de la sucursal y de todos tus colaboradores.
+                </li>
                 <li>Manuales y políticas por escrito.</li>
-                <li>Estrategias de Marketing a nivel nacional. Webinars, Blogs, Contenido en Redes Sociales.</li>
+                <li>
+                  Estrategias de Marketing a nivel nacional. Webinars, Blogs, Contenido en Redes Sociales.
+                </li>
                 <li>Capacitación y seguimiento constante a todos sus ejecutivos.</li>
-                <li>Capacitación y asesoría permanente en materia comercial, jurídica y de marketing.</li>
+                <li>
+                  Capacitación y asesoría permanente en materia comercial, jurídica y de marketing.
+                </li>
                 <li>Reportes y evaluación de tu sucursal.</li>
               </ul>
+
+              {/* <hr className="s2" /> */}
               <div className="spacer-10"></div>
               <a
                 className="btn-main mb10 mt20"
@@ -277,25 +289,27 @@ export default function FranchisesPage() {
                 Inicia tu proceso
               </a>
             </div>
+
             <div className="col-lg-6 mb-sm-20 position-relative">
               <div className="images-deco-1">
-                <Image
+                <img
                   src="/images/misc/img-3.png"
-                  width={581}
-                  height={389}
                   className="d-img-1 wow zoomIn img-fluid"
                   data-wow-delay="0s"
                   alt="franquicias"
                 />
-                <Image
+                <img
                   src="/images/misc/2.png"
-                  width={180}
-                  height={180}
                   className="d-img-2 wow zoomIn"
                   data-wow-delay=".5s"
+                  data-jarallax-element="100"
                   alt="logo"
                 />
-                <div className="d-img-3 bg-color wow zoomIn" data-wow-delay=".6s"></div>
+                <div
+                  className="d-img-3 bg-color wow zoomIn"
+                  data-wow-delay=".6s"
+                  data-jarallax-element="-50"
+                ></div>
               </div>
             </div>
           </div>

@@ -108,8 +108,8 @@ export default function Footer() {
           <div className="row">
             <div className="col-md-12 d-flex justify-content-center">
               &copy; {new Date().getFullYear()} Póliza de rentas. Todos los derechos reservados. |{" "}
-              <a href="https://polizaderentas.com/aviso_privacidad.php" className="mx-1">Aviso de privacidad</a> |{" "}
-              <a href="https://polizaderentas.com/terminos_y_condiciones.php" className="mx-1">Términos y condiciones</a>
+              <a href="/aviso-de-privacidad" className="mx-1">Aviso de privacidad</a> |{" "}
+              <a href="/terminos-y-condiciones" className="mx-1">Términos y condiciones</a>
             </div>
           </div>
         </div>

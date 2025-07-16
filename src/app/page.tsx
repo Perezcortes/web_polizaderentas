@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import Head from 'next/head';
 import Image from 'next/image';
@@ -10,12 +10,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/parallax';
 import 'swiper/css/scrollbar';
-import './styles.css';
 import { useReInitVisualScripts } from '../hooks/useReInitVisualScripts';
 import RecentPosts from '../components/RecentPosts';
+import './styles.css';
 
-
-export default function Home() {  
+export default function Home() {
   useReInitVisualScripts();
 
   return (
@@ -254,22 +253,45 @@ export default function Home() {
               <div className="row align-items-center gx-5">
                 <div className="col-lg-6 mb-sm-20 position-relative">
                   <div className="images-deco-1">
-                    <Image src="/images/misc/1.jpg" width={481} height={321} className="d-img-1 wow zoomIn" data-wow-delay="0s" alt="Quienes somos" />
-                    <Image src="/images/misc/2.png" width={175} height={175} className="shadow-sm d-img-2 wow zoomIn" data-wow-delay=".5s" data-jarallax-element="100" alt="logo" />
-                    <div className="d-img-3 bg-color wow zoomIn" data-wow-delay=".6s" data-jarallax-element="-50"></div>
+                    <img
+                      src="images/misc/1.jpg"
+                      className="d-img-1 wow zoomIn"
+                      data-wow-delay="0s"
+                      alt="Quienes somos"
+                    />
+                    <img
+                      src="images/misc/2.png"
+                      className="shadow-sm d-img-2 wow zoomIn"
+                      data-wow-delay=".5s"
+                      data-jarallax-element="100"
+                      alt="logo"
+                    />
+                    <div
+                      className="d-img-3 bg-color wow zoomIn"
+                      data-wow-delay=".6s"
+                      data-jarallax-element="-50"
+                    ></div>
                   </div>
                 </div>
 
                 <div className="col-lg-6">
                   <div className="subtitle s2 wow fadeInUp mb-3">Quiénes somos</div>
-                  <h2 className="wow fadeInUp" data-wow-delay=".2s">Acerca de <br /> Póliza de Rentas</h2>
-                  <p className="wow fadeInUp">Somos la empresa líder en México dedicada a proteger inmuebles en arrendamiento. Nuestros servicios de pólizas jurídicas para arrendamiento garantizan una protección integral en cada contrato, brindando tranquilidad y respaldo legal tanto a propietarios como a inquilinos.</p>
-                  <p><b>¿Eres asesor inmobiliario?</b> Trabajamos contigo para asegurar el éxito de tus operaciones de arrendamiento. Con nuestro apoyo, no solo ofrecerás un servicio más profesional y de mejor calidad a tus clientes, sino que también simplificará tus actividades diarias al contar con el respaldo de un equipo experto en prevención y resolución de conflictos.</p>
+                  <h2 className="wow fadeInUp" data-wow-delay=".2s">
+                    Acerca de <br /> Póliza de Rentas
+                  </h2>
+                  <p className="wow fadeInUp">
+                    Somos la empresa líder en México dedicada a proteger inmuebles en arrendamiento.
+                    Nuestros servicios de pólizas jurídicas para arrendamiento garantizan una protección integral en cada contrato, brindando tranquilidad y respaldo legal tanto a propietarios como a inquilinos.
+                  </p>
+                  <p>
+                    <b>¿Eres asesor inmobiliario?</b> Trabajamos contigo para asegurar el éxito de tus operaciones de arrendamiento.
+                    Con nuestro apoyo, no solo ofrecerás un servicio más profesional y de mejor calidad a tus clientes, sino que también simplificará tus actividades diarias al contar con el respaldo de un equipo experto en prevención y resolución de conflictos.
+                  </p>
                   <hr className="s2" />
                   <div className="spacer-10"></div>
                   <div className="d-flex">
-                    <Link className="btn-main me-1" href="/about">Conoce más</Link>
-                    <Link className="btn-main btn-line" href="/sucursales">Nuestras sucursales</Link>
+                    <a className="btn-main me-1" href="/about">Conoce más</a>
+                    <a className="btn-main btn-line" href="/sucursales">Nuestras sucursales</a>
                   </div>
                 </div>
               </div>

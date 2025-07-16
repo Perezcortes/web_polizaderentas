@@ -348,23 +348,27 @@ export default function PostDetail() {
 
                         return (
                           <div key={recentPost.id}>
-                            <Link href={`/blog/${recentPost.slug}`} passHref legacyBehavior>
-                              <div className="row mb-3 recent-post-item" style={{ cursor: 'pointer' }}>
-                                <div className="col-4">
-                                  <Image
-                                    src={recentPost.url_img
-                                      ? `${cloudflareEndpoint}/${recentPost.url_img.replace(/^\//, '')}`
-                                      : '/images/default-thumb.jpg'}
-                                    width={100}
-                                    height={80}
-                                    className="recent-post-image"
-                                    alt={recentPost.titulo}
-                                  />
-                                </div>
-                                <div className="col-8">
-                                  <p className="recent-post-title">{truncateText(recentPost.titulo, 60)}</p>
-                                  <small className="recent-post-date">Póliza de Rentas - {formatDate(recentPost.created_at)}</small>
-                                </div>
+                            <Link
+                              href={`/blog/${recentPost.slug}`}
+                              className="row mb-3 recent-post-item"
+                              style={{ cursor: 'pointer' }}
+                            >
+                              <div className="col-4">
+                                <Image
+                                  src={recentPost.url_img
+                                    ? `${cloudflareEndpoint}/${recentPost.url_img.replace(/^\//, '')}`
+                                    : '/images/default-thumb.jpg'}
+                                  width={100}
+                                  height={80}
+                                  className="recent-post-image"
+                                  alt={recentPost.titulo}
+                                />
+                              </div>
+                              <div className="col-8">
+                                <p className="recent-post-title">{truncateText(recentPost.titulo, 60)}</p>
+                                <small className="recent-post-date">
+                                  Póliza de Rentas - {formatDate(recentPost.created_at)}
+                                </small>
                               </div>
                             </Link>
                             {index < recentPosts.length - 1 && <hr className="my-2" />}
