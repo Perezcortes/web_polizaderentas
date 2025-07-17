@@ -97,7 +97,7 @@ export default function NosotrosPage() {
                                                 </p>
                                                 <hr className="s2" />
                                                 <div className="spacer-10"></div>
-                                                <Link className="btn-main mb10" href="#acerca-de">
+                                                <Link className="btn-main mb10" href="/#acerca-de">
                                                     Conócenos
                                                 </Link>
                                                 &nbsp;

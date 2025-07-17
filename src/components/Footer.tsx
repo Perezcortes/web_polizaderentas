@@ -3,6 +3,7 @@
 import React from "react";
 import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './footer.css';
 
 export default function Footer() {
   return (
@@ -96,25 +97,29 @@ export default function Footer() {
             <h5>Accesos</h5>
             <div className="row">
               <div className="col-lg-4">
-                <a className="btn-main mb-3" href="/sucursales">Sucursales</a> {/* mb-3 = margin-bottom 1rem */}
-                <a className="btn-main mt-3" href="/services/poliza_juridica">Sistema Polizas</a> {/* mt-3 = margin-top 1rem */}
+                <div className="btn-access-group">
+                  <a className="btn-main" href="/sucursales">Sucursales</a>
+                  <a className="btn-main" href="/services/poliza_juridica">Sistema Pólizas</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="subfooter">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12 d-flex justify-content-center">
-              &copy; {new Date().getFullYear()} Póliza de rentas. Todos los derechos reservados. |{" "}
-              <a href="/aviso-de-privacidad" className="mx-1">Aviso de privacidad</a> |{" "}
-              <a href="/terminos-y-condiciones" className="mx-1">Términos y condiciones</a>
-            </div>
-          </div>
+      <div className="col-md-12 subfooter-content">
+        <div className="footer-line">
+          <span>&copy; {new Date().getFullYear()} Póliza de rentas.</span>
+        </div>
+        <div className="footer-links">
+          <span>Todos los derechos reservados.</span>
+          <span className="separator">|</span>
+          <a href="/aviso-de-privacidad">Aviso de privacidad</a>
+          <span className="separator">|</span>
+          <a href="/terminos-y-condiciones">Términos y condiciones</a>
         </div>
       </div>
+
     </footer>
   );
 }

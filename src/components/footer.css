@@ -1,0 +1,217 @@
+/* ===========================
+   FOOTER ESTILOS BASE
+=========================== */
+footer {
+  background-color: #2c2c2c;
+  color: #fff;
+  padding: 40px 0;
+  font-size: 0.9rem;
+}
+
+footer h5 {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+footer p {
+  margin-bottom: 0.8rem;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #bea151;
+}
+
+/* Botón principal SOLO dentro del footer */
+footer .btn-main {
+  background-color: #bea151;
+  color: #2c2c2c;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 4px;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+footer .btn-main:hover {
+  background-color: #bea151;
+  color: #000;
+}
+
+footer .widget {
+  margin-bottom: 30px;
+}
+
+footer .social-icons a {
+  margin-right: 12px;
+  font-size: 1.2rem;
+}
+
+footer .social-icons a i {
+  color: #bea151;
+  transition: color 0.3s ease;
+}
+
+footer .social-icons a:hover i {
+  color: #bea151;
+}
+
+footer .de-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+footer .de-icon-text img {
+  width: 24px;
+  height: 24px;
+}
+
+/* ===========================
+   BOTONES ACCESOS HORIZONTALES
+=========================== */
+footer .btn-access-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+/* ===========================
+   SUBFOOTER
+=========================== */
+footer .subfooter {
+  background-color: #1a1a1a;
+  padding: 15px 0;
+  font-size: 0.8rem;
+}
+
+footer .subfooter-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+footer .footer-line {
+  font-weight: 500;
+  color: #fff;
+}
+
+footer .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+footer .footer-links a {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+footer .footer-links a:hover {
+  color: #bea151;
+}
+
+footer .footer-links .separator {
+  color: #fff;
+  font-weight: 400;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+=========================== */
+
+/* Pantallas medianas (tablets y laptops pequeños) */
+@media (max-width: 991px) {
+  footer .row > div {
+    margin-bottom: 20px;
+  }
+
+  footer .de-icon-text {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  footer .btn-main {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+
+/* Pantallas pequeñas (smartphones) */
+@media (max-width: 576px) {
+  footer {
+    padding: 30px 15px;
+    text-align: left;
+  }
+
+  footer .container .row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  footer .widget {
+    margin-bottom: 20px;
+  }
+
+  footer .de-icon-text {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  footer .de-icon-text img {
+    width: 20px;
+    height: 20px;
+  }
+
+  footer .social-icons {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  footer .btn-main {
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+    margin: 10px auto;
+  }
+
+  footer .btn-access-group {
+    justify-content: center;
+    gap: 4px;
+  }
+
+  footer .btn-access-group .btn-main {
+    flex: 1 1 auto;
+    max-width: 45%;
+    margin: 0;
+  }
+
+  footer .subfooter-content {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  footer .footer-links {
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+  }
+}

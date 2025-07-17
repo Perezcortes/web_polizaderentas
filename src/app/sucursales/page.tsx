@@ -375,7 +375,6 @@ export default function SucursalesPage() {
       <section className="bg-dark-1 text-light">
         <div className="container">
           <div className="row align-items-center gx-5">
-
             <div className="col-lg-6 mb-sm-20 position-relative">
               <div className="images-deco-1">
                 <img
@@ -406,8 +405,8 @@ export default function SucursalesPage() {
               </h2>
               <p className="wow fadeInUp">
                 Somos una empresa dedicada a proteger el patrimonio de las personas,
-                nuestros servicios están destinados a propietarios, inmobiliarias o
-                administradores de inmuebles que buscan dar sus propiedades en arrendamiento.
+                nuestros servicios están destinados a propietarios, inmobiliarias o administradores de
+                inmuebles que buscan dar sus propiedades en arrendamiento.
               </p>
               <hr className="s2" />
               <div className="spacer-10"></div>
@@ -415,7 +414,6 @@ export default function SucursalesPage() {
                 Conoce más
               </a>
             </div>
-
           </div>
         </div>
       </section>

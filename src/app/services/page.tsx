@@ -107,7 +107,7 @@ export default function ServicesPage() {
                         <p className="fs-4">
                           Nuestro equipo de abogados ha diseñado cinco soluciones para garantizar la seguridad de tu patrimonio.
                         </p>
-                        <Link className="btn-main mt20 me-2" href="#todos-los-servicios">Ver todos los servicios</Link>
+                        <Link className="btn-main mt20 me-1" href="#todos-los-servicios">Ver todos los servicios</Link>
                         <Link className="btn-main mt20" href="/sucursales">Sucursales</Link>
                       </div>
                     </div>

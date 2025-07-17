@@ -154,7 +154,7 @@ export default function FirmaElectronicaPage() {
       {/* Sección Cómo funciona */}
       <section>
         <div className="container">
-          <div className="row gx-5 justify-content-center">
+          <div className="row gx-5 justify-content-center"  id="como-funciona">
             <div className="col-lg-5">
               <div className="subtitle s2 wow fadeInUp mb-3">Cómo funciona</div>
               <h2 className="wow fadeInUp mb20" data-wow-delay=".2s">

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import './RecentPosts.css';
 
 interface BlogPost {
     id: number;
@@ -68,7 +69,7 @@ export default function RecentPosts() {
                                 <div className="placeholder" style={{
                                     width: '100%',
                                     height: '300px',
-                                    backgroundColor: '#f0f0f0'
+                                    backgroundColor: '#f0f0f0ff'
                                 }}></div>
                             </div>
                         </div>
@@ -130,7 +131,7 @@ export default function RecentPosts() {
                                     style={{
                                         width: '100%',
                                         height: '300px',
-                                        objectFit: 'cover'
+                                        objectFit: 'cover',
                                     }}
                                 />
                             </div>
