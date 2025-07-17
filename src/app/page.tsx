@@ -110,7 +110,7 @@ export default function Home() {
                               Se líder en protección jurídico inmobiliaria en tu Ciudad, genera ingresos con un negocio probado y exitoso en todo México
                             </p>
                             <div className="d-flex">
-                              <Link className="btn-main me-1" href="/secretaria">Sucursales</Link> {/* margen derecho */}
+                              <Link className="btn-main me-1" href="/sucursales">Sucursales</Link> {/* margen derecho */}
                               <Link className="btn-line" href="/franquicias#conoce">Conoce más</Link>
                             </div>
                           </div>
@@ -274,7 +274,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="col-lg-6">
+                <div className="col-lg-6"  id="acerca-de">
                   <div className="subtitle s2 wow fadeInUp mb-3">Quiénes somos</div>
                   <h2 className="wow fadeInUp" data-wow-delay=".2s">
                     Acerca de <br /> Póliza de Rentas

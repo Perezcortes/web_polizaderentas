@@ -1,11 +1,3 @@
-// app/blog/layout.tsx
-import NavbarBlack from "../../../components/NavbarBlack";
-
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <NavbarBlack />
-      <main>{children}</main>
-    </>
-  );
+  return <main>{children}</main>;
 }

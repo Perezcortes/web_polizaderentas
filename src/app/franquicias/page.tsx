@@ -18,6 +18,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function FranchisesPage() {
 
@@ -158,10 +159,10 @@ export default function FranchisesPage() {
                         <p className="fs-4 wow fadeInRight">
                           Agenda una sesión Informativa personalizada con nuestro Director de Expansión y conoce los detalles de nuestro modelo de negocio.
                         </p>
-                        <a className="btn-main mb10 mt20" href="https://formulario.franquicias.polizaderentas.com/" target="_blank" rel="noopener noreferrer">
+                        <a className="btn-main mt20 me-1" href="https://formulario.franquicias.polizaderentas.com/" target="_blank" rel="noopener noreferrer">
                           Inicia tu proceso
                         </a>
-                        <Link className="btn-line mb10" href="#conoce">
+                        <Link className="btn-line mt20" href="#conoce">
                           Conoce más
                         </Link>
                       </div>
@@ -319,43 +320,45 @@ export default function FranchisesPage() {
       {/* Sección Cuánto ganar */}
       <section className="no-top">
         <div className="container">
-          <div className="row justify-content-center">
+          <div className="row">
             <div className="col-lg-12 col-md-12 col-sm-12 mt-5 text-center">
-              <h2>¿Cuánto puedo ganar con <br /> mi franquicia de Póliza de Rentas?</h2>
-              <Image
-                src="/images/franquicias/img-4.png"
+              <h2>
+                ¿Cuánto puedo ganar con <br /> mi franquicia de Póliza de Rentas?
+              </h2>
+              <img
+                src="images/franquicias/img-4.png"
                 alt="franquicias"
-                width={889}
-                height={441}
                 className="img-fluid"
               />
             </div>
-          </div>
-          <div className="row mt-5" style={{ textAlign: 'justify' }}>
-            <div className="col-lg-6 col-md-6 col-sm-12">
-              <h2>Tecnología para crear una experiencia única para todos tus clientes, inmobiliarias, propietarios e inquilino</h2>
-              <p>
-                Digitalización de todos nuestros procesos.
-                <br />Aplicación digital para las inmobiliarias
-                <br />Herramientas digitales para investigación de inquilinos.
-              </p>
-              <a
-                className="btn-main mb10 mt20"
-                href="https://formulario.franquicias.polizaderentas.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Inicia tu proceso
-              </a>
-            </div>
-            <div className="col-lg-6 col-md-6 col-sm-12">
-              <Image
-                src="/images/franquicias/img-5.png"
-                alt="franquicias"
-                width={778}
-                height={487}
-                className="img-fluid"
-              />
+
+            <div className="row col-lg-12 col-md-12 col-sm-12 mt-5 text-justify">
+              <div className="col-lg-6 col-md-6 col-sm-6">
+                <h2>
+                  Tecnología para crear una experiencia única para todos tus clientes,
+                  inmobiliarias, propietarios e inquilinos
+                </h2>
+                <p>
+                  Digitalización de todos nuestros procesos. <br />
+                  Aplicación digital para las inmobiliarias <br />
+                  Herramientas digitales para investigación de <br />
+                  inquilinos.
+                </p>
+                <a
+                  className="btn-main mb10 mt20"
+                  href="https://formulario.franquicias.polizaderentas.com/"
+                >
+                  Inicia tu proceso
+                </a>
+              </div>
+
+              <div className="col-lg-6 col-md-6 col-sm-6">
+                <img
+                  src="images/franquicias/img-5.png"
+                  alt="franquicias"
+                  className="img-fluid"
+                />
+              </div>
             </div>
           </div>
         </div>
