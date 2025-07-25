@@ -1,63 +1,99 @@
 'use client';
-
-import Link from "next/link";
-import Image from "next/image";
-import { useState } from "react";
-import './NavbarBlack.css'; 
+import { useEffect, useState } from "react";
+import "./NavbarBlack.css";
 
 export default function NavbarBlack() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  useEffect(() => {
+    let timeoutId: number | undefined;
+    const navbar = document.querySelector(
+      ".navbar-black.header-full"
+    ) as HTMLElement | null;
+
+    if (!navbar) return;
+
+    // El navbar empieza con color sólido
+    navbar.classList.add("solid-bg");
+
+    const onScroll = () => {
+      if (!navbar) return;
+
+      if (window.scrollY > 50) {
+        // Aplica semitransparencia con blur al hacer scroll
+        navbar.classList.add("transparent-scroll");
+
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+        timeoutId = window.setTimeout(() => {
+          // Luego de 1.2s, quitar efecto para volver a color sólido
+          navbar.classList.remove("transparent-scroll");
+        }, 1200);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, []);
+
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    setMenuOpen((prev) => !prev);
   };
 
   return (
-    <header className={`header-full transparent ${menuOpen ? "menu-open" : ""}`}>
+    <header className="navbar-black header-full">
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-12">
             <div className="de-flex sm-pt10">
-              
-              {/* Logo */}
               <div className="de-flex-col">
-                <div id="logo">
-                  <Link href="/">
-                    <Image
-                      src="/images/logo.png"
-                      alt="logo"
-                      width={143}
-                      height={50}
-                      className="logo-main"
-                      priority
-                    />
-                  </Link>
+                <div className="de-flex-col">
+                  {/* logo begin */}
+                  <div id="logo">
+                    <a href="/">
+                      <img
+                        className="logo-main"
+                        src="/images/logo.png"
+                        alt="logo"
+                        width={143}
+                      />
+                      <img
+                        className="logo-mobile"
+                        src="/images/logo.png"
+                        alt="logo"
+                        width={100}
+                      />
+                    </a>
+                  </div>
+                  {/* logo close */}
                 </div>
               </div>
 
-              {/* Menu */}
               <div className="de-flex-col header-col-mid">
                 <ul id="mainmenu" className={menuOpen ? "active" : ""}>
-                  <li><Link href="/" className="menu-item" style={{ color: 'white' }}>Inicio</Link></li>
-                  <li><Link href="/about" className="menu-item" style={{ color: 'white' }}>Nosotros</Link></li>
-                  <li className="menu-item-has-children has-child">
-                    <a className="menu-item" href="/services" style={{ color: 'white' }}>Servicios</a>
-                    <ul className="sub-menu" style={{ backgroundColor: "#1E1E1E", borderColor: "#1E1E1E" }}>
-                      <li><Link href="/services/investigacion_inquilinos" style={{ color: "white" }}>Investigación de Inquilinos</Link></li>
-                      <li><Link href="/services/poliza_juridica" style={{ color: "white" }}>Póliza de Protección Jurídica</Link></li>
-                      <li><Link href="/services/convenio_transaccion" style={{ color: "white" }}>Convenio de transacción</Link></li>
-                      <li><Link href="/services/convenio_prevencion" style={{ color: "white" }}>Convenio de Prevención de Conflictos</Link></li>
-                      <li><Link href="/services/firma_electronica" style={{ color: "white" }}>Firma Electrónica</Link></li>
+                  <li><a className="menu-item" href="/">Inicio</a></li>
+                  <li><a className="menu-item" href="/about">Nosotros</a></li>
+                  <li>
+                    <a className="menu-item" href="/services">Servicios</a>
+                    <ul className="sub-menu" style={{ backgroundColor: '#1E1E1E', borderColor: '#1E1E1E' }}>
+                      <li><a style={{ color: 'white' }} href="/services/investigacion_inquilinos">Investigación de Inquilinos</a></li>
+                      <li><a style={{ color: 'white' }} href="/services/poliza_juridica">Póliza de Protección Jurídica</a></li>
+                      <li><a style={{ color: 'white' }} href="/services/convenio_transaccion">Convenio de transacción</a></li>
+                      <li><a style={{ color: 'white' }} href="/services/convenio_prevencion">Convenio de Prevención de Conflictos</a></li>
+                      <li><a style={{ color: 'white' }} href="/services/firma_electronica">Firma Electrónica</a></li>
                     </ul>
                   </li>
-                  <li><Link href="/sucursales" className="menu-item" style={{ color: 'white' }}>Sucursales</Link></li>
-                  <li><Link href="/blog" className="menu-item" style={{ color: 'white' }}>Blog</Link></li>
-                  <li><Link href="/contacto" className="menu-item" style={{ color: 'white' }}>Contacto</Link></li>
+                  <li><a className="menu-item" href="/sucursales">Sucursales</a></li>
+                  <li><a className="menu-item" href="/blog">Blog</a></li>
+                  <li><a className="menu-item" href="/contacto">Contacto</a></li>
                 </ul>
-
-                {/* Botón Hamburguesa */}
                 <div className="menu_side_area">
-                  <Link href="/franquicias" className="btn-main" style={{ color: 'white' }}>Franquicias</Link>
+                  <a href="/franquicias" className="btn-main">Franquicias</a>
                   <button
                     id="menu-btn"
                     className={menuOpen ? "open" : ""}
@@ -68,7 +104,6 @@ export default function NavbarBlack() {
                   </button>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
