@@ -6,38 +6,11 @@ export const metadata: Metadata = {
   title: "Aviso de Privacidad - Póliza de Rentas",
   description:
     "Nuestra tecnología revoluciona la protección jurídica en el arrendamiento inmobiliario. Forma parte del futuro de la seguridad para propietarios e inquilinos.",
-  keywords: ["aviso de privacidad", "protección de datos", "Póliza de Rentas"],
 };
 
 export default function PrivacyPolicy() {
   return (
     <>
-      {/* Meta Pixel */}
-      <Script id="facebook-pixel" strategy="afterInteractive">
-        {`
-          !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '217583817249537');
-          fbq('track', 'PageView');
-        `}
-      </Script>
-      <noscript>
-        <Image
-          src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1"
-          alt="facebook-pixel"
-          width={1}
-          height={1}
-          style={{ display: "none" }}
-          unoptimized
-        />
-      </noscript>
-
       {/* Google Analytics */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-3HT5BR97DT"
@@ -52,11 +25,9 @@ export default function PrivacyPolicy() {
         `}
       </Script>
 
+      {/* Contenido */}
       <div id="wrapper">
         <div className="no-bottom no-top" id="content">
-
-          <div id="top"></div>
-
           <section className="text-light bg-dark-1">
             <div className="container">
               <div className="row wow fadeInUp" data-wow-delay=".2s">

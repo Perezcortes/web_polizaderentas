@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect, useState } from "react";
 import "./NavbarBlack.css";
 
@@ -6,30 +7,27 @@ export default function NavbarBlack() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    let timeoutId: number | undefined;
     const navbar = document.querySelector(
       ".navbar-black.header-full"
     ) as HTMLElement | null;
 
     if (!navbar) return;
 
-    // El navbar empieza con color sólido
+    // Al iniciar le pones el fondo sólido
     navbar.classList.add("solid-bg");
 
     const onScroll = () => {
       if (!navbar) return;
 
       if (window.scrollY > 50) {
-        // Aplica semitransparencia con blur al hacer scroll
+        // Al hacer scroll hacia abajo más de 50, agrega clase transparente con blur
         navbar.classList.add("transparent-scroll");
-
-        if (timeoutId) {
-          clearTimeout(timeoutId);
-        }
-        timeoutId = window.setTimeout(() => {
-          // Luego de 1.2s, quitar efecto para volver a color sólido
-          navbar.classList.remove("transparent-scroll");
-        }, 1200);
+        // También quita la clase solid-bg para que no interfiera (opcional)
+        navbar.classList.remove("solid-bg");
+      } else {
+        // Cuando estés arriba del todo, vuelve a fondo sólido y quita transparente
+        navbar.classList.add("solid-bg");
+        navbar.classList.remove("transparent-scroll");
       }
     };
 
@@ -37,7 +35,6 @@ export default function NavbarBlack() {
 
     return () => {
       window.removeEventListener("scroll", onScroll);
-      if (timeoutId) clearTimeout(timeoutId);
     };
   }, []);
 
