@@ -1,63 +1,74 @@
+/* Contenedor principal del mapa */
 .mapContainer {
-  width: 100%;
-  margin: 2rem 0;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ocupa todo el ancho disponible */
+  margin: 2rem auto; /* Espacio vertical y centrado horizontalmente */
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 20px; /* Espacio interno */
+  display: flex;
+  justify-content: center; /* Centra el mapa horizontalmente */
+  align-items: center; /* Centra el mapa verticalmente si tiene altura */
+  /*box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* Sombra sutil para mejor visibilidad */
 }
 
+/* SVG del mapa de México */
 .mexicoMap {
-  width: 100%;
-  height: auto;
-  max-height: 600px;
+  width: 100%; /* Escala horizontalmente */
+  height: auto; /* Mantiene proporción */
+  max-height: 600px; /* Límite para pantallas grandes */
+  display: block; /* Elimina espacio adicional de elementos inline */
 }
 
+/* Estilos de los caminos (estados) del mapa */
 .mexicoMap path {
-  fill: #e9ecef;
-  stroke: #fff;
-  stroke-width: 1px;
-  transition: all 0.3s ease;
-  cursor: pointer;
+  fill: #e9ecef; /* Color base de los estados */
+  stroke: #fff; /* Contorno blanco */
+  stroke-width: 1px; /* Grosor del contorno */
+  transition: all 0.3s ease; /* Animación suave al pasar el cursor */
+  cursor: pointer; /* Muestra que es interactivo */
 }
 
+/* Hover: cuando el cursor pasa sobre un estado */
 .mexicoMap path:hover {
-  fill: #ced4da;
-  stroke-width: 2px;
+  fill: #ced4da; /* Color más oscuro al pasar el cursor */
+  stroke-width: 2px; /* Aumenta el grosor del borde */
 }
 
+/* Estilo para estados activos (seleccionados) */
 .mexicoMap path.estado-activo {
-  fill: #4CAF50;
-  stroke: #2E7D32;
+  fill: #4CAF50; /* Verde de activación */
+  stroke: #2E7D32; /* Verde más oscuro en el borde */
 }
 
+/* Hover sobre estado activo */
 .mexicoMap path.estado-activo:hover {
-  fill: #3e8e41;
+  fill: #3e8e41; /* Verde más fuerte al pasar el cursor */
   stroke-width: 2px;
 }
 
-/* Estilos para dispositivos móviles */
+/* Responsividad para dispositivos móviles */
 @media (max-width: 768px) {
   .mapContainer {
-    padding: 10px;
+    padding: 10px; /* Reduce espacio interno */
+    margin: 1rem auto;
   }
-  
+
   .mexicoMap {
-    max-height: 400px;
+    max-height: 400px; /* Limita altura para evitar overflow */
   }
 }
-/* Estilos para la paginación */
 
+/* Estilos para la paginación */
 .pagination {
   display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  flex-wrap: wrap;
-  gap: 5px;
+  justify-content: center; /* Centra los botones */
+  margin-top: 30px; /* Separación con el contenido anterior */
+  flex-wrap: wrap; /* Permite que los botones se acomoden en varias líneas */
+  gap: 5px; /* Espacio entre botones */
 }
 
 .pagination button {
-  color: rgba(187, 161, 85);
+  color: rgba(187, 161, 85); /* Color principal del texto */
   padding: 8px 16px;
   text-decoration: none;
   border: 1px solid rgba(187, 161, 85);
@@ -66,23 +77,27 @@
   cursor: pointer;
 }
 
+/* Hover sobre botones activos */
 .pagination button:hover:not(:disabled) {
   background-color: rgba(187, 161, 85);
   color: white;
 }
 
+/* Botón activo de la paginación */
 .pagination .active {
   background-color: rgba(187, 161, 85);
   color: white;
   font-weight: bold;
 }
 
+/* Botón deshabilitado */
 .pagination .disabled {
   color: #ccc;
   border-color: #ccc;
   pointer-events: none;
 }
 
+/* Elipsis (puntos suspensivos entre páginas) */
 .pagination .ellipsis {
   padding: 8px 12px;
   color: #666;

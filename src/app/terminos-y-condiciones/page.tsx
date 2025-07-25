@@ -1,70 +1,34 @@
-import Head from 'next/head';
-import type { Metadata } from 'next';
+import Script from 'next/script';
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Términos y Condiciones - Póliza de Rentas',
-  description: 'Estos términos y condiciones regulan el uso de los servicios ofrecidos por Póliza de Rentas, incluyendo la evaluación de inquilinos y la formalización de contratos de arrendamiento.',
-  keywords: ['términos', 'condiciones', 'Póliza de Rentas', 'arrendamiento', 'contratos'],
+  description:
+    'Estos términos y condiciones regulan el uso de los servicios ofrecidos por Póliza de Rentas, incluyendo la evaluación de inquilinos y la formalización de contratos de arrendamiento.',
+  icons: {
+    icon: '/images/icon.png',
+  },
 };
 
 export default function TerminosCondiciones() {
   return (
     <>
-      <Head>
-        <title>Términos y Condiciones - Póliza de Rentas</title>
-        <link rel="icon" href="/images/icon.png" type="image/gif" sizes="16x16" />
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Estos términos y condiciones regulan el uso de los servicios ofrecidos por Póliza de Rentas, incluyendo la evaluación de inquilinos y la formalización de contratos de arrendamiento." />
-        <meta name="keywords" content="términos, condiciones, Póliza de Rentas, arrendamiento, contratos" />
-        <meta name="author" content="Póliza de Rentas" />
+      {/* Google Analytics */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-3HT5BR97DT"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-3HT5BR97DT');
+        `}
+      </Script>
 
-        {/* Meta Pixel Code */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '217583817249537');
-              fbq('track', 'PageView');
-            `,
-          }}
-        />
-        <noscript>
-          <img
-            height={1}
-            width={1}
-            style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1"
-            alt="" // siempre agregar alt vacío si es decorativo o tracking
-          />
-        </noscript>
-        {/* End Meta Pixel Code */}
-
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3HT5BR97DT"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-3HT5BR97DT');
-            `,
-          }}
-        />
-      </Head>
-
+      {/* Contenido */}
       <div id="wrapper">
         <div className="no-bottom no-top" id="content">
-          <div id="top"></div>
-
           <section className="text-light bg-dark-1">
             <div className="container">
               <div className="row wow fadeInUp" data-wow-delay=".2s">
@@ -126,12 +90,12 @@ export default function TerminosCondiciones() {
         </div>
       </div>
 
-      {/* Javascript Files */}
-      <script src="/js/plugins.js"></script>
-      <script src="/js/designesia.js"></script>
-      <script src="/js/swiper.js"></script>
-      <script src="/js/custom-marquee.js"></script>
-      <script src="/js/custom-swiper-1.js"></script>
+      {/* Scripts del tema */}
+      <Script src="/js/plugins.js" strategy="lazyOnload" />
+      <Script src="/js/designesia.js" strategy="lazyOnload" />
+      <Script src="/js/swiper.js" strategy="lazyOnload" />
+      <Script src="/js/custom-marquee.js" strategy="lazyOnload" />
+      <Script src="/js/custom-swiper-1.js" strategy="lazyOnload" />
     </>
   );
 }
