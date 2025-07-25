@@ -1,31 +1,62 @@
 /* === NAVBAR BASE === */
-.header-full {
+.navbar-black.header-full {
+  background-color: rgba(29, 29, 31) !important;  /* color sólido inicial */
   position: relative;
   top: 0;
   opacity: 1;
   visibility: visible;
-  transition: none;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 }
 
+/* Clase para fondo sólido (por si quieres diferenciar) */
+.navbar-black.header-full.solid-bg {
+  background-color: rgba(29, 29, 31);
+  backdrop-filter: none;
+}
 
-#mainmenu {
+/* Estado semitransparente con blur al hacer scroll */
+.navbar-black.header-full.transparent-scroll {
+  background-color: rgba(29, 29, 31, 0.7);
+  backdrop-filter: blur(6px);
+}
+
+/* Logo ajuste opcional */
+.navbar-black.header-full img.logo-main {
+  transition: width 0.3s ease;
+}
+
+/* === MENÚ PRINCIPAL === */
+.navbar-black #mainmenu {
   display: flex; /* desktop */
-  display: flex;
   gap: 20px;
 }
 
-#mainmenu li {
+.navbar-black #mainmenu li {
   list-style: none;
 }
 
-#mainmenu a {
+.navbar-black #mainmenu a {
   text-decoration: none;
   color: white;
   font-weight: 500;
 }
 
+/* Submenú */
+.navbar-black ul.sub-menu {
+  position: absolute;
+  display: none;
+  padding: 10px 0;
+  margin: 0;
+  list-style: none;
+  z-index: 9999;
+}
+
+.navbar-black li:hover > ul.sub-menu {
+  display: block;
+}
+
 /* Botón hamburguesa */
-#menu-btn {
+.navbar-black #menu-btn {
   display: none;
   background: none;
   border: none;
@@ -36,9 +67,9 @@
   margin-left: 15px;
 }
 
-#menu-btn span,
-#menu-btn::before,
-#menu-btn::after {
+.navbar-black #menu-btn span,
+.navbar-black #menu-btn::before,
+.navbar-black #menu-btn::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -48,42 +79,41 @@
   border-radius: 2px;
 }
 
-#menu-btn span {
+.navbar-black #menu-btn span {
   top: 50%;
   transform: translateY(-50%);
 }
 
-#menu-btn::before {
+.navbar-black #menu-btn::before {
   top: 0;
 }
 
-#menu-btn::after {
+.navbar-black #menu-btn::after {
   bottom: 0;
 }
 
 /* Cuando está abierto */
-#menu-btn.open span {
+.navbar-black #menu-btn.open span {
   background: transparent;
 }
 
-#menu-btn.open::before {
+.navbar-black #menu-btn.open::before {
   transform: rotate(45deg);
   top: 8px;
 }
 
-#menu-btn.open::after {
+.navbar-black #menu-btn.open::after {
   transform: rotate(-45deg);
   bottom: 8px;
 }
 
 /* === RESPONSIVE === */
 @media (max-width: 991px) {
-  #menu-btn {
+  .navbar-black #menu-btn {
     display: inline-block;
   }
 
-  #mainmenu {
-    display: none;
+  .navbar-black #mainmenu {
     display: none;
     flex-direction: column;
     gap: 10px;
@@ -95,8 +125,7 @@
     padding: 20px;
   }
 
-  #mainmenu.active {
-    display: none;
+  .navbar-black #mainmenu.active {
     display: flex;
   }
 }
