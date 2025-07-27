@@ -1,22 +1,29 @@
 /* === NAVBAR BASE === */
+header.header-full.transparent {
+  display: none !important;
+}
+
 .navbar-black.header-full {
   background-color: rgba(29, 29, 31) !important;  /* color sólido inicial */
-  position: relative;
+  position: fixed;          /* fijo en la parte superior */
   top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;            /* por encima del contenido */
   opacity: 1;
   visibility: visible;
   transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 }
 
-/* Clase para fondo sólido (por si quieres diferenciar) */
+/* Clase para fondo sólido  */
 .navbar-black.header-full.solid-bg {
-  background-color: rgba(29, 29, 31);
+  background-color: rgba(29, 29, 31, 0.95);
   backdrop-filter: none;
 }
 
 /* Estado semitransparente con blur al hacer scroll */
 .navbar-black.header-full.transparent-scroll {
-  background-color: rgba(29, 29, 31, 0.7);
+  background-color: rgba(80, 80, 82, 0.5);
   backdrop-filter: blur(6px);
 }
 
@@ -128,4 +135,10 @@
   .navbar-black #mainmenu.active {
     display: flex;
   }
+}
+
+/* === CONTENIDO PRINCIPAL === */
+/* Este padding evita que el contenido quede oculto detrás del navbar fijo */
+main {
+  padding-top: 35px; /* Ajusta este valor si cambias el alto real del navbar */
 }

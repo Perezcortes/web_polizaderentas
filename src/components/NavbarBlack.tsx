@@ -13,7 +13,7 @@ export default function NavbarBlack() {
 
     if (!navbar) return;
 
-    // Al iniciar le pones el fondo sólido
+    // Al iniciar le pone el fondo sólido
     navbar.classList.add("solid-bg");
 
     const onScroll = () => {
@@ -37,10 +37,6 @@ export default function NavbarBlack() {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
-
-  const toggleMenu = () => {
-    setMenuOpen((prev) => !prev);
-  };
 
   return (
     <header className="navbar-black header-full">
@@ -72,7 +68,7 @@ export default function NavbarBlack() {
               </div>
 
               <div className="de-flex-col header-col-mid">
-                <ul id="mainmenu" className={menuOpen ? "active" : ""}>
+                <ul id="mainmenu">
                   <li><a className="menu-item" href="/">Inicio</a></li>
                   <li><a className="menu-item" href="/about">Nosotros</a></li>
                   <li>
@@ -91,14 +87,7 @@ export default function NavbarBlack() {
                 </ul>
                 <div className="menu_side_area">
                   <a href="/franquicias" className="btn-main">Franquicias</a>
-                  <button
-                    id="menu-btn"
-                    className={menuOpen ? "open" : ""}
-                    onClick={toggleMenu}
-                    aria-label="Toggle menu"
-                  >
-                    <span></span>
-                  </button>
+                  <span id="menu-btn"></span>
                 </div>
               </div>
             </div>
