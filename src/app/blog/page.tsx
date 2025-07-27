@@ -19,14 +19,56 @@ export default function BlogPage() {
   return (
     <>
       <Head>
+        {/* Título y descripción básica */}
         <title>Blog - Póliza de Rentas</title>
-        <meta name="description" content="Artículos y noticias sobre arrendamiento inmobiliario. Mantente informado con Póliza de Rentas." />
-        <meta name="keywords" content="blog, arrendamiento, inquilinos, propietarios, noticias inmobiliarias" />
+        <meta
+          name="description"
+          content="Artículos y noticias sobre arrendamiento inmobiliario. Mantente informado con Póliza de Rentas."
+        />
+        <meta
+          name="keywords"
+          content="blog, arrendamiento, inquilinos, propietarios, noticias inmobiliarias, renta segura"
+        />
         <meta name="author" content="Póliza de Rentas" />
-        <link rel="icon" href="/images/icon.png" type="image/gif" sizes="16x16" />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://polizaderentas.com/blog" />
+
+        {/* Open Graph (Facebook, LinkedIn) */}
+        <meta property="og:title" content="Blog - Póliza de Rentas" />
+        <meta
+          property="og:description"
+          content="Artículos y noticias sobre arrendamiento inmobiliario. Mantente informado con Póliza de Rentas."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://polizaderentas.com/blog" />
+        <meta
+          property="og:image"
+          content="https://polizaderentas.com/images/blog-banner.jpg"
+        />
+        <meta property="og:locale" content="es_MX" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Blog - Póliza de Rentas" />
+        <meta
+          name="twitter:description"
+          content="Artículos y noticias sobre arrendamiento inmobiliario."
+        />
+        <meta
+          name="twitter:image"
+          content="https://polizaderentas.com/images/blog-banner.jpg"
+        />
+
+        {/* Icono */}
+        <link rel="icon" href="/images/icon.png" type="image/png" sizes="32x32" />
 
         {/* Preload de recursos críticos */}
-        <link rel="preload" href="https://code.jquery.com/jquery-3.6.0.min.js" as="script" />
+        <link
+          rel="preload"
+          href="https://code.jquery.com/jquery-3.6.0.min.js"
+          as="script"
+        />
         <link rel="preload" href="/css/bootstrap.min.css" as="style" />
         <link rel="preload" href="/css/style.css" as="style" />
 
@@ -39,49 +81,62 @@ export default function BlogPage() {
         <link rel="stylesheet" href="/css/colors/scheme-01.css" />
 
         {/* Font Awesome */}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
 
         {/* Meta Pixel Code */}
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            !function(f,b,e,v,n,t,s){
-              if(f.fbq)return;
-              n=f.fbq=function(){
-                n.callMethod?
-                n.callMethod.apply(n,arguments):n.queue.push(arguments)
-              };
-              if(!f._fbq)f._fbq=n;
-              n.push=n;
-              n.loaded=!0;
-              n.version='2.0';
-              n.queue=[];
-              t=b.createElement(e);
-              t.async=!0;
-              t.src=v;
-              s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)
-            }(window,document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '217583817249537');
-            fbq('track', 'PageView');
-          `
-        }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+        !function(f,b,e,v,n,t,s){
+          if(f.fbq)return;
+          n=f.fbq=function(){
+            n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)
+          };
+          if(!f._fbq)f._fbq=n;
+          n.push=n;
+          n.loaded=!0;
+          n.version='2.0';
+          n.queue=[];
+          t=b.createElement(e);
+          t.async=!0;
+          t.src=v;
+          s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)
+        }(window,document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '217583817249537');
+        fbq('track', 'PageView');
+      `,
+          }}
+        />
         <noscript>
-          <img height="1" width="1" style={{ display: 'none' }}
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
             src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1"
           />
         </noscript>
 
         {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3HT5BR97DT"></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-3HT5BR97DT');
-          `
-        }} />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-3HT5BR97DT"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3HT5BR97DT');
+      `,
+          }}
+        />
       </Head>
 
       <Script
