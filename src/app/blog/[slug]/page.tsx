@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 import { BlogPost } from '../../../types/blog-types';
+import { VideoEmbedder } from '../../../components/VideoEmbedder'; 
 import './styles.css';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/posts';
@@ -123,10 +124,8 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
                       <span className="text-muted">Póliza de Rentas - {formatDate(post.created_at)}</span>
                     </div>
 
-                    <div
-                      className="post-content wow fadeInUp"
-                      dangerouslySetInnerHTML={{ __html: post.contenido }}
-                    />
+                   <VideoEmbedder html={post.contenido} />
+
 
                     <hr className="my-4" />
 
