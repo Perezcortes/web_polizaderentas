@@ -6,7 +6,8 @@ import { BlogPost } from '../../../types/blog-types';
 import { VideoEmbedder } from '../../../components/VideoEmbedder';
 import './styles.css';
 
-export const dynamic = 'force-dynamic'; // Fuerza renderizado dinámico en Vercel
+export const dynamic = 'force-dynamic'; // Esto evita que la página se genere como estática
+export const revalidate = 0; // Desactiva ISR
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/posts';
 const apiKey = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
