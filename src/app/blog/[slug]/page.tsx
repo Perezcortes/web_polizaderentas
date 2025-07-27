@@ -1,54 +1,59 @@
-// app/blog/[slug]/page.tsx
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 import { BlogPost } from '../../../types/blog-types';
-import { VideoEmbedder } from '../../../components/VideoEmbedder'; 
+import { VideoEmbedder } from '../../../components/VideoEmbedder';
 import './styles.css';
+
+export const dynamic = 'force-dynamic'; // Fuerza renderizado dinámico en Vercel
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/posts';
 const apiKey = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
 const cloudflareEndpoint = process.env.NEXT_PUBLIC_CLOUDFLARE_R2_ENDPOINT || 'https://default.endpoint.com';
 
+// === Fetch principal: Artículo ===
 async function getPost(slug: string): Promise<BlogPost> {
   const res = await fetch(`${apiUrl}/${slug}`, {
     headers: { Authorization: `Bearer ${apiKey}` },
-    next: { revalidate: 3600 }
+    cache: 'no-store' // Importante para datos dinámicos
   });
-  
+
   if (!res.ok) throw new Error('Error al cargar el artículo');
   const data = await res.json();
   return data.data || data;
 }
 
+// === Artículos recientes ===
 async function getRecentPosts(): Promise<BlogPost[]> {
   const res = await fetch(`${apiUrl}?limit=5`, {
     headers: { Authorization: `Bearer ${apiKey}` },
-    next: { revalidate: 3600 }
+    cache: 'no-store'
   });
-  
+
   if (!res.ok) throw new Error('Error al cargar artículos recientes');
   const data = await res.json();
   return data.data || data;
 }
 
+// === Todos los artículos (para relacionados) ===
 async function getAllPosts(): Promise<BlogPost[]> {
   const res = await fetch(`${apiUrl}?limit=10&order=desc`, {
     headers: { Authorization: `Bearer ${apiKey}` },
-    next: { revalidate: 3600 }
+    cache: 'no-store'
   });
-  
+
   if (!res.ok) throw new Error('Error al cargar artículos relacionados');
   const data = await res.json();
   return data.data || data;
 }
 
+// === SEO Dinámico ===
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const awaitedParams = await params;
   try {
     const post = await getPost(awaitedParams.slug);
-    
+
     return {
       title: `${post.meta_titulo || post.titulo} - Póliza de Rentas`,
       description: post.meta_descripcion || truncateText(post.contenido.replace(/<[^>]*>/g, ''), 160),
@@ -66,6 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
+// === Helpers ===
 function truncateText(text: string, maxLength: number) {
   return text && text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
 }
@@ -76,17 +82,18 @@ function formatDate(dateString: string) {
   });
 }
 
+// === Página Principal ===
 export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const awaitedParams = await params;
   const slug = awaitedParams.slug;
-  
+
   try {
     const [post, recentPosts, allPosts] = await Promise.all([
       getPost(slug),
       getRecentPosts(),
       getAllPosts()
     ]);
-    
+
     const currentIndex = allPosts.findIndex((p) => p.slug === slug);
     const relatedPosts = currentIndex !== -1
       ? allPosts.slice(currentIndex + 1, currentIndex + 3)
@@ -94,17 +101,15 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
     return (
       <>
-        <Script
-          id="jquery-js"
-          src="https://code.jquery.com/jquery-3.6.0.min.js"
-          strategy="beforeInteractive"
-        />
+        {/* Scripts externos */}
+        <Script id="jquery-js" src="https://code.jquery.com/jquery-3.6.0.min.js" strategy="beforeInteractive" />
 
         <section>
           <div className="container">
             <div className="row">
               <div className="col-lg-12">
                 <div className="row gx-4">
+                  {/* Contenido principal */}
                   <div className="col-lg-8 col-md-6 mb10">
                     {post.url_img && (
                       <Image
@@ -124,11 +129,12 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
                       <span className="text-muted">Póliza de Rentas - {formatDate(post.created_at)}</span>
                     </div>
 
-                   <VideoEmbedder html={post.contenido} />
-
+                    {/* Render dinámico con videos */}
+                    <VideoEmbedder html={post.contenido} />
 
                     <hr className="my-4" />
 
+                    {/* Artículos relacionados */}
                     {relatedPosts.length > 0 && (
                       <div id="related-posts" className="row mt-4">
                         <h4 className="color-dor mb-4">Artículos relacionados</h4>
@@ -159,6 +165,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
                     )}
                   </div>
 
+                  {/* Sidebar artículos recientes */}
                   <div className="col-lg-4 col-md-6">
                     <div className="bg-dark py-2 ps-4">
                       <h3 className="text-white">Artículos recientes</h3>
@@ -208,6 +215,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
           </div>
         </section>
 
+        {/* Scripts personalizados */}
         <Script src="/js/plugins.js" strategy="afterInteractive" />
         <Script src="/js/designesia.js" strategy="afterInteractive" />
         <Script src="/js/swiper.js" strategy="afterInteractive" />
