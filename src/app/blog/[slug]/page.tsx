@@ -6,8 +6,7 @@ import { BlogPost } from '../../../types/blog-types';
 import { VideoEmbedder } from '../../../components/VideoEmbedder';
 import './styles.css';
 
-export const dynamic = 'force-dynamic'; // Esto evita que la página se genere como estática
-export const revalidate = 0; // Desactiva ISR
+export const dynamic = 'force-dynamic'; // Fuerza renderizado dinámico en Vercel
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/posts';
 const apiKey = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
@@ -17,7 +16,7 @@ const cloudflareEndpoint = process.env.NEXT_PUBLIC_CLOUDFLARE_R2_ENDPOINT || 'ht
 async function getPost(slug: string): Promise<BlogPost> {
   const res = await fetch(`${apiUrl}/${slug}`, {
     headers: { Authorization: `Bearer ${apiKey}` },
-    cache: 'no-store',
+    cache: 'no-store' // Importante para datos dinámicos
   });
 
   if (!res.ok) throw new Error('Error al cargar el artículo');
@@ -29,7 +28,7 @@ async function getPost(slug: string): Promise<BlogPost> {
 async function getRecentPosts(): Promise<BlogPost[]> {
   const res = await fetch(`${apiUrl}?limit=5`, {
     headers: { Authorization: `Bearer ${apiKey}` },
-    cache: 'no-store',
+    cache: 'no-store'
   });
 
   if (!res.ok) throw new Error('Error al cargar artículos recientes');
@@ -41,7 +40,7 @@ async function getRecentPosts(): Promise<BlogPost[]> {
 async function getAllPosts(): Promise<BlogPost[]> {
   const res = await fetch(`${apiUrl}?limit=10&order=desc`, {
     headers: { Authorization: `Bearer ${apiKey}` },
-    cache: 'no-store',
+    cache: 'no-store'
   });
 
   if (!res.ok) throw new Error('Error al cargar artículos relacionados');
@@ -52,22 +51,22 @@ async function getAllPosts(): Promise<BlogPost[]> {
 // === SEO Dinámico ===
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const awaitedParams = await params;
-
   try {
     const post = await getPost(awaitedParams.slug);
-    if (!post) throw new Error('Post no encontrado');
 
     return {
       title: `${post.meta_titulo || post.titulo} - Póliza de Rentas`,
       description: post.meta_descripcion || truncateText(post.contenido.replace(/<[^>]*>/g, ''), 160),
       keywords: post.palabras_clave_ceo || 'blog, arrendamiento, inquilinos, propietarios',
       author: 'Póliza de Rentas',
-      icons: { icon: '/images/icon.png' },
+      icons: {
+        icon: '/images/icon.png'
+      }
     };
   } catch (error) {
     return {
       title: 'Artículo - Póliza de Rentas',
-      description: 'Blog sobre arrendamiento, inquilinos y propietarios',
+      description: 'Blog sobre arrendamiento, inquilinos y propietarios'
     };
   }
 }
@@ -79,9 +78,7 @@ function truncateText(text: string, maxLength: number) {
 
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString('es-ES', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+    year: 'numeric', month: 'long', day: 'numeric',
   });
 }
 
@@ -94,14 +91,13 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
     const [post, recentPosts, allPosts] = await Promise.all([
       getPost(slug),
       getRecentPosts(),
-      getAllPosts(),
+      getAllPosts()
     ]);
 
-    if (!post) notFound();
-
     const currentIndex = allPosts.findIndex((p) => p.slug === slug);
-    const relatedPosts =
-      currentIndex !== -1 ? allPosts.slice(currentIndex + 1, currentIndex + 3) : allPosts.slice(0, 2);
+    const relatedPosts = currentIndex !== -1
+      ? allPosts.slice(currentIndex + 1, currentIndex + 3)
+      : allPosts.slice(0, 2);
 
     return (
       <>
@@ -127,9 +123,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
                       />
                     )}
 
-                    <h3 className="wow fadeInUp mt-5 mb20 color-dor" data-wow-delay=".2s">
-                      {post.titulo}
-                    </h3>
+                    <h3 className="wow fadeInUp mt-5 mb20 color-dor" data-wow-delay=".2s">{post.titulo}</h3>
 
                     <div className="post-meta mb-3">
                       <span className="text-muted">Póliza de Rentas - {formatDate(post.created_at)}</span>
@@ -145,16 +139,14 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
                       <div id="related-posts" className="row mt-4">
                         <h4 className="color-dor mb-4">Artículos relacionados</h4>
                         <div className="row">
-                          {relatedPosts.map((relatedPost) => (
+                          {relatedPosts.map(relatedPost => (
                             <div key={relatedPost.id} className="col-md-6 mb-4">
                               <Link href={`/blog/${relatedPost.slug}`}>
                                 <div className="card h-100 related-post-card" style={{ cursor: 'pointer' }}>
                                   <Image
-                                    src={
-                                      relatedPost.url_img
-                                        ? `${cloudflareEndpoint}/${relatedPost.url_img.replace(/^\//, '')}`
-                                        : '/images/default-blog.jpg'
-                                    }
+                                    src={relatedPost.url_img
+                                      ? `${cloudflareEndpoint}/${relatedPost.url_img.replace(/^\//, '')}`
+                                      : '/images/default-blog.jpg'}
                                     width={400}
                                     height={200}
                                     className="card-img-top related-post-img"
@@ -162,9 +154,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
                                   />
                                   <div className="card-body">
                                     <h5 className="card-title">{truncateText(relatedPost.titulo, 50)}</h5>
-                                    <p className="card-text">
-                                      <small className="text-muted">{formatDate(relatedPost.created_at)}</small>
-                                    </p>
+                                    <p className="card-text"><small className="text-muted">{formatDate(relatedPost.created_at)}</small></p>
                                   </div>
                                 </div>
                               </Link>
@@ -189,14 +179,16 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
                           return (
                             <div key={recentPost.id}>
-                              <Link href={`/blog/${recentPost.slug}`} className="row mb-3 recent-post-item" style={{ cursor: 'pointer' }}>
+                              <Link
+                                href={`/blog/${recentPost.slug}`}
+                                className="row mb-3 recent-post-item"
+                                style={{ cursor: 'pointer' }}
+                              >
                                 <div className="col-4">
                                   <Image
-                                    src={
-                                      recentPost.url_img
-                                        ? `${cloudflareEndpoint}/${recentPost.url_img.replace(/^\//, '')}`
-                                        : '/images/default-thumb.jpg'
-                                    }
+                                    src={recentPost.url_img
+                                      ? `${cloudflareEndpoint}/${recentPost.url_img.replace(/^\//, '')}`
+                                      : '/images/default-thumb.jpg'}
                                     width={100}
                                     height={80}
                                     className="recent-post-image"
