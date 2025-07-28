@@ -53,20 +53,49 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const awaitedParams = await params;
   try {
     const post = await getPost(awaitedParams.slug);
+    const description = post.meta_descripcion || truncateText(post.contenido.replace(/<[^>]*>/g, ''), 160);
+    const imageUrl = post.url_img
+      ? `${cloudflareEndpoint}/${post.url_img.replace(/^\//, '')}`
+      : '/images/default-blog.jpg';
 
     return {
       title: `${post.meta_titulo || post.titulo} - Póliza de Rentas`,
-      description: post.meta_descripcion || truncateText(post.contenido.replace(/<[^>]*>/g, ''), 160),
+      description,
       keywords: post.palabras_clave_ceo || 'blog, arrendamiento, inquilinos, propietarios',
       author: 'Póliza de Rentas',
       icons: {
         icon: '/images/icon.png'
-      }
+      },
+      openGraph: {
+        title: post.titulo,
+        description,
+        type: 'article',
+        url: `https://www.polizaderentas.com/blog/${post.slug}`,
+        images: [{ url: imageUrl, width: 1200, height: 630, alt: post.titulo }],
+        locale: 'es_ES',
+        siteName: 'Póliza de Rentas',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: post.titulo,
+        description,
+        // No hay cuenta oficial de Twitter listada, se omite el campo `site`
+        images: [imageUrl],
+      },
+      metadataBase: new URL('https://www.polizaderentas.com'),
     };
   } catch (error) {
     return {
       title: 'Artículo - Póliza de Rentas',
-      description: 'Blog sobre arrendamiento, inquilinos y propietarios'
+      description: 'Blog sobre arrendamiento, inquilinos y propietarios',
+      openGraph: {
+        title: 'Blog - Póliza de Rentas',
+        description: 'Artículos útiles para propietarios e inquilinos',
+        type: 'website',
+        url: 'https://www.polizaderentas.com/blog',
+        images: ['/images/default-blog.jpg'],
+        siteName: 'Póliza de Rentas',
+      }
     };
   }
 }
