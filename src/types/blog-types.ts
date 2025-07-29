@@ -8,5 +8,5 @@ export interface BlogPost {
   created_at: string;
   meta_titulo?: string;
   meta_descripcion?: string;
-  palabras_clave_ceo?: string;
+  palabras_clave_seo?: string;
 }

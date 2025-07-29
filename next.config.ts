@@ -1,3 +1,4 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -10,9 +11,39 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Configuración para mejorar estabilidad
+  // Configuración para mejorar estabilidad en rutas dinámicas
   experimental: {
     optimizePackageImports: ['react-icons'],
+    serverComponentsExternalPackages: [], // Evita problemas con dependencias externas
+  },
+  // Configuración específica para evitar problemas de hidratación
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error']
+    } : false,
+  },
+  // Configuración de headers para mejorar cache
+  async headers() {
+    return [
+      {
+        source: '/blog/:slug*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, s-maxage=1, stale-while-revalidate=59',
+          },
+        ],
+      },
+    ];
+  },
+  // Configuración de rewrites para asegurar rutas correctas
+  async rewrites() {
+    return [
+      {
+        source: '/blog/:slug',
+        destination: '/blog/:slug',
+      },
+    ];
   },
 };
 
