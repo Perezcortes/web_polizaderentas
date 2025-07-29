@@ -1,12 +1,10 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { notFound, useParams } from 'next/navigation';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import Script from 'next/script';
 import { BlogPost } from '../../../types/blog-types';
 import { VideoEmbedder } from '../../../components/VideoEmbedder';
+import BlogPostClient from './BlogPostClient';
 import './styles.css';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/posts';
@@ -24,107 +22,195 @@ function formatDate(dateString: string) {
   });
 }
 
-export default function BlogDetailPage() {
-  const params = useParams();
-  const slug = params?.slug as string;
-  
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);
-  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+// Función para obtener el post (servidor)
+async function getPost(slug: string): Promise<BlogPost | null> {
+  try {
+    const response = await fetch(`${apiUrl}/${slug}`, {
+      headers: { 
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      cache: 'no-store'
+    });
 
-  useEffect(() => {
-    if (!slug) return;
+    if (!response.ok) {
+      return null;
+    }
 
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        
-        // Fetch principal post con retry logic
-        const postRes = await fetch(`${apiUrl}/${slug}`, {
-          headers: { 
-            Authorization: `Bearer ${apiKey}`,
-            'Content-Type': 'application/json'
-          },
-          cache: 'no-store'
-        });
+    const data = await response.json();
+    return data.data || data;
+  } catch (error) {
+    console.error('Error fetching post:', error);
+    return null;
+  }
+}
 
-        if (!postRes.ok) {
-          console.error(`Failed to fetch post: ${postRes.status} - ${postRes.statusText}`);
-          throw new Error(`Post not found: ${postRes.status}`);
-        }
+// Función para obtener posts recientes
+async function getRecentPosts(): Promise<BlogPost[]> {
+  try {
+    const response = await fetch(`${apiUrl}?limit=5`, {
+      headers: { Authorization: `Bearer ${apiKey}` },
+      cache: 'no-store'
+    });
 
-        const postData = await postRes.json();
-        const currentPost = postData.data || postData;
-        setPost(currentPost);
+    if (!response.ok) return [];
 
-        // Fetch recent posts
-        const recentRes = await fetch(`${apiUrl}?limit=5`, {
-          headers: { Authorization: `Bearer ${apiKey}` },
-          cache: 'no-store'
-        });
+    const data = await response.json();
+    return data.data || data || [];
+  } catch (error) {
+    console.error('Error fetching recent posts:', error);
+    return [];
+  }
+}
 
-        if (recentRes.ok) {
-          const recentData = await recentRes.json();
-          setRecentPosts(recentData.data || recentData || []);
-        }
+// Función para obtener posts relacionados
+async function getRelatedPosts(slug: string): Promise<BlogPost[]> {
+  try {
+    const response = await fetch(`${apiUrl}?limit=10&order=desc`, {
+      headers: { Authorization: `Bearer ${apiKey}` },
+      cache: 'no-store'
+    });
 
-        // Fetch all posts for related
-        const allRes = await fetch(`${apiUrl}?limit=10&order=desc`, {
-          headers: { Authorization: `Bearer ${apiKey}` },
-          cache: 'no-store'
-        });
+    if (!response.ok) return [];
 
-        if (allRes.ok) {
-          const allData = await allRes.json();
-          const allPosts = allData.data || allData || [];
-          const currentIndex = allPosts.findIndex((p: BlogPost) => p.slug === slug);
-          const related = currentIndex !== -1
-            ? allPosts.slice(currentIndex + 1, currentIndex + 3)
-            : allPosts.slice(0, 2);
-          setRelatedPosts(related);
-        }
+    const data = await response.json();
+    const allPosts = data.data || data || [];
+    const currentIndex = allPosts.findIndex((p: BlogPost) => p.slug === slug);
+    return currentIndex !== -1
+      ? allPosts.slice(currentIndex + 1, currentIndex + 3)
+      : allPosts.slice(0, 2);
+  } catch (error) {
+    console.error('Error fetching related posts:', error);
+    return [];
+  }
+}
 
-      } catch (err) {
-        console.error('Error fetching blog data:', err);
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
+// Generar metadatos dinámicos
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPost(slug);
+
+  if (!post) {
+    return {
+      title: 'Artículo no encontrado - Póliza de Rentas',
+      description: 'El artículo que buscas no está disponible.',
     };
-
-    fetchData();
-  }, [slug]);
-
-  // Handle loading state
-  if (loading) {
-    return (
-      <section>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12 text-center">
-              <div className="spinner-border" role="status">
-                <span className="sr-only">Cargando...</span>
-              </div>
-              <p className="mt-3">Cargando artículo...</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
   }
 
-  // Handle error state
-  if (error || !post) {
+  const title = post.meta_titulo || post.titulo;
+  const description = post.meta_descripcion || truncateText(post.contenido.replace(/<[^>]*>/g, ''), 160);
+  const keywords = post.palabras_clave_ceo || 'blog, arrendamiento, inquilinos, propietarios, renta segura';
+  const imageUrl = post.url_img 
+    ? `${cloudflareEndpoint}/${post.url_img.replace(/^\//, '')}`
+    : 'https://polizaderentas.com/images/blog-banner.jpg';
+  const url = `https://polizaderentas.com/blog/${post.slug}`;
+
+  return {
+    title: `${title} - Póliza de Rentas`,
+    description,
+    keywords,
+    authors: [{ name: 'Póliza de Rentas' }],
+    
+    // Open Graph (Facebook, WhatsApp)
+    openGraph: {
+      title: `${title} - Póliza de Rentas`,
+      description,
+      url,
+      siteName: 'Póliza de Rentas',
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: title,
+        }
+      ],
+      locale: 'es_MX',
+      type: 'article',
+      publishedTime: post.created_at,
+    },
+
+    // Twitter Card
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} - Póliza de Rentas`,
+      description,
+      images: [imageUrl],
+      creator: '@polizaderentas',
+    },
+
+    // Metadatos adicionales
+    alternates: {
+      canonical: url,
+    },
+    
+    // Robots
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+  };
+}
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function BlogDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+  
+  // Obtener datos en paralelo
+  const [post, recentPosts, relatedPosts] = await Promise.all([
+    getPost(slug),
+    getRecentPosts(),
+    getRelatedPosts(slug)
+  ]);
+
+  // Si no se encuentra el post, mostrar 404
+  if (!post) {
     notFound();
-    return null;
   }
 
   return (
     <>
-      {/* Scripts externos */}
-      <Script id="jquery-js" src="https://code.jquery.com/jquery-3.6.0.min.js" strategy="beforeInteractive" />
+      {/* JSON-LD para SEO estructurado */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post.titulo,
+            "description": post.meta_descripcion || truncateText(post.contenido.replace(/<[^>]*>/g, ''), 160),
+            "image": post.url_img ? `${cloudflareEndpoint}/${post.url_img.replace(/^\//, '')}` : null,
+            "author": {
+              "@type": "Organization",
+              "name": "Póliza de Rentas"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Póliza de Rentas",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://polizaderentas.com/images/logo.png"
+              }
+            },
+            "datePublished": post.created_at,
+            "dateModified": post.created_at,
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": `https://polizaderentas.com/blog/${post.slug}`
+            }
+          })
+        }}
+      />
 
       <section>
         <div className="container">
@@ -145,7 +231,7 @@ export default function BlogDetailPage() {
                     />
                   )}
 
-                  <h3 className="wow fadeInUp mt-5 mb20 color-dor" data-wow-delay=".2s">{post.titulo}</h3>
+                  <h2 className="wow fadeInUp mt-5 mb20 color-dor" data-wow-delay=".2s">{post.titulo}</h2>
 
                   <div className="post-meta mb-3">
                     <span className="text-muted">Póliza de Rentas - {formatDate(post.created_at)}</span>
@@ -159,7 +245,7 @@ export default function BlogDetailPage() {
                   {/* Artículos relacionados */}
                   {relatedPosts.length > 0 && (
                     <div id="related-posts" className="row mt-4">
-                      <h4 className="color-dor mb-4">Artículos relacionados</h4>
+                      <h2 className="color-dor mb-4">Artículos relacionados</h2>
                       <div className="row">
                         {relatedPosts.map(relatedPost => (
                           <div key={relatedPost.id} className="col-md-6 mb-4">
@@ -175,7 +261,7 @@ export default function BlogDetailPage() {
                                   alt={relatedPost.titulo}
                                 />
                                 <div className="card-body">
-                                  <h5 className="card-title">{truncateText(relatedPost.titulo, 50)}</h5>
+                                  <h3 className="card-title h5">{truncateText(relatedPost.titulo, 50)}</h3>
                                   <p className="card-text"><small className="text-muted">{formatDate(relatedPost.created_at)}</small></p>
                                 </div>
                               </div>
@@ -190,7 +276,7 @@ export default function BlogDetailPage() {
                 {/* Sidebar artículos recientes */}
                 <div className="col-lg-4 col-md-6">
                   <div className="bg-dark py-2 ps-4">
-                    <h3 className="text-white">Artículos recientes</h3>
+                    <h2 className="text-white h3">Artículos recientes</h2>
                   </div>
                   <div className="py-2 ps-4 borde">
                     {recentPosts.length === 0 ? (
@@ -237,12 +323,8 @@ export default function BlogDetailPage() {
         </div>
       </section>
 
-      {/* Scripts personalizados */}
-      <Script src="/js/plugins.js" strategy="afterInteractive" />
-      <Script src="/js/designesia.js" strategy="afterInteractive" />
-      <Script src="/js/swiper.js" strategy="afterInteractive" />
-      <Script src="/js/custom-marquee.js" strategy="afterInteractive" />
-      <Script src="/js/custom-swiper-1.js" strategy="afterInteractive" />
+      {/* Componente cliente para scripts */}
+      <BlogPostClient />
     </>
   );
 }

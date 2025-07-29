@@ -31,7 +31,7 @@ export const PostMetadata = ({ post }: PostMetadataProps) => {
       />
       <meta 
         name="keywords" 
-        content={formatKeywords(post.palabras_clave_seo)} 
+        content={formatKeywords(post.palabras_clave_ceo)} 
       />
       <meta name="author" content="Póliza de Rentas" />
       <link rel="icon" href="/images/icon.png" type="image/gif" sizes="16x16" />
