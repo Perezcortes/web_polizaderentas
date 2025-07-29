@@ -6,6 +6,7 @@ import { BlogPost } from '../../../types/blog-types';
 import { VideoEmbedder } from '../../../components/VideoEmbedder';
 import './styles.css';
 
+export const revalidate = 0;
 export const dynamic = 'force-dynamic'; // Fuerza renderizado dinámico en Vercel
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/posts';
@@ -49,10 +50,9 @@ async function getAllPosts(): Promise<BlogPost[]> {
 }
 
 // === SEO Dinámico ===
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const awaitedParams = await params;
+export async function generateMetadata({ params }: { params: { slug: string } }) {
   try {
-    const post = await getPost(awaitedParams.slug);
+    const post = await getPost(params.slug);
     const description = post.meta_descripcion || truncateText(post.contenido.replace(/<[^>]*>/g, ''), 160);
     const imageUrl = post.url_img
       ? `${cloudflareEndpoint}/${post.url_img.replace(/^\//, '')}`
@@ -112,9 +112,8 @@ function formatDate(dateString: string) {
 }
 
 // === Página Principal ===
-export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const awaitedParams = await params;
-  const slug = awaitedParams.slug;
+export default async function BlogDetailPage({ params }: { params: { slug: string } }) {
+  const slug = params.slug;
 
   try {
     const [post, recentPosts, allPosts] = await Promise.all([
