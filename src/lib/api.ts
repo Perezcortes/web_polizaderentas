@@ -1,5 +1,5 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/posts';
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
 
 if (!API_URL || !API_KEY) {
   throw new Error('API configuration is missing');
