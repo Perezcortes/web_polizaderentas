@@ -7,9 +7,9 @@ import { VideoEmbedder } from '../../../components/VideoEmbedder';
 import BlogPostClient from './BlogPostClient';
 import './styles.css';
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/posts';
-const apiKey = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
-const cloudflareEndpoint = process.env.NEXT_PUBLIC_CLOUDFLARE_R2_ENDPOINT || 'https://pub-7d69744bfc94470c9f3257d29c3a67d3.r2.dev';
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || process.env.API_URL || 'http://localhost:8000/api/posts';
+const apiKey = process.env.NEXT_PUBLIC_API_KEY || process.env.API_KEY || 'default-key';
+const cloudflareEndpoint = process.env.NEXT_PUBLIC_CLOUDFLARE_R2_ENDPOINT || process.env.CLOUDFLARE_R2_ENDPOINT || 'https://pub-7d69744bfc94470c9f3257d29c3a67d3.r2.dev';
 
 // === Helpers ===
 function truncateText(text: string, maxLength: number) {
@@ -30,17 +30,21 @@ async function getPost(slug: string): Promise<BlogPost | null> {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
-      cache: 'no-store'
+      cache: 'no-store',
+      // Agregar timeout y retry en producción
+      signal: AbortSignal.timeout(10000), // 10 segundos timeout
     });
 
     if (!response.ok) {
+      console.error(`Failed to fetch post ${slug}: ${response.status} - ${response.statusText}`);
       return null;
     }
 
     const data = await response.json();
     return data.data || data;
   } catch (error) {
-    console.error('Error fetching post:', error);
+    console.error(`Error fetching post ${slug}:`, error);
+    // En producción, podríamos intentar un fallback o cache
     return null;
   }
 }
@@ -50,10 +54,14 @@ async function getRecentPosts(): Promise<BlogPost[]> {
   try {
     const response = await fetch(`${apiUrl}?limit=5`, {
       headers: { Authorization: `Bearer ${apiKey}` },
-      cache: 'no-store'
+      cache: 'no-store',
+      signal: AbortSignal.timeout(8000),
     });
 
-    if (!response.ok) return [];
+    if (!response.ok) {
+      console.error(`Failed to fetch recent posts: ${response.status}`);
+      return [];
+    }
 
     const data = await response.json();
     return data.data || data || [];
@@ -68,10 +76,14 @@ async function getRelatedPosts(slug: string): Promise<BlogPost[]> {
   try {
     const response = await fetch(`${apiUrl}?limit=10&order=desc`, {
       headers: { Authorization: `Bearer ${apiKey}` },
-      cache: 'no-store'
+      cache: 'no-store',
+      signal: AbortSignal.timeout(8000),
     });
 
-    if (!response.ok) return [];
+    if (!response.ok) {
+      console.error(`Failed to fetch related posts: ${response.status}`);
+      return [];
+    }
 
     const data = await response.json();
     const allPosts = data.data || data || [];
@@ -231,7 +243,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                     />
                   )}
 
-                  <h2 className="wow fadeInUp mt-5 mb20 color-dor" data-wow-delay=".2s">{post.titulo}</h2>
+                  <h2 className="wow fadeInUp mt-5 mb20 color-dor h3" data-wow-delay=".2s">{post.titulo}</h2>
 
                   <div className="post-meta mb-3">
                     <span className="text-muted">Póliza de Rentas - {formatDate(post.created_at)}</span>
@@ -261,7 +273,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                                   alt={relatedPost.titulo}
                                 />
                                 <div className="card-body">
-                                  <h3 className="card-title h5">{truncateText(relatedPost.titulo, 50)}</h3>
+                                  <h2 className="card-title h5">{truncateText(relatedPost.titulo, 50)}</h2>
                                   <p className="card-text"><small className="text-muted">{formatDate(relatedPost.created_at)}</small></p>
                                 </div>
                               </div>
