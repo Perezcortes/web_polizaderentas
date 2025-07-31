@@ -1,44 +1,57 @@
-/* Estilos generales del navbar */
+/* ==== Estilo general ==== */
 .header-black-full {
   transition: all 0.4s ease;
-  padding: 20px 0;
+  padding: 20px 30px;
   position: fixed;
   width: 100%;
   z-index: 999;
+  background: #111;
 }
-
-.header-black-full.transparent {
-  background: transparent;
-}
-
 .header-black-full.smaller {
-  padding: 10px 0;
+  padding: 10px 30px;
   background: rgba(0, 0, 0, 0.9) !important;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos del menú principal */
+/* ==== Menú principal ==== */
 #mainmenu-black {
   display: flex;
   margin: 0;
+  margin-right: 35px;
   padding: 0;
-  list-style: none; /* Esto quita los puntos de la lista principal */
+  list-style: none;
+  gap: 25px;
+  align-items: flex-start;
+  text-align: left;
 }
 
 #mainmenu-black > li {
   position: relative;
-  padding: 0 15px;
+  padding: 0 6px;
 }
 
-#mainmenu-black > li > a {
-  color: white;
+.menu-item-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#mainmenu-black > li > a.menu-item-black {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  color: #ccc;
   text-decoration: none;
-  font-size: 15px;
-  font-weight: 500;
+  font-family: "Inter Tight", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
+#mainmenu-black > li > a.menu-item-black:hover {
+  color: #ffffff;
+}
 
-/* Submenús - Estilo idéntico al ejemplo */
+/* ==== Submenús ==== */
 .sub-menu-black {
   display: none;
   position: absolute;
@@ -47,108 +60,148 @@
   min-width: 220px;
   padding: 15px 0;
   z-index: 999;
-  background-color: #1E1E1E;
-  border: 1px solid #1E1E1E;
-  list-style: none; /* Esto quita los puntos del submenú */
-  margin: 0; /* Elimina márgenes por defecto */
+  background-color: #1e1e1e;
+  border: 1px solid #1e1e1e;
+  list-style: none;
+  margin: 0;
 }
 
-#mainmenu-black > li:hover > .sub-menu-black {
+#mainmenu-black > li:hover > .sub-menu-black,
+#mainmenu-black > li.active .sub-menu-black {
   display: block;
 }
-
 .sub-menu-black li {
   padding: 8px 20px;
-  list-style: none; /* Refuerza quitar puntos */
+  border-bottom: 1px solid #2a2a2a; /* tono gris oscuro para mantener el estilo */
+}
+
+.sub-menu-black li:last-child {
+  border-bottom: none; /* evita línea al final */
 }
 
 .sub-menu-black li a {
-  color: white;
+  color: #ccc;
   font-size: 14px;
   display: block;
   transition: all 0.3s ease;
-  text-decoration: none; /* Asegura que no tenga subrayado */
-}
-
-.sub-menu-black li a:hover {
-  color: #ccc;
-}
-
-/* Botón de Franquicias */
-.btn-main-black {
-  display: inline-block;
-  background: #fff;
-  color: #000;
-  padding: 10px 20px;
-  border-radius: 30px;
-  font-weight: 600;
-  transition: all 0.3s ease;
   text-decoration: none;
 }
-
-.btn-main-black:hover {
-  background: #ddd;
+.sub-menu-black li a:hover {
+  color: white;
 }
 
-/* Botón hamburguesa (solo móvil) */
+/* ==== Flecha SVG desplegable moderna ==== */
+.submenu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  color: #ccc;
+}
+.submenu-toggle svg {
+  stroke: #ccc;
+  transition: transform 0.3s ease;
+  width: 16px;
+  height: 16px;
+}
+.submenu-toggle:hover svg {
+  stroke: white;
+}
+.submenu-toggle.rotated svg {
+  transform: rotate(180deg);
+}
+
+/* ==== Botón principal ==== */
+.menu_side_area_black {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.btn-main {
+  background: #b79850;
+  color: white;
+  font-weight: 600;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+.btn-main:hover {
+  background: #a3823f;
+}
+
+/* ==== Hamburguesa con 3 líneas ==== */
 #menu-btn-black {
   display: none;
-  width: 30px;
-  height: 20px;
+  width: 24px;
+  height: 18px;
   position: relative;
   cursor: pointer;
 }
-
+#menu-btn-black span,
 #menu-btn-black::before,
 #menu-btn-black::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 3.5px;
   background: white;
   transition: all 0.3s ease;
 }
-
 #menu-btn-black::before {
   top: 0;
 }
-
+#menu-btn-black span {
+  top: 8px;
+}
 #menu-btn-black::after {
   bottom: 0;
 }
-
 #menu-btn-black.active::before {
-  transform: rotate(45deg);
-  top: 9px;
+  transform: none;
+  top: 10px;
 }
-
+#menu-btn-black.active span {
+  opacity: 0;
+}
 #menu-btn-black.active::after {
-  transform: rotate(-45deg);
-  bottom: 9px;
+  transform: none;
+  bottom: auto;
+  top: 10px;
 }
 
-/* Logo */
+/* ==== Logos ==== */
 .logo-black-main {
   display: block;
 }
-
 .logo-black-mobile {
   display: none;
 }
 
-/* Estilos para móvil */
+/* ==== Responsive ==== */
 @media (max-width: 992px) {
+  .navbar-black-spacer {
+    height: 80px; /* ajusta según el alto de tu header en móvil */
+    width: 100%;
+  }
+
   #mainmenu-black {
     display: none;
     position: fixed;
     top: 80px;
+    /*bottom: 0;*/
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.95);
     flex-direction: column;
-    padding: 20px 0;
-    z-index: 998;
+    padding: 0px 0;
+    z-index: 999;
+    align-items: flex-start;
+    text-align: left;
+    /*overflow-y: auto;*/
   }
 
   #mainmenu-black.mobile-visible {
@@ -164,26 +217,20 @@
     display: none;
     background: none;
     border: none;
-    padding-left: 20px;
+    padding-left: 30px;
   }
 
-  #mainmenu-black > li:hover > .sub-menu-black {
-    display: none;
-  }
-
-  #mainmenu-black > li:focus-within > .sub-menu-black,
-  #mainmenu-black > li.active > .sub-menu-black {
+  #mainmenu-black > li.active .sub-menu-black {
     display: block;
-  }
-
-  #menu-btn-black {
-    display: block;
-    margin-left: 15px;
   }
 
   .menu_side_area_black {
     display: flex;
     align-items: center;
+  }
+
+  #menu-btn-black {
+    display: block;
   }
 
   .logo-black-main {
