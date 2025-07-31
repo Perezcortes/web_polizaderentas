@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
-import Navbar from "../components/Navbar";
+import NavbarWrapper from "../components/NavbarWrapper"; // Cambiar esta línea
 import Footer from "../components/Footer";
 import { headers } from "next/headers";
 
@@ -108,7 +108,7 @@ export default async function RootLayout({
 
         {/* Contenido */}
         <div id="wrapper">
-          {!hideGlobalNavbar && <Navbar />}
+          {!hideGlobalNavbar && <NavbarWrapper />}
           <main>{children}</main>
           <Footer />
         </div>
