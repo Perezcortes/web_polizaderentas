@@ -12,7 +12,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Mapa from '../../components/mapa';
 import RecentPosts from '../../components/RecentPosts';
-import { useReInitVisualScripts } from '../../hooks/useReInitVisualScripts';
+//import { useReInitVisualScripts } from '../../hooks/useReInitVisualScripts';
+import { Office } from '../../types/office';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './styles.css';
@@ -24,23 +25,8 @@ declare global {
   }
 }
 
-interface Office {
-  id: number;
-  nombre_suc: string;
-  calle: string;
-  numExt: string;
-  colonia: string;
-  municipio: string;
-  estado: string;
-  cp: string;
-  email_suc: string;
-  telefono_suc: string;
-  lat: string;
-  lng: string;
-}
-
 export default function SucursalesPage() {
-  useReInitVisualScripts();
+  //useReInitVisualScripts();
 
   const [offices, setOffices] = useState<Office[]>([]);
   const [uniqueStates, setUniqueStates] = useState<string[]>([]);
