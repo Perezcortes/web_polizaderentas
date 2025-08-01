@@ -6,8 +6,8 @@ import Script from 'next/script';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, Parallax } from 'swiper/modules';
-import BlogContent from '../../components/BlogContent';
-import BlogSidebar from '../../components/BlogSidebar';
+import BlogContent from '../../components/blog/BlogContent';
+import BlogSidebar from '../../components/blog/BlogSidebar';
 import './blog-styles.css';
 
 export default function BlogPage() {

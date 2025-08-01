@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import BlogSearchBar from './BlogSearchBar';
-import type { BlogPost } from '../types/blog-types';
+import type { BlogPost } from '../../types/blog-types';
 
 interface BlogContentProps {
   postsPerPage: number;

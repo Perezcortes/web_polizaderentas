@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import type { BlogPost } from '../types/blog-types';
+import type { BlogPost } from '../../types/blog-types';
 
 interface BlogSidebarProps {
   apiUrl: string;

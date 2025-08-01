@@ -1,102 +1,37 @@
 'use client';
 
-import { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Script from 'next/script';
-import Swal from 'sweetalert2';
-import './style.css';
+import ContactForm from '../../components/contacto/ContactForm';
 import { useReInitVisualScripts } from '../../hooks/useReInitVisualScripts';
+import './style.css';
 
-
-// Extiende la interfaz Window para incluir jQuery y $
 declare global {
-    interface Window {
-        jQuery?: any;
-        $?: any;
-    }
+  interface Window {
+    jQuery?: any;
+    $?: any;
+  }
 }
 
 export default function ContactPage() {
-    useReInitVisualScripts();
+  useReInitVisualScripts();
 
-    const [formData, setFormData] = useState({
-        nombre: '',
-        apellido: '',
-        email: '',
-        numero: '',
-        type: 'Propietario',
-        captcha: '',
-        id: ''
-    });
+  return (
+    <>
+      <Head>
+        <title>Contacto - Póliza de Rentas</title>
+        <meta name="description" content="Contáctanos para proteger tu patrimonio con nuestros servicios jurídicos especializados en arrendamiento" />
+        <link rel="icon" href="/images/icon.png" type="image/gif" sizes="16x16" />
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
+        {/* Preload de recursos críticos */}
+        <link rel="preload" href="https://code.jquery.com/jquery-3.6.0.min.js" as="script" />
+        <link rel="preload" href="/css/bootstrap.min.css" as="style" />
+        <link rel="preload" href="/css/style.css" as="style" />
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        try {
-            const response = await fetch('https://app.polizaderentas.com/api/offices/contacto', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams(formData as any).toString()
-            });
-
-            const data = await response.json();
-
-            if (data.status === 'success') {
-                Swal.fire({
-                    icon: 'success',
-                    title: '¡Éxito!',
-                    text: data.message,
-                    confirmButtonText: 'OK',
-                });
-                // Reset form after successful submission
-                setFormData({
-                    nombre: '',
-                    apellido: '',
-                    email: '',
-                    numero: '',
-                    type: 'Propietario',
-                    captcha: '',
-                    id: ''
-                });
-            } else {
-                throw new Error(data.message || 'Error en el envío');
-            }
-        } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Hubo un problema con el envío. Por favor, intenta nuevamente.',
-                confirmButtonText: 'OK',
-            });
-        }
-    };
-
-    return (
-        <>
-            <Head>
-                <title>Contacto - Póliza de Rentas</title>
-                <meta name="description" content="Contáctanos para proteger tu patrimonio con nuestros servicios jurídicos especializados en arrendamiento" />
-                <link rel="icon" href="/images/icon.png" type="image/gif" sizes="16x16" />
-
-                {/* Preload de recursos críticos */}
-                <link rel="preload" href="https://code.jquery.com/jquery-3.6.0.min.js" as="script" />
-                <link rel="preload" href="/css/bootstrap.min.css" as="style" />
-                <link rel="preload" href="/css/style.css" as="style" />
-
-                {/* Meta Pixel Code */}
-                <script dangerouslySetInnerHTML={{
-                    __html: `
+        {/* Meta Pixel Code */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
             !function(f,b,e,v,n,t,s){
               if(f.fbq)return;
               n=f.fbq=function(){
@@ -118,187 +53,147 @@ export default function ContactPage() {
             fbq('init', '217583817249537');
             fbq('track', 'PageView');
           `
-                }} />
-                <noscript>
-                    <Image
-                        src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1"
-                        alt="facebook-pixel"
-                        width={1}
-                        height={1}
-                        style={{ display: "none" }}
-                        unoptimized
-                    />
-                </noscript>
+        }} />
+        <noscript>
+          <Image
+            src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1"
+            alt="facebook-pixel"
+            width={1}
+            height={1}
+            style={{ display: "none" }}
+            unoptimized
+          />
+        </noscript>
 
-                {/* Google tag (gtag.js) */}
-                <script async src="https://www.googletagmanager.com/gtag/js?id=G-3HT5BR97DT"></script>
-                <script dangerouslySetInnerHTML={{
-                    __html: `
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3HT5BR97DT"></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-3HT5BR97DT');
           `
-                }} />
-            </Head>
+        }} />
+      </Head>
 
-            {/* Cargar jQuery con mayor control */}
-            <Script
-                id="jquery-js"
-                src="https://code.jquery.com/jquery-3.6.0.min.js"
-                strategy="beforeInteractive"
-                onLoad={() => {
-                    if (typeof window !== 'undefined' && window.jQuery && !window.$) {
-                        window.$ = window.jQuery;
-                    }
-                }}
-            />
+      {/* Cargar jQuery con mayor control */}
+      <Script
+        id="jquery-js"
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        strategy="beforeInteractive"
+        onLoad={() => {
+          if (typeof window !== 'undefined' && window.jQuery && !window.$) {
+            window.$ = window.jQuery;
+          }
+        }}
+      />
 
-            {/* Script de SweetAlert2 */}
-            <Script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" strategy="lazyOnload" />
+      {/* Script de SweetAlert2 */}
+      <Script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" strategy="lazyOnload" />
 
-            {/* Banner superior */}
-            <section id="poliza" className="text-light jarallax">
-                <img src="/images/slider/banner3.jpg" className="jarallax-img" alt="banner3" />
-                <div className="container">
-                    <div className="row text-center">
-                        <div className="col-lg-8 offset-lg-2">
-                            <h1 className="wow fadeInUp mb20" data-wow-delay=".2s">Contacto</h1>
-                            <br /><br />
-                        </div>
-                    </div>
-                </div>
-            </section>
+      {/* Banner superior */}
+      <section id="poliza" className="text-light jarallax">
+        <img src="/images/slider/banner3.jpg" className="jarallax-img" alt="banner3" />
+        <div className="container">
+          <div className="row text-center">
+            <div className="col-lg-8 offset-lg-2">
+              <h1 className="wow fadeInUp mb20" data-wow-delay=".2s">Contacto</h1>
+              <br /><br />
+            </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Sección de formulario y mapa */}
-            <section>
-                <div className="container">
-                    <div className="row">
-                        <div className="row col-lg-12 col-md-6" data-wow-delay="0s">
+      {/* Sección de formulario y mapa */}
+      <section>
+        <div className="container">
+          <div className="row">
+            <div className="row col-lg-12 col-md-6" data-wow-delay="0s">
+              {/* Formulario */}
+              <div className="col-lg-6 p-4 pb-2 bg-grey">
+                <h4>Envía tus datos y un agente de Póliza de Rentas se pondrá en contacto contigo</h4>
+                <ContactForm />
+              </div>
 
-                            {/* Formulario */}
-                            <div className="col-lg-6 p-4 pb-2 bg-grey">
-                                <h4>Envía tus datos y un agente de Póliza de Rentas se pondrá en contacto contigo</h4>
+              {/* Espacio */}
+              <br /><br />
 
-                                <form className="formulario-informes" id="contactoForm">
-                                    <div className="mb-3">
-                                        <label htmlFor="nombre" className="form-label">Nombre</label>
-                                        <input type="text" name="nombre" className="form-control" id="nombre" required />
-                                    </div>
+              {/* Mapa */}
+              <div className="col-lg-6">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.4002200013833!2d-99.2094382889982!3d19.43830404042254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2021965d6cd41%3A0xbae0eb331a021324!2sSears%20Polanco!5e0!3m2!1ses-419!2smx!4v1711477157778!5m2!1ses-419!2smx"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                                    <div className="mb-3">
-                                        <label htmlFor="apellido" className="form-label">Primer Apellido</label>
-                                        <input type="text" name="apellido" className="form-control" id="apellido" required />
-                                    </div>
+      {/* Sección "Quiénes somos" */}
+      <section className="bg-dark-1 text-light">
+        <div className="container">
+          <div className="row align-items-center gx-5">
+            <div className="col-lg-6 mb-sm-20 position-relative">
+              <div className="images-deco-1">
+                <img
+                  src="images/misc/1.png"
+                  className="d-img-1 wow zoomIn"
+                  data-wow-delay="0s"
+                  alt="quienes somos"
+                />
+                <img
+                  src="images/misc/2.png"
+                  className="d-img-2 wow zoomIn"
+                  data-wow-delay=".5s"
+                  data-jarallax-element="100"
+                  alt="logo"
+                />
+                <div
+                  className="d-img-3 bg-color wow zoomIn"
+                  data-wow-delay=".6s"
+                  data-jarallax-element="-50"
+                ></div>
+              </div>
+            </div>
 
-                                    <div className="mb-3">
-                                        <label htmlFor="email" className="form-label">Correo electrónico</label>
-                                        <input type="email" name="email" className="form-control" id="email" aria-describedby="emailHelp" required />
-                                    </div>
+            <div className="col-lg-6">
+              <div className="subtitle s2 wow fadeInUp mb-3">Quiénes somos</div>
+              <h2 className="wow fadeInUp" data-wow-delay=".2s">
+                Acerca de <br /> Póliza de Rentas
+              </h2>
+              <p className="wow fadeInUp">
+                Somos una empresa dedicada a proteger el patrimonio de las personas,
+                nuestros servicios están destinados a propietarios, inmobiliarias o
+                administradores de inmuebles que buscan dar sus propiedades en arrendamiento.
+              </p>
+              <hr className="s2" />
+              <div className="spacer-10"></div>
+              <div className="d-flex">
+                <a className="btn-main me-1" href="/franquicias#conoce">
+                  Conoce más
+                </a>
+                <a className="btn-main btn-line" href="/sucursales">
+                  Nuestras sucursales
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                                    <div className="mb-3">
-                                        <label htmlFor="numero" className="form-label">WhatsApp</label>
-                                        <input type="number" name="numero" className="form-control" id="numero" required />
-                                    </div>
-
-                                    <div className="mb-3">
-                                        <label htmlFor="mensaje" className="form-label">Soy un</label>
-                                        <select name="type" className="form-control" required>
-                                            <option value="Propietario">Propietario</option>
-                                            <option value="Inquilino">Inquilino</option>
-                                            <option value="Asesor Inmobiliario">Asesor Inmobiliario</option>
-                                            <option value="Director Inmobiliario">Director Inmobiliario</option>
-                                        </select>
-                                    </div>
-
-                                    <input type="hidden" name="captcha" value="" />
-                                    <input type="hidden" name="id" value="" />
-
-                                    <button type="submit" className="btn btn-primary">Enviar</button>
-                                </form>
-                            </div>
-
-                            {/* Espacio */}
-                            <br /><br />
-
-                            {/* Mapa */}
-                            <div className="col-lg-6">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.4002200013833!2d-99.2094382889982!3d19.43830404042254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2021965d6cd41%3A0xbae0eb331a021324!2sSears%20Polanco!5e0!3m2!1ses-419!2smx!4v1711477157778!5m2!1ses-419!2smx"
-                                    width="100%"
-                                    height="100%"
-                                    style={{ border: 0 }}
-                                    allowFullScreen
-                                    loading="lazy"
-                                    referrerPolicy="no-referrer-when-downgrade"
-                                />
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Sección "Quiénes somos" */}
-            <section className="bg-dark-1 text-light">
-                <div className="container">
-                    <div className="row align-items-center gx-5">
-
-                        <div className="col-lg-6 mb-sm-20 position-relative">
-                            <div className="images-deco-1">
-                                <img
-                                    src="images/misc/1.png"
-                                    className="d-img-1 wow zoomIn"
-                                    data-wow-delay="0s"
-                                    alt="quienes somos"
-                                />
-                                <img
-                                    src="images/misc/2.png"
-                                    className="d-img-2 wow zoomIn"
-                                    data-wow-delay=".5s"
-                                    data-jarallax-element="100"
-                                    alt="logo"
-                                />
-                                <div
-                                    className="d-img-3 bg-color wow zoomIn"
-                                    data-wow-delay=".6s"
-                                    data-jarallax-element="-50"
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-6">
-                            <div className="subtitle s2 wow fadeInUp mb-3">Quiénes somos</div>
-                            <h2 className="wow fadeInUp" data-wow-delay=".2s">
-                                Acerca de <br /> Póliza de Rentas
-                            </h2>
-                            <p className="wow fadeInUp">
-                                Somos una empresa dedicada a proteger el patrimonio de las personas,
-                                nuestros servicios están destinados a propietarios, inmobiliarias o
-                                administradores de inmuebles que buscan dar sus propiedades en arrendamiento.
-                            </p>
-                            <hr className="s2" />
-                            <div className="spacer-10"></div>
-                            <div className="d-flex">
-                                <a className="btn-main me-1" href="/franquicias#conoce">
-                                    Conoce más
-                                </a>
-                                <a className="btn-main btn-line" href="/sucursales">
-                                    Nuestras sucursales
-                                </a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            {/* Scripts adicionales */}
-            <Script src="/js/plugins.js" strategy="afterInteractive" />
-            <Script src="/js/designesia.js" strategy="afterInteractive" />
-            <Script src="/js/swiper.js" strategy="afterInteractive" />
-            <Script src="/js/custom-marquee.js" strategy="afterInteractive" />
-            <Script src="/js/custom-swiper-1.js" strategy="afterInteractive" />
-        </>
-    );
+      {/* Scripts adicionales */}
+      <Script src="/js/plugins.js" strategy="afterInteractive" />
+      <Script src="/js/designesia.js" strategy="afterInteractive" />
+      <Script src="/js/swiper.js" strategy="afterInteractive" />
+      <Script src="/js/custom-marquee.js" strategy="afterInteractive" />
+      <Script src="/js/custom-swiper-1.js" strategy="afterInteractive" />
+    </>
+  );
 }

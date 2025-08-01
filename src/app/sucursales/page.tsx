@@ -10,9 +10,9 @@ import 'swiper/css/parallax';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import Mapa from '../../components/mapa';
-import RecentPosts from '../../components/RecentPosts';
-//import { useReInitVisualScripts } from '../../hooks/useReInitVisualScripts';
+import Mapa from '../../components/sucursales/mapa';
+import RecentPosts from '../../components/blog/RecentPosts';
+//import { useReInitVisualScripts } from '../../hooks/useScriptsVisuales';
 import { Office } from '../../types/office';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
