@@ -1,6 +1,5 @@
 import Script from "next/script";
 import type { Metadata } from "next";
-import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Aviso de Privacidad - Póliza de Rentas",
@@ -152,13 +151,20 @@ export default function PrivacyPolicy() {
                   <h3 className="dorado mt-4">Limitación de Uso y Divulgación de Información</h3>
                   <p>En nuestro programa de notificación de promociones, ofertas y servicios a través de correo electrónico, sólo POLIZA DE RENTAS tiene acceso a la información recabada. Este tipo de publicidad se realiza mediante avisos y mensajes promocionales de correo electrónico, los cuales sólo serán enviados a usted y a aquellos contactos registrados para tal propósito. Si Usted desea dejar de recibir mensajes promocionales de nuestra parte, puede solicitarlo al correo electrónico info@polizaderentas.com En los correos electrónicos enviados, pueden incluirse ocasionalmente ofertas de terceras partes.</p>
 
-                  <p className="text-end"><em>Última actualización: 15/08/2024</em></p>
+                  <p className="text-right italic">Última actualización: 15/08/2024</p>
                 </div>
               </div>
             </div>
           </section>
         </div>
       </div>
+
+       {/* Scripts del tema */}
+      <Script src="/js/plugins.js" strategy="lazyOnload" />
+      <Script src="/js/designesia.js" strategy="lazyOnload" />
+      <Script src="/js/swiper.js" strategy="lazyOnload" />
+      <Script src="/js/custom-marquee.js" strategy="lazyOnload" />
+      <Script src="/js/custom-swiper-1.js" strategy="lazyOnload" />
     </>
   );
 }
