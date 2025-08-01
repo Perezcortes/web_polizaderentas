@@ -4,9 +4,6 @@ export const metadata = {
   title: 'Términos y Condiciones - Póliza de Rentas',
   description:
     'Estos términos y condiciones regulan el uso de los servicios ofrecidos por Póliza de Rentas, incluyendo la evaluación de inquilinos y la formalización de contratos de arrendamiento.',
-  icons: {
-    icon: '/images/icon.png',
-  },
 };
 
 export default function TerminosCondiciones() {
