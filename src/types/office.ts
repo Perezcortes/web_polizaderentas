@@ -12,4 +12,5 @@ export interface Office {
   telefono_suc: string;
   lat: string;
   lng: string;
+  descripcion_suc: string;
 }

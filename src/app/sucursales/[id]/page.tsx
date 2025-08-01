@@ -11,23 +11,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
+import { Office } from '../../../types/office';
 import Swal from 'sweetalert2';
-
-interface Office {
-  id: number;
-  nombre_suc: string;
-  calle: string;
-  numExt: string;
-  colonia: string;
-  municipio: string;
-  estado: string;
-  cp: string;
-  email_suc: string;
-  telefono_suc: string;
-  lat: string;
-  lng: string;
-  descripcion_suc: string;
-}
 
 interface User {
   id: number;

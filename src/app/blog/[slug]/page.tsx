@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BlogPost } from '../../../types/blog-types';
-import { VideoEmbedder } from '../../../components/VideoEmbedder';
+import { VideoEmbedder } from '../../../components/blog/VideoEmbedder';
 import BlogPostClient from './BlogPostClient';
 import './styles.css';
 
