@@ -1,13 +1,5 @@
 'use client';
 
-// Extiende la interfaz Window para incluir jQuery y $
-declare global {
-  interface Window {
-    jQuery?: any;
-    $?: any;
-  }
-}
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, Parallax } from 'swiper/modules';
 import 'swiper/css';
@@ -19,6 +11,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+// Extiende la interfaz Window para incluir jQuery y $
+declare global {
+  interface Window {
+    jQuery?: any;
+    $?: any;
+  }
+}
 
 export default function FranchisesPage() {
 

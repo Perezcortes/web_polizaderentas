@@ -11,7 +11,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/parallax';
 import 'swiper/css/scrollbar';
 import { useReInitVisualScripts } from '../hooks/useReInitVisualScripts';
-import RecentPosts from '../components/blog/RecentPosts';
+import RecentPosts from '../components/blog/RecentPosts'; //obtener los posts recientes
 import './styles.css';
 
 export default function Home() {

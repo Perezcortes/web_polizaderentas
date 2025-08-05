@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Póliza de Rentas",
   description:
-    "Nuestra tecnología revoluciona la protección jurídica en el arrendamiento inmobiliario.",
+    "Nuestra tecnología revoluciona la protección jurídica en el arrendamiento inmobiliario. Forma parte del futuro de la seguridad para propietarios e inquilinos.",
   metadataBase: new URL("https://polizaderentas.com"),
   openGraph: {
     images: "/almacenamiento/images/og.jpg",
