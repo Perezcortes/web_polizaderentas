@@ -4,18 +4,15 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import type { BlogPost } from '../../types/blog-types';
-
-interface BlogSidebarProps {
-  apiUrl: string;
-  apiKey: string;
-  cloudflareEndpoint: string;
-}
+import type { BlogPost, BlogSidebarProps } from '../../types/blog-types';
+import Spinner from '../ui/Spinner';
+import './BlogSidebar.css';
 
 export default function BlogSidebar({
   apiUrl,
   apiKey,
-  cloudflareEndpoint
+  cloudflareEndpoint,
+  excludeSlug // Nuevo prop para excluir el post actual
 }: BlogSidebarProps) {
   const router = useRouter();
   const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);
@@ -25,13 +22,20 @@ export default function BlogSidebar({
     const fetchRecentPosts = async () => {
       try {
         const recentResponse = await fetch(
-          `${apiUrl}?per_page=5`,
+          `${apiUrl}?per_page=6`, // Pedimos 1 más por si hay que excluir uno
           { headers: { 'Authorization': `Bearer ${apiKey}` } }
         );
 
         if (!recentResponse.ok) throw new Error('Error al cargar publicaciones recientes');
-        const recentData = await recentResponse.json();
-        setRecentPosts(recentData.data);
+        let recentData = await recentResponse.json();
+
+        // Filtrar el post actual si existe excludeSlug
+        if (excludeSlug) {
+          recentData.data = recentData.data.filter((post: BlogPost) => post.slug !== excludeSlug);
+        }
+
+        // Tomar solo los primeros 5 posts después de filtrar
+        setRecentPosts(recentData.data.slice(0, 5));
         setLoading(false);
       } catch (err) {
         console.error('Error fetching recent posts:', err);
@@ -40,7 +44,7 @@ export default function BlogSidebar({
     };
 
     fetchRecentPosts();
-  }, [apiUrl, apiKey]);
+  }, [apiUrl, apiKey, excludeSlug]); // Añadir excludeSlug a las dependencias
 
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -55,29 +59,15 @@ export default function BlogSidebar({
   };
 
   return (
-    <div className="col-lg-4 col-md-6">
-      <div className="bg-dark py-2 ps-4">
-        <h3 className="text-white">Artículos recientes</h3>
+    <div className="col-lg-4 col-md-6 blog-sidebar-container">
+      <div className="blog-sidebar-header">
+        <h3>Artículos recientes</h3>
       </div>
-      <div className="py-2 ps-4 borde">
+      <div className="blog-sidebar-content">
         {loading ? (
-          <div className="text-center py-3">
-            <div
-              className="spinner-border spinner-border-sm"
-              style={{
-                width: '1.5rem',
-                height: '1.5rem',
-                borderWidth: '0.2em',
-                borderColor: '#bdad5d transparent #bdad5d transparent'
-              }}
-              role="status"
-            >
-              <span className="visually-hidden">Cargando...</span>
-            </div>
-          </div>
-        ) : recentPosts.length === 0 ? (
-          <p className="text-muted">No se pudieron cargar los artículos recientes</p>
-        ) : (
+          <Spinner message="Cargando publicaciones..." />) : recentPosts.length === 0 ? (
+            <p className="blog-sidebar-error">No se pudieron cargar los artículos recientes</p>
+          ) : (
           recentPosts.map((post, index) => {
             const imageUrl = post.url_img
               ? `${cloudflareEndpoint}/${post.url_img.replace(/^\//, '')}`
@@ -86,8 +76,7 @@ export default function BlogSidebar({
             return (
               <div key={post.id}>
                 <div
-                  className="row mb-3 recent-post-item"
-                  style={{ cursor: 'pointer' }}
+                  className="row recent-post-item"
                   onClick={() => router.push(`/blog/${post.slug}`)}
                 >
                   <div className="col-4">
@@ -96,18 +85,22 @@ export default function BlogSidebar({
                       alt={post.titulo}
                       width={100}
                       height={80}
-                      className="img-fluid rounded"
-                      style={{ height: '80px', width: '100%', objectFit: 'cover' }}
+                      className="recent-post-image"
+                      priority={false}
                     />
                   </div>
                   <div className="col-8">
-                    <Link href={`/blog/${post.slug}`} style={{ color: 'rgb(101, 85, 36)' }}>
-                      <p className="mb-1">{truncateText(post.titulo, 60)}</p>
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="post-title"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {truncateText(post.titulo, 60)}
                     </Link>
-                    <small className="text-muted">Póliza de Rentas - {formatDate(post.created_at)}</small>
+                    <small className="post-meta">Póliza de Rentas - {formatDate(post.created_at)}</small>
                   </div>
                 </div>
-                {index < recentPosts.length - 1 && <hr className="my-2" />}
+                {index < recentPosts.length - 1 && <hr className="blog-sidebar-divider" />}
               </div>
             );
           })

@@ -1,9 +1,12 @@
 'use client';
 
+import Head from 'next/head';
 import Script from "next/script";
 import { useEffect, useState } from 'react';
+import { useReInitVisualScripts } from '../../hooks/useReInitVisualScripts';
 
 export default function PrivacyPolicy() {
+    useReInitVisualScripts();
   const [scriptsLoaded, setScriptsLoaded] = useState(false);
 
   useEffect(() => {
@@ -38,6 +41,16 @@ export default function PrivacyPolicy() {
 
   return (
     <>
+    <Head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        {/* Open Graph Meta Tags */}
+        <meta property="og:image" content="https://polizaderentas.com/almacenamiento/images/og.jpg" />
+        <meta property="og:url" content="https://polizaderentas.com/" />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://polizaderentas.com/" />
+      </Head>
+      
       {/* Google Analytics */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-3HT5BR97DT"

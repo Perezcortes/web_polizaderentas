@@ -30,9 +30,9 @@
 /* Ajustes específicos para móvil */
 @media (max-width: 768px) {
   .video-responsive-container {
-    paddingBottom: '75%'; /* 4:3 para mejor visualización en vertical */
-    margin: '15px 0'; /* Espaciado vertical */
-    borderRadius: '0.5rem'; /* Bordes más suaves */
+    padding-bottom: 75%; /* 4:3 para mejor visualización en vertical */
+    margin: 15px 0; /* Espaciado vertical */
+    border-radius: 0.5rem; /* Bordes más suaves */
   }
   
   .video-iframe {

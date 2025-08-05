@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { BlogPost } from '../../../types/blog-types';
 import { VideoEmbedder } from '../../../components/blog/VideoEmbedder';
 import BlogPostClient from './BlogPostClient';
+import BlogSidebar from '../../../components/blog/BlogSidebar';
 import './styles.css';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || process.env.API_URL || 'http://localhost:8000/api/posts';
@@ -26,7 +27,7 @@ function formatDate(dateString: string) {
 async function getPost(slug: string): Promise<BlogPost | null> {
   try {
     const response = await fetch(`${apiUrl}/${slug}`, {
-      headers: { 
+      headers: {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
@@ -112,7 +113,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const title = post.meta_titulo || post.titulo;
   const description = post.meta_descripcion || truncateText(post.contenido.replace(/<[^>]*>/g, ''), 160);
   const keywords = post.palabras_clave_ceo || 'blog, arrendamiento, inquilinos, propietarios, renta segura';
-  const imageUrl = post.url_img 
+  const imageUrl = post.url_img
     ? `${cloudflareEndpoint}/${post.url_img.replace(/^\//, '')}`
     : 'https://polizaderentas.com/images/blog-banner.jpg';
   const url = `https://polizaderentas.com/blog/${post.slug}`;
@@ -122,7 +123,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description,
     keywords,
     authors: [{ name: 'Póliza de Rentas' }],
-    
+
     // Open Graph (Facebook, WhatsApp)
     openGraph: {
       title: `${title} - Póliza de Rentas`,
@@ -155,7 +156,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     alternates: {
       canonical: url,
     },
-    
+
     // Robots
     robots: {
       index: true,
@@ -177,7 +178,7 @@ interface PageProps {
 
 export default async function BlogDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  
+
   // Obtener datos en paralelo
   const [post, recentPosts, relatedPosts] = await Promise.all([
     getPost(slug),
@@ -285,50 +286,13 @@ export default async function BlogDetailPage({ params }: PageProps) {
                   )}
                 </div>
 
-                {/* Sidebar artículos recientes */}
-                <div className="col-lg-4 col-md-6">
-                  <div className="bg-dark py-2 ps-4">
-                    <h2 className="text-white h3">Artículos recientes</h2>
-                  </div>
-                  <div className="py-2 ps-4 borde">
-                    {recentPosts.length === 0 ? (
-                      <p className="text-muted">No hay artículos recientes</p>
-                    ) : (
-                      recentPosts.map((recentPost, index) => {
-                        if (recentPost.slug === slug) return null;
-
-                        return (
-                          <div key={recentPost.id}>
-                            <Link
-                              href={`/blog/${recentPost.slug}`}
-                              className="row mb-3 recent-post-item"
-                              style={{ cursor: 'pointer' }}
-                            >
-                              <div className="col-4">
-                                <Image
-                                  src={recentPost.url_img
-                                    ? `${cloudflareEndpoint}/${recentPost.url_img.replace(/^\//, '')}`
-                                    : '/images/default-thumb.jpg'}
-                                  width={100}
-                                  height={80}
-                                  className="recent-post-image"
-                                  alt={recentPost.titulo}
-                                />
-                              </div>
-                              <div className="col-8">
-                                <p className="recent-post-title">{truncateText(recentPost.titulo, 60)}</p>
-                                <small className="recent-post-date">
-                                  Póliza de Rentas - {formatDate(recentPost.created_at)}
-                                </small>
-                              </div>
-                            </Link>
-                            {index < recentPosts.length - 1 && <hr className="my-2" />}
-                          </div>
-                        );
-                      })
-                    )}
-                  </div>
-                </div>
+                {/* Sidebar usando el componente BlogSidebar */}
+                <BlogSidebar
+                  apiUrl={apiUrl}
+                  apiKey={apiKey}
+                  cloudflareEndpoint={cloudflareEndpoint}
+                  excludeSlug={slug} // Pasar el slug del post actual para excluirlo
+                />
               </div>
             </div>
           </div>

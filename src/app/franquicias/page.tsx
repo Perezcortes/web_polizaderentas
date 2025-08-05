@@ -11,6 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import styles from './franquicias.module.css';
 
 // Extiende la interfaz Window para incluir jQuery y $
 declare global {
@@ -21,7 +22,6 @@ declare global {
 }
 
 export default function FranchisesPage() {
-
   return (
     <>
       <Head>
@@ -117,17 +117,14 @@ export default function FranchisesPage() {
           >
             <SwiperSlide>
               {/* Versión desktop */}
-              <div className="swiper-inner d-none d-sm-block" style={{
-                backgroundImage: 'url(/images/slider/franquicias.jpg)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                minHeight: '80vh'
+              <div className={`swiper-inner d-none d-sm-block ${styles.heroSlider}`} style={{
+                backgroundImage: 'url(/images/slider/franquicias.jpg)'
               }}>
                 <div className="sw-caption">
                   <div className="container">
                     <div className="row gx-5 align-items-center">
                       <div className="col-lg-7 mb-sm-30">
-                        <h1 className="slider-title">Invierte en el servicio jurídico de mayor crecimiento en México.</h1>
+                        <h1 className={styles.sliderTitle}>Invierte en el servicio jurídico de mayor crecimiento en México.</h1>
                         <p className="fs-4 wow fadeInRight">
                           Agenda una sesión Informativa personalizada con nuestro Director de Expansión y conoce los detalles de nuestro modelo de negocio.
                         </p>
@@ -145,17 +142,14 @@ export default function FranchisesPage() {
               </div>
 
               {/* Versión móvil */}
-              <div className="swiper-inner d-block d-sm-none" style={{
-                backgroundImage: 'url(/images/slider/franquicias-movil.png)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                minHeight: '80vh'
+              <div className={`swiper-inner d-block d-sm-none ${styles.heroMobileSlider}`} style={{
+                backgroundImage: 'url(/images/slider/franquicias-movil.png)'
               }}>
                 <div className="sw-caption">
                   <div className="container">
                     <div className="row gx-5 align-items-center">
                       <div className="col-lg-7 mb-sm-30">
-                        <h1 className="slider-title">Invierte en el servicio jurídico de mayor crecimiento en México.</h1>
+                        <h1 className={styles.sliderTitle}>Invierte en el servicio jurídico de mayor crecimiento en México.</h1>
                         <p className="fs-4 wow fadeInRight">
                           Agenda una sesión Informativa personalizada con nuestro Director de Expansión y conoce los detalles de nuestro modelo de negocio.
                         </p>
@@ -184,14 +178,8 @@ export default function FranchisesPage() {
         <div className="container">
           <div className="row align-items-center">
             {/* Texto */}
-            <div className="col-lg-6 col-md-6 col-sm-12 mt-5" style={{ textAlign: 'justify' }}>
-              <h2
-                style={{
-                  fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
-                  lineHeight: '1.2',
-                  marginBottom: '1rem',
-                }}
-              >
+            <div className={`col-lg-6 col-md-6 col-sm-12 mt-5 ${styles.whatIsSection}`}>
+              <h2 className={styles.whatIsTitle}>
                 ¿Qué es una Póliza Jurídica?
               </h2>
               <p>
@@ -225,9 +213,8 @@ export default function FranchisesPage() {
         </div>
       </section>
 
-
       {/* Sección Modelo de negocio */}
-      <section className="no-top">
+      <section className={`no-top ${styles.businessModelSection}`}>
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-12 col-md-12 col-sm-12 mt-5 text-center">
@@ -253,11 +240,11 @@ export default function FranchisesPage() {
       </section>
 
       {/* Sección Qué incluye */}
-      <section className="bg-dark-1 text-light">
+      <section className={`bg-dark-1 text-light ${styles.includesSection}`}>
         <div className="container">
           <div className="row align-items-center gx-5">
             <div className="col-lg-6">
-              <h2 className="wow fadeInUp" data-wow-delay=".2s">
+              <h2 className={`wow fadeInUp ${styles.includesTitle}`} data-wow-delay=".2s">
                 ¿Qué incluye la <br /> franquicia?
               </h2>
               <ul>
@@ -279,7 +266,6 @@ export default function FranchisesPage() {
                 <li>Reportes y evaluación de tu sucursal.</li>
               </ul>
 
-              {/* <hr className="s2" /> */}
               <div className="spacer-10"></div>
               <a
                 className="btn-main mb10 mt20"
@@ -291,7 +277,7 @@ export default function FranchisesPage() {
               </a>
             </div>
 
-            <div className="col-lg-6 mb-sm-20 position-relative">
+            <div className={`col-lg-6 mb-sm-20 position-relative ${styles.includesImage}`}>
               <div className="images-deco-1">
                 <img
                   src="/images/misc/img-3.png"
@@ -318,11 +304,11 @@ export default function FranchisesPage() {
       </section>
 
       {/* Sección Cuánto ganar */}
-      <section className="no-top">
+      <section className={`no-top ${styles.earningsSection}`}>
         <div className="container">
           <div className="row">
             <div className="col-lg-12 col-md-12 col-sm-12 mt-5 text-center">
-              <h2>
+              <h2 className={styles.earningsTitle}>
                 ¿Cuánto puedo ganar con <br /> mi franquicia de Póliza de Rentas?
               </h2>
               <img
@@ -332,7 +318,7 @@ export default function FranchisesPage() {
               />
             </div>
 
-            <div className="row col-lg-12 col-md-12 col-sm-12 mt-5 text-justify">
+            <div className={`row col-lg-12 col-md-12 col-sm-12 mt-5 ${styles.earningsContent}`}>
               <div className="col-lg-6 col-md-6 col-sm-6">
                 <h2>
                   Tecnología para crear una experiencia única para todos tus clientes,
@@ -365,7 +351,7 @@ export default function FranchisesPage() {
       </section>
 
       {/* Sección final con CTA */}
-      <div className="row container-fluid" style={{ backgroundColor: '#595959' }}>
+      <div className={`row container-fluid ${styles.finalCtaSection}`}>
         <div className="col-lg-12 col-md-12 col-sm-12 text-center">
           <div style={{ position: 'relative', display: 'inline-block' }}>
             <Image
@@ -376,16 +362,10 @@ export default function FranchisesPage() {
               className="img-fluid"
             />
             <a
-              className="btn-main mb10 mt20"
+              className={`btn-main mb10 mt20 ${styles.ctaButtonOverlay}`}
               href="https://formulario.franquicias.polizaderentas.com/"
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                position: 'absolute',
-                top: '80%',
-                left: '80%',
-                transform: 'translate(-50%, -50%)'
-              }}
             >
               Inicia tu proceso
             </a>
