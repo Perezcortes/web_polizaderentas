@@ -3,15 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Search, X } from 'lucide-react';
 import './BlogSearchBar.css';
-
-interface BlogSearchBarProps {
-  onSearch: (searchTerm: string) => void;
-  isLoading?: boolean;
-  apiUrl?: string;
-  apiKey?: string;
-  searchMode?: 'auto' | 'manual'; // Nuevo prop para controlar modo de búsqueda
-  debounceTime?: number; // Tiempo de debounce personalizable
-}
+import type { BlogSearchBarProps } from '../../types/blog-types';
 
 export default function BlogSearchBar({ 
   onSearch, 

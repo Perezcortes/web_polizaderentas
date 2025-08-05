@@ -1,0 +1,99 @@
+/* franquicias.module.css */
+
+/* Hero Slider */
+.heroSlider {
+  min-height: 80vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.heroMobileSlider {
+  min-height: 80vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.sliderTitle {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+/* Sección Qué es */
+.whatIsSection {
+  text-align: justify;
+}
+
+.whatIsTitle {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+/* Sección Modelo de negocio */
+.businessModelSection {
+  text-align: center;
+}
+
+/* Sección Qué incluye */
+.includesSection {
+  background-color: var(--dark-1);
+  color: var(--light);
+}
+
+/* Sección Cuánto ganar */
+.earningsSection {
+  text-align: center;
+}
+
+.earningsContent {
+  text-align: justify;
+}
+
+/* Sección final con CTA */
+.finalCtaSection {
+  background-color: #595959;
+}
+
+.ctaButtonOverlay {
+  position: absolute;
+  top: 80%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .whatIsContent {
+    margin-bottom: 2rem;
+  }
+  
+  .includesImage {
+    margin-top: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sliderTitle {
+    font-size: 2rem;
+  }
+  
+  .earningsTitle br,
+  .includesTitle br {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .heroSlider {
+    min-height: 70vh;
+  }
+  
+  .whatIsTitle {
+    text-align: center;
+  }
+  
+  .whatIsContent {
+    text-align: left;
+  }
+}

@@ -1,0 +1,83 @@
+/* BlogSidebar.css */
+
+/* Contenedor principal */
+.blog-sidebar-container {
+  margin-bottom: 2rem;
+}
+
+/* Encabezado */
+.blog-sidebar-header {
+  background-color: #333;
+  padding: 0.75rem 1.25rem;
+  /*border-radius: 8px 8px 0 0;*/
+}
+
+.blog-sidebar-header h3 {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Contenido */
+.blog-sidebar-content {
+  padding: 1rem 1.25rem;
+  border: 1px solid #eee;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  background-color: #fff;
+}
+
+/* Items de posts */
+.recent-post-item {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.recent-post-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: #f9f9f9;
+}
+
+.recent-post-item .post-title {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: #644f0a;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  display: block;
+}
+
+.recent-post-item .post-title:hover {
+  color: #8a6d0b;
+}
+
+/* Estilos para la fecha */
+.recent-post-item .post-meta {
+  color: #000; /* Cambiado a negro */
+  font-size: 0.95rem; /* Tamaño aumentado */
+  margin-top: 0.5rem; /* Espaciado superior */
+}
+
+.recent-post-image {
+  object-fit: cover;
+  height: 80px;
+  width: 100%;
+  /*border-radius: 6px;*/
+}
+
+/* Mensaje de error */
+.blog-sidebar-error {
+  color: #888;
+  font-style: italic;
+}
+
+/* Separador */
+.blog-sidebar-divider {
+  margin: 0.5rem 0;
+  border-color: rgba(0, 0, 0, 0.05);
+}

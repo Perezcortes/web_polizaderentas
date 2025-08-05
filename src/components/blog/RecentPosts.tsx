@@ -3,16 +3,8 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import type { BlogPost } from '../../types/blog-types';
 import './RecentPosts.css';
-
-interface BlogPost {
-    id: number;
-    titulo: string;
-    slug: string;
-    contenido: string;
-    url_img: string | null;
-    created_at: string;
-}
 
 /*
  * Componente para mostrar las publicaciones recientes del blog.

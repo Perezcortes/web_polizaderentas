@@ -5,14 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import BlogSearchBar from './BlogSearchBar';
-import type { BlogPost } from '../../types/blog-types';
-
-interface BlogContentProps {
-  postsPerPage: number;
-  apiUrl: string;
-  apiKey: string;
-  cloudflareEndpoint: string;
-}
+import Spinner from '../ui/Spinner';
+import type { BlogPost, BlogContentProps } from '../../types/blog-types';
 
 export default function BlogContent({
   postsPerPage,
@@ -87,7 +81,7 @@ export default function BlogContent({
     try {
       setLoading(true);
       setError(null);
-      
+
       // Construir URL con parámetros de búsqueda
       let url = `${apiUrl}?page=${page}&per_page=${postsPerPage}`;
       if (search.trim()) {
@@ -103,7 +97,7 @@ export default function BlogContent({
       }
 
       const postsData = await postsResponse.json();
-      
+
       // Laravel devuelve la paginación en este formato
       setPosts(postsData.data || []);
       setTotalPosts(postsData.total || 0);
@@ -127,7 +121,7 @@ export default function BlogContent({
   const handleSearch = useCallback((term: string) => {
     setSearchTerm(term);
     setIsSearching(!!term);
-    
+
     // Si hay búsqueda, resetear a la página 1
     if (term && currentPage !== 1) {
       const newSearchParams = new URLSearchParams(searchParams.toString());
@@ -137,10 +131,10 @@ export default function BlogContent({
   }, [currentPage, router, searchParams]);
 
   const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     };
     return new Date(dateString).toLocaleDateString('es-ES', options);
   };
@@ -210,26 +204,9 @@ export default function BlogContent({
 
   const renderContent = () => {
     if (loading) {
-      return (
-        <div className="text-center py-5">
-          <div
-            className="spinner-border"
-            style={{
-              width: '3rem',
-              height: '3rem',
-              borderWidth: '0.25em',
-              borderColor: '#bdad5d transparent #bdad5d transparent'
-            }}
-            role="status"
-          >
-            <span className="visually-hidden">Cargando...</span>
-          </div>
-          <p className="mt-2" style={{ color: '#bdad5d' }}>
-            {searchTerm ? 'Buscando publicaciones...' : 'Cargando publicaciones...'}
-          </p>
-        </div>
-      );
+      return <Spinner message={searchTerm ? 'Buscando publicaciones...' : 'Cargando publicaciones...'} />;
     }
+
 
     if (error) {
       return (
@@ -243,7 +220,7 @@ export default function BlogContent({
       return (
         <div className="text-center py-5">
           <p>
-            {searchTerm 
+            {searchTerm
               ? `No se encontraron publicaciones que coincidan con "${searchTerm}"`
               : 'No hay publicaciones disponibles en este momento.'
             }
@@ -262,7 +239,7 @@ export default function BlogContent({
         {searchTerm && (
           <div className="search-results-info mb-4">
             <p className="text-muted">
-              Se encontraron <strong>{totalPosts}</strong> resultado {totalPosts !== 1 ? 's' : ''} 
+              Se encontraron <strong>{totalPosts}</strong> resultado {totalPosts !== 1 ? 's' : ''}
               para "<strong>{searchTerm}</strong>"
             </p>
           </div>
@@ -281,11 +258,11 @@ export default function BlogContent({
                 width={800}
                 height={450}
                 className="img-fluid rounded shadow-sm"
-                style={{ 
-                  width: '100%', 
-                  height: 'auto', 
-                  maxHeight: '400px', 
-                  objectFit: 'cover' 
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  maxHeight: '400px',
+                  objectFit: 'cover'
                 }}
               />
 
@@ -303,8 +280,8 @@ export default function BlogContent({
 
               <div
                 className="post-content"
-                dangerouslySetInnerHTML={{ 
-                  __html: truncateHtml(post.contenido, 200) 
+                dangerouslySetInnerHTML={{
+                  __html: truncateHtml(post.contenido, 200)
                 }}
               />
 
@@ -323,13 +300,13 @@ export default function BlogContent({
 
   return (
     <div className="col-lg-8 col-md-6 mb10">
-      <BlogSearchBar 
+      <BlogSearchBar
         onSearch={handleSearch}
         isLoading={loading || isSearching}
         searchMode="manual" // O "auto" si prefieres búsqueda automática
         debounceTime={2000} // Solo se usa si searchMode="auto"
       />
-      
+
       {renderContent()}
     </div>
   );
