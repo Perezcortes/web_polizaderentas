@@ -33,10 +33,11 @@
 .menu-item-wrapper {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
-#mainmenu-black > li > a.menu-item-black {
+#mainmenu-black > li > a.menu-item-black,
+#mainmenu-black > li > .menu-item-wrapper > a.menu-item-black {
   box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
@@ -47,7 +48,8 @@
   font-weight: 600;
   transition: all 0.3s ease;
 }
-#mainmenu-black > li > a.menu-item-black:hover {
+#mainmenu-black > li > a.menu-item-black:hover,
+#mainmenu-black > li > .menu-item-wrapper > a.menu-item-black:hover {
   color: #ffffff;
 }
 
@@ -55,7 +57,7 @@
 .sub-menu-black {
   display: none;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 19px);
   left: 0;
   min-width: 220px;
   padding: 15px 0;
@@ -66,17 +68,43 @@
   margin: 0;
 }
 
-#mainmenu-black > li:hover > .sub-menu-black,
+/* Desktop: mostrar submenu al hacer hover */
+@media (min-width: 993px) {
+  #mainmenu-black > li:hover > .sub-menu-black {
+    display: block;
+  }
+  
+  /* Crear un área invisible que conecte el item con el submenu */
+  #mainmenu-black > li::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: transparent;
+    z-index: 997;
+  }
+  
+  /* Extender el área hoverable del li para incluir el gap */
+  #mainmenu-black > li {
+    padding-bottom: 10px;
+    margin-bottom: -10px;
+  }
+}
+
+/* Mobile y desktop: mostrar submenu cuando tenga clase active */
 #mainmenu-black > li.active .sub-menu-black {
   display: block;
 }
+
 .sub-menu-black li {
   padding: 8px 20px;
-  border-bottom: 1px solid #2a2a2a; /* tono gris oscuro para mantener el estilo */
+  border-bottom: 1px solid #2a2a2a;
 }
 
 .sub-menu-black li:last-child {
-  border-bottom: none; /* evita línea al final */
+  border-bottom: none;
 }
 
 .sub-menu-black li a {
@@ -184,7 +212,7 @@
 /* ==== Responsive ==== */
 @media (max-width: 992px) {
   .navbar-black-spacer {
-    height: 80px; /* ajusta según el alto de tu header en móvil */
+    height: 80px;
     width: 100%;
     background: rgba(0, 0, 0, 0.95);
   }
@@ -193,7 +221,6 @@
     display: none;
     position: fixed;
     top: 80px;
-    /*bottom: 0;*/
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.95);
@@ -202,7 +229,6 @@
     z-index: 999;
     align-items: flex-start;
     text-align: left;
-    /*overflow-y: auto;*/
   }
 
   #mainmenu-black.mobile-visible {
@@ -211,6 +237,12 @@
 
   #mainmenu-black > li {
     padding: 10px 20px;
+    width: 100%;
+  }
+
+  .menu-item-wrapper {
+    justify-content: space-between;
+    width: 100%;
   }
 
   .sub-menu-black {
@@ -219,6 +251,7 @@
     background: none;
     border: none;
     padding-left: 30px;
+    width: 100%;
   }
 
   #mainmenu-black > li.active .sub-menu-black {
