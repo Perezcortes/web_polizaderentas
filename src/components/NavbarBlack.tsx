@@ -22,6 +22,14 @@ export default function NavbarBlack() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  interface ArrowClickEvent extends React.MouseEvent<HTMLSpanElement, MouseEvent> {}
+
+  const handleArrowClick = (e: ArrowClickEvent): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSubmenuOpen(!submenuOpen);
+  };
+
   return (
     <header className="header-black-full">
       <div className="container-fluid">
@@ -42,17 +50,14 @@ export default function NavbarBlack() {
                   <li><a className="menu-item-black" href="/">Inicio</a></li>
                   <li><a className="menu-item-black" href="/nosotros">Nosotros</a></li>
                   <li className={submenuOpen ? 'active' : ''}>
-                    <a
-                      href="/services"
-                      className="menu-item-black"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSubmenuOpen(!submenuOpen);
-                      }}
-                      style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
-                    >
-                      Servicios
-                      <span className={`submenu-toggle ${submenuOpen ? 'rotated' : ''}`}>
+                    <div className="menu-item-wrapper">
+                      <a href="/services" className="menu-item-black">
+                        Servicios
+                      </a>
+                      <span 
+                        className={`submenu-toggle ${submenuOpen ? 'rotated' : ''}`}
+                        onClick={handleArrowClick}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="12"
@@ -68,7 +73,7 @@ export default function NavbarBlack() {
                           <polyline points="6 9 12 15 18 9" />
                         </svg>
                       </span>
-                    </a>
+                    </div>
                     <ul className="sub-menu-black">
                       <li><a href="/services/investigacion_inquilinos">Investigación de Inquilinos</a></li>
                       <li><a href="/services/poliza_juridica">Póliza de Protección Jurídica</a></li>

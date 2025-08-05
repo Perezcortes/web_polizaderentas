@@ -7,7 +7,7 @@
 
 /* Encabezado */
 .blog-sidebar-header {
-  background-color: #333;
+  background-color: rgb(33, 37, 41);
   padding: 0.75rem 1.25rem;
   /*border-radius: 8px 8px 0 0;*/
 }
