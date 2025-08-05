@@ -1,14 +1,56 @@
-import Script from 'next/script';
+'use client';
 
-export const metadata = {
-  title: 'Términos y Condiciones - Póliza de Rentas',
-  description:
-    'Estos términos y condiciones regulan el uso de los servicios ofrecidos por Póliza de Rentas, incluyendo la evaluación de inquilinos y la formalización de contratos de arrendamiento.',
-};
+import Head from 'next/head';
+import Script from "next/script";
+import { useEffect, useState } from 'react';
+import { useReInitVisualScripts } from '../../hooks/useReInitVisualScripts';
 
 export default function TerminosCondiciones() {
+  useReInitVisualScripts();
+  const [scriptsLoaded, setScriptsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Solo ejecutar en el lado del cliente
+    if (typeof window !== 'undefined') {
+      const loadScripts = async () => {
+        try {
+          // Cargar jQuery solo si no está ya cargado
+          if (!window.jQuery) {
+            await new Promise((resolve) => {
+              const script = document.createElement('script');
+              script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
+              script.async = true;
+              script.onload = resolve;
+              document.body.appendChild(script);
+            });
+          }
+
+          // Cargar WOW.js dinámicamente
+          const { WOW } = await import('wowjs');
+          new WOW({ live: false }).init();
+
+          setScriptsLoaded(true);
+        } catch (error) {
+          console.error('Error loading scripts:', error);
+        }
+      };
+
+      loadScripts();
+    }
+  }, []);
+
   return (
     <>
+      <Head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        {/* Open Graph Meta Tags */}
+        <meta property="og:image" content="https://polizaderentas.com/almacenamiento/images/og.jpg" />
+        <meta property="og:url" content="https://polizaderentas.com/" />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://polizaderentas.com/" />
+      </Head>
+
       {/* Google Analytics */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-3HT5BR97DT"
@@ -23,6 +65,37 @@ export default function TerminosCondiciones() {
         `}
       </Script>
 
+      {/* Scripts del tema - Solo cargar después de que jQuery y WOW estén listos */}
+       {scriptsLoaded && (
+        <>
+          <Script 
+            src="/js/plugins.js" 
+            strategy="lazyOnload"
+            onError={(e) => console.error('Error loading plugins.js', e)}
+          />
+          <Script 
+            src="/js/designesia.js" 
+            strategy="lazyOnload"
+            onError={(e) => console.error('Error loading designesia.js', e)}
+          />
+          <Script 
+            src="/js/swiper.js" 
+            strategy="lazyOnload"
+            onError={(e) => console.error('Error loading swiper.js', e)}
+          />
+          <Script 
+            src="/js/custom-marquee.js" 
+            strategy="lazyOnload"
+            onError={(e) => console.error('Error loading custom-marquee.js', e)}
+          />
+          <Script 
+            src="/js/custom-swiper-1.js" 
+            strategy="lazyOnload"
+            onError={(e) => console.error('Error loading custom-swiper-1.js', e)}
+          />
+        </>
+      )}
+      
       {/* Contenido */}
       <div id="wrapper">
         <div className="no-bottom no-top" id="content">
@@ -86,13 +159,6 @@ export default function TerminosCondiciones() {
           </section>
         </div>
       </div>
-
-      {/* Scripts del tema */}
-      <Script src="/js/plugins.js" strategy="lazyOnload" />
-      <Script src="/js/designesia.js" strategy="lazyOnload" />
-      <Script src="/js/swiper.js" strategy="lazyOnload" />
-      <Script src="/js/custom-marquee.js" strategy="lazyOnload" />
-      <Script src="/js/custom-swiper-1.js" strategy="lazyOnload" />
     </>
   );
 }

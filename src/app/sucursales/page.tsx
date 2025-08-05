@@ -12,10 +12,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Mapa from '../../components/sucursales/mapa';
 import RecentPosts from '../../components/blog/RecentPosts';
-//import { useReInitVisualScripts } from '../../hooks/useScriptsVisuales';
 import { Office } from '../../types/office';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import './styles.css';
 
 declare global {
@@ -26,7 +24,6 @@ declare global {
 }
 
 export default function SucursalesPage() {
-  //useReInitVisualScripts();
 
   const [offices, setOffices] = useState<Office[]>([]);
   const [uniqueStates, setUniqueStates] = useState<string[]>([]);

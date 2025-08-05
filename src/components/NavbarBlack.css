@@ -186,6 +186,7 @@
   .navbar-black-spacer {
     height: 80px; /* ajusta según el alto de tu header en móvil */
     width: 100%;
+    background: rgba(0, 0, 0, 0.95);
   }
 
   #mainmenu-black {

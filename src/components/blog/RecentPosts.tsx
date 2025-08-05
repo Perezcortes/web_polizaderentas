@@ -14,6 +14,10 @@ interface BlogPost {
     created_at: string;
 }
 
+/*
+ * Componente para mostrar las publicaciones recientes del blog.
+ * Obtiene los datos de la API y los muestra en un formato de tarjetas.
+ */
 export default function RecentPosts() {
     const [posts, setPosts] = useState<BlogPost[]>([]);
     const [loading, setLoading] = useState(true);
@@ -60,17 +64,13 @@ export default function RecentPosts() {
                                 <div className="d-overlay">
                                     <div className="d-label"></div>
                                     <div className="d-text">
-                                        <h4 style={{ color: '#000' }}>Cargando...</h4>
+                                        <h4 className="loading-text">Cargando...</h4>
                                         <Link className="btn-main btn-fullwidth btn-white" href="#">
                                             Ver más
                                         </Link>
                                     </div>
                                 </div>
-                                <div className="placeholder" style={{
-                                    width: '100%',
-                                    height: '300px',
-                                    backgroundColor: '#f0f0f0ff'
-                                }}></div>
+                                <div className="placeholder"></div>
                             </div>
                         </div>
                     ))}
@@ -109,9 +109,11 @@ export default function RecentPosts() {
                                 <div className="d-overlay">
                                     <div className="d-label"></div>
                                     <div className="d-text">
-                                        <h4>{post.titulo}</h4>
+                                        <div className="overlay-text">
+                                            <h4 className="recent-post-title-home">{post.titulo}</h4>
+                                        </div>
                                         <Link
-                                            className="btn-main btn-fullwidth btn-white"
+                                            className="btn-main btn-fullwidth btn-dorado"
                                             href={{
                                                 pathname: '/blog/[slug]',
                                                 query: { slug: post.slug }
