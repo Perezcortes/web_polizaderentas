@@ -11,6 +11,7 @@ import Head from 'next/head';
 import Script from 'next/script';
 import { Office } from '../../../types/office';
 import Swal from 'sweetalert2';
+import Spinner from '../../../components/ui/Spinner';
 
 interface User {
   id: number;
@@ -33,28 +34,53 @@ export default function SucursalPage() {
   });
 
   useEffect(() => {
-    // Get ID from URL
+    // Get slug from URL (nombre de sucursal)
     const path = window.location.pathname.split('/');
-    const id = path[path.length - 1];
+    const slug = path[path.length - 1];
 
-    if (id) {
-      setFormData(prev => ({ ...prev, id }));
-      fetchOfficeData(id);
+    if (slug) {
+      fetchOfficeBySucursal(slug);
     }
   }, []);
 
-  const fetchOfficeData = async (id: string) => {
+  const fetchOfficeBySucursal = async (slug: string) => {
     try {
       setLoading(true);
-      const response = await fetch(`https://app.polizaderentas.com/api/offices/find-by-id/${id}`);
-      const data = await response.json();
-
-      if (data.office && data.office.length > 0) {
-        setOffice(data.office[0]);
-      }
-
-      if (data.users) {
-        setUsers(data.users);
+      
+      // Convertir slug de vuelta a formato legible
+      const nombreSucursal = slug.replace(/-/g, ' ');
+      
+      // Función para normalizar texto (quitar acentos y convertir a minúsculas)
+      const normalizeText = (text: string) => {
+        return text.toLowerCase()
+          .replace(/[áàäâ]/g, 'a')
+          .replace(/[éèëê]/g, 'e')
+          .replace(/[íìïî]/g, 'i')
+          .replace(/[óòöô]/g, 'o')
+          .replace(/[úùüû]/g, 'u')
+          .replace(/ñ/g, 'n');
+      };
+      
+      // Primero obtener todas las sucursales
+      const response = await fetch('https://app.polizaderentas.com/api/offices');
+      const offices = await response.json();
+      
+      // Buscar la sucursal que coincida con el nombre
+      const matchingOffice = offices.find((office: Office) => 
+        normalizeText(office.nombre_suc.replace(/\s+/g, ' ')) === normalizeText(nombreSucursal)
+      );
+      
+      if (matchingOffice) {
+        setOffice(matchingOffice);
+        setFormData(prev => ({ ...prev, id: matchingOffice.id.toString() }));
+        
+        // Ahora buscar los usuarios de esa sucursal
+        const userResponse = await fetch(`https://app.polizaderentas.com/api/offices/find-by-id/${matchingOffice.id}`);
+        const userData = await userResponse.json();
+        
+        if (userData.users) {
+          setUsers(userData.users);
+        }
       }
     } catch (error) {
       console.error('Error fetching office data:', error);
@@ -121,9 +147,7 @@ export default function SucursalPage() {
   if (loading) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-        <div className="spinner-border text-primary" role="status">
-          <span className="visually-hidden">Cargando...</span>
-        </div>
+        <Spinner message="Cargando sucursal..." size="3rem" />
       </div>
     );
   }
@@ -209,7 +233,7 @@ export default function SucursalPage() {
                         backgroundImage: 'url(/images/slider/sucursal.png)',
                         backgroundSize: 'cover',
                         backgroundPosition:  '1% center',
-                        minHeight: '80vh', // o usa minHeight si quieres que crezca dinámicamente
+                        minHeight: '80vh',
                       }}
                     >
                       <div className="sw-caption">
@@ -262,7 +286,7 @@ export default function SucursalPage() {
                         color: 'white',
                         fontSize: '0.9rem',
                         fontWeight: 'bold',
-                        borderRadius: '8px', // hace que sea un "pill"
+                        borderRadius: '8px',
                       }}
                     >
                       {office.estado}

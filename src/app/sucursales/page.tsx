@@ -256,7 +256,7 @@ export default function SucursalesPage() {
                           <strong>Email:</strong> {office.email_suc}<br />
                           <strong>Teléfono:</strong> {office.telefono_suc}<br />
                         </p>
-                        <Link className="btn-main mb10" href={`/sucursales/${office.id}`} passHref>
+                        <Link className="btn-main mb10" href={`/sucursales/${office.nombre_suc.toLowerCase().replace(/\s+/g, '-').replace(/[áàäâ]/g, 'a').replace(/[éèëê]/g, 'e').replace(/[íìïî]/g, 'i').replace(/[óòöô]/g, 'o').replace(/[úùüû]/g, 'u').replace(/ñ/g, 'n')}`} passHref>
                           Ver más
                         </Link>
                       </div>
