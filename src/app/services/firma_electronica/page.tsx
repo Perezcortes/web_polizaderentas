@@ -19,75 +19,7 @@ export default function FirmaElectronicaPage() {
         <title>Firma Electrónica - Póliza de Rentas</title>
         <meta name="description" content="Nuestra tecnología revoluciona la protección jurídica en el arrendamiento inmobiliario con firma electrónica avanzada." />
         <link rel="icon" href="/images/icon.png" type="image/gif" sizes="16x16" />
-
-        {/* Preload de recursos críticos */}
-        <link rel="preload" href="https://code.jquery.com/jquery-3.6.0.min.js" as="script" />
-        <link rel="preload" href="/css/bootstrap.min.css" as="style" />
-        <link rel="preload" href="/css/style.css" as="style" />
-
-        {/* Hojas de estilo */}
-        <link rel="stylesheet" href="/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/css/plugins.css" />
-        <link rel="stylesheet" href="/css/swiper.css" />
-        <link rel="stylesheet" href="/css/style.css" />
-        <link rel="stylesheet" href="/css/coloring.css" />
-        <link rel="stylesheet" href="/css/estilos.css" />
-        <link rel="stylesheet" href="/css/colors/scheme-01.css" />
-
-        {/* Meta Pixel Code */}
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            !function(f,b,e,v,n,t,s){
-              if(f.fbq)return;
-              n=f.fbq=function(){
-                n.callMethod?
-                n.callMethod.apply(n,arguments):n.queue.push(arguments)
-              };
-              if(!f._fbq)f._fbq=n;
-              n.push=n;
-              n.loaded=!0;
-              n.version='2.0';
-              n.queue=[];
-              t=b.createElement(e);
-              t.async=!0;
-              t.src=v;
-              s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)
-            }(window,document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '217583817249537');
-            fbq('track', 'PageView');
-          `
-        }} />
-        <noscript>
-          <img height="1" width="1" style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=217583817249537&ev=PageView&noscript=1"
-          />
-        </noscript>
-
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3HT5BR97DT"></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-3HT5BR97DT');
-          `
-        }} />
       </Head>
-
-      {/* Cargar jQuery con mayor control */}
-      <Script
-        id="jquery-js"
-        src="https://code.jquery.com/jquery-3.6.0.min.js"
-        strategy="beforeInteractive"
-        onLoad={() => {
-          if (typeof window !== 'undefined' && window.jQuery && !window.$) {
-            window.$ = window.jQuery;
-          }
-        }}
-      />
 
       {/* Hero Slider */}
       <section className="text-light no-top no-bottom position-relative z-1000">
@@ -271,14 +203,6 @@ export default function FirmaElectronicaPage() {
           </div>
         </div>
       </section>
-
-
-      {/* Scripts adicionales */}
-      <Script src="/js/plugins.js" strategy="afterInteractive" />
-      <Script src="/js/designesia.js" strategy="afterInteractive" />
-      <Script src="/js/swiper.js" strategy="afterInteractive" />
-      <Script src="/js/custom-marquee.js" strategy="afterInteractive" />
-      <Script src="/js/custom-swiper-1.js" strategy="afterInteractive" />
     </>
   );
 }

@@ -435,27 +435,6 @@ export default function Home() {
           </section>
         </div>
       </div>
-
-      {/* Javascript Files */}
-      <script src="/js/plugins.js"></script>
-      <script src="/js/designesia.js"></script>
-      <script src="/js/custom-marquee.js"></script>
-      <script dangerouslySetInnerHTML={{
-        __html: `
-          function loadScript(a){
-            var b=document.getElementsByTagName("head")[0],
-            c=document.createElement("script");
-            c.type="text/javascript",
-            c.src="https://tracker.metricool.com/resources/be.js",
-            c.onreadystatechange=a,
-            c.onload=a,
-            b.appendChild(c)
-          }
-          loadScript(function(){
-            beTracker.t({hash:"e7b9beb5ef17e78a4fad2f402d03de0f"})
-          });
-        `
-      }} />
     </>
   );
 }

@@ -12,27 +12,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function ServicesPage() {
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const scripts = [
-        '/js/plugins.js',
-        '/js/designesia.js',
-        '/js/swiper.js',
-        '/js/custom-marquee.js',
-        '/js/custom-swiper-1.js',
-        '/js/wow.min.js',
-      ];
-      scripts.forEach((src) => {
-        const script = document.createElement('script');
-        script.src = src;
-        script.async = true;
-        document.body.appendChild(script);
-      });
-      setTimeout(() => {
-        if (window.WOW) new window.WOW().init();
-      }, 500);
-    }
-  }, []);
 
   const services = [
     {
@@ -73,8 +52,6 @@ export default function ServicesPage() {
         <title>Servicios - Póliza de Rentas</title>
         <meta name="description" content="Conoce nuestros servicios para propietarios e inquilinos." />
       </Head>
-
-      <Script src="/js/wow.min.js" strategy="lazyOnload" />
 
       <section className="text-light no-top no-bottom position-relative z-1000">
         <div className="v-center">

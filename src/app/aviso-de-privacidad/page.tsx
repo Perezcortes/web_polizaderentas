@@ -6,38 +6,7 @@ import { useEffect, useState } from 'react';
 import { useReInitVisualScripts } from '../../hooks/useReInitVisualScripts';
 
 export default function PrivacyPolicy() {
-    useReInitVisualScripts();
-  const [scriptsLoaded, setScriptsLoaded] = useState(false);
-
-  useEffect(() => {
-    // Solo ejecutar en el lado del cliente
-    if (typeof window !== 'undefined') {
-      const loadScripts = async () => {
-        try {
-          // Cargar jQuery solo si no está ya cargado
-          if (!window.jQuery) {
-            await new Promise((resolve) => {
-              const script = document.createElement('script');
-              script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
-              script.async = true;
-              script.onload = resolve;
-              document.body.appendChild(script);
-            });
-          }
-
-          // Cargar WOW.js dinámicamente
-          const { WOW } = await import('wowjs');
-          new WOW({ live: false }).init();
-
-          setScriptsLoaded(true);
-        } catch (error) {
-          console.error('Error loading scripts:', error);
-        }
-      };
-
-      loadScripts();
-    }
-  }, []);
+  //useReInitVisualScripts();
 
   return (
     <>
@@ -50,7 +19,7 @@ export default function PrivacyPolicy() {
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://polizaderentas.com/" />
       </Head>
-      
+
       {/* Google Analytics */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-3HT5BR97DT"
@@ -64,37 +33,6 @@ export default function PrivacyPolicy() {
           gtag('config', 'G-3HT5BR97DT');
         `}
       </Script>
-
-      {/* Scripts del tema - Solo cargar después de que jQuery y WOW estén listos */}
-      {scriptsLoaded && (
-        <>
-          <Script 
-            src="/js/plugins.js" 
-            strategy="lazyOnload"
-            onError={(e) => console.error('Error loading plugins.js', e)}
-          />
-          <Script 
-            src="/js/designesia.js" 
-            strategy="lazyOnload"
-            onError={(e) => console.error('Error loading designesia.js', e)}
-          />
-          <Script 
-            src="/js/swiper.js" 
-            strategy="lazyOnload"
-            onError={(e) => console.error('Error loading swiper.js', e)}
-          />
-          <Script 
-            src="/js/custom-marquee.js" 
-            strategy="lazyOnload"
-            onError={(e) => console.error('Error loading custom-marquee.js', e)}
-          />
-          <Script 
-            src="/js/custom-swiper-1.js" 
-            strategy="lazyOnload"
-            onError={(e) => console.error('Error loading custom-swiper-1.js', e)}
-          />
-        </>
-      )}
 
       {/* Contenido */}
       <div id="wrapper">

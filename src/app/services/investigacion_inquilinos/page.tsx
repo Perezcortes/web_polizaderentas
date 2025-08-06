@@ -6,29 +6,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function InvestigacionInquilinosPage() {
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const scripts = [
-        '/js/plugins.js',
-        '/js/designesia.js',
-        '/js/swiper.js',
-        '/js/custom-marquee.js',
-        '/js/custom-swiper-1.js',
-        '/js/wow.min.js'
-      ];
-
-      scripts.forEach((src) => {
-        const script = document.createElement('script');
-        script.src = src;
-        script.async = true;
-        document.body.appendChild(script);
-      });
-
-      setTimeout(() => {
-        if (window.WOW) new window.WOW().init();
-      }, 500);
-    }
-  }, []);
 
   return (
     <>
