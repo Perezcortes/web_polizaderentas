@@ -9,7 +9,6 @@ import 'swiper/css/parallax';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import Script from 'next/script';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './franquicias.module.css';
 

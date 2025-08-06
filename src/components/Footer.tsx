@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './footer.css';
 
@@ -77,7 +76,7 @@ export default function Footer() {
                 <img src="/images/svg/phone-svgrepo-com-white.svg" alt="phone" />
                 <div className="d-text">
                   <h4>Teléfono</h4>
-                  +52 5589469764
+                  +52 5597230688
                 </div>
               </div>
 

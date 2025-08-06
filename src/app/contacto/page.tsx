@@ -1,10 +1,8 @@
 'use client';
 
 import Head from 'next/head';
-import Image from 'next/image';
 import Script from 'next/script';
 import ContactForm from '../../components/contacto/ContactForm';
-import { useReInitVisualScripts } from '../../hooks/useReInitVisualScripts';
 import './style.css';
 
 declare global {

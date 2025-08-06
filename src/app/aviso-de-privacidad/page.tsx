@@ -2,8 +2,6 @@
 
 import Head from 'next/head';
 import Script from "next/script";
-import { useEffect, useState } from 'react';
-import { useReInitVisualScripts } from '../../hooks/useReInitVisualScripts';
 
 export default function PrivacyPolicy() {
   //useReInitVisualScripts();
@@ -126,7 +124,7 @@ export default function PrivacyPolicy() {
                   <p>El usuario se compromete a actualizar sus datos personales siempre que estos sean modificados a fin de que POLIZA DE RENTAS pueda brindarle el servicio en condiciones de su eficiencia, eficacia y personalización.</p>
 
                   <h3 className="dorado mt-4">Derechos ARCO</h3>
-                  <p>En todo momento usted tiene derecho a ejercer los derechos ARCO (acceso, rectificación, cancelación, oposición) y a revocar el consentimiento al tratamiento de los datos personales que poseemos dentro de POLIZA DE RENTAS, cualquiera de sus derechos los podrá ejercer poniéndose en contacto en Montes Urales 755 piso 5, oficina 5631, Lomas de Chapultepec, Miguel Hidalgo, CDMX, 11000, en el teléfono 5589469764 y en la dirección electrónica info@polizaderentas.com Su solicitud deberá ir acompañada de los argumentos por los que desea ejercer cualquiera de sus derechos, junto con una identificación oficial del titular de los datos o su apoderado, su petición será atendida en un plazo no mayor a 20 días hábiles.</p>
+                  <p>En todo momento usted tiene derecho a ejercer los derechos ARCO (acceso, rectificación, cancelación, oposición) y a revocar el consentimiento al tratamiento de los datos personales que poseemos dentro de POLIZA DE RENTAS, cualquiera de sus derechos los podrá ejercer poniéndose en contacto en Montes Urales 755 piso 5, oficina 5631, Lomas de Chapultepec, Miguel Hidalgo, CDMX, 11000, en el teléfono 5597230688 y en la dirección electrónica info@polizaderentas.com Su solicitud deberá ir acompañada de los argumentos por los que desea ejercer cualquiera de sus derechos, junto con una identificación oficial del titular de los datos o su apoderado, su petición será atendida en un plazo no mayor a 20 días hábiles.</p>
 
                   <p>La seguridad y la confidencialidad de los datos que los usuarios proporcionen al contratar un servicio estarán protegidos por un servidor seguro bajo el protocolo Secure Socket Layer (SSL), de tal forma que los datos enviados se transmitirán encriptados para asegurar su resguardo.</p>
 
