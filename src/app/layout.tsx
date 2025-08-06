@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
-import NavbarWrapper from "../components/NavbarWrapper"; // Cambiar esta línea
+import NavbarWrapper from "../components/NavbarWrapper";
 import Footer from "../components/Footer";
 import { headers } from "next/headers";
+import { SpeedInsights } from "@vercel/speed-insights/next"; 
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,11 +36,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  //  Obtenemos headers en SSR
   const headersList = await headers();
   const pathname = headersList.get("x-invoke-path") || "";
-
-  //  Ocultar Navbar en /blog/[slug]
   const hideGlobalNavbar =
     pathname.startsWith("/blog/[slug]/") && pathname.split("/").length === 3;
 
@@ -52,8 +50,6 @@ export default async function RootLayout({
           type="image/gif"
           sizes="16x16"
         />
-
-        {/* CSS externos */}
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/css/bootstrap.rtl.min.css" />
         <link rel="stylesheet" href="/css/jquery.countdown.css" />
@@ -139,6 +135,9 @@ export default async function RootLayout({
             });
           `}
         </Script>
+
+        {/* Speed Insights de Vercel */}
+        <SpeedInsights />
       </body>
     </html>
   );
