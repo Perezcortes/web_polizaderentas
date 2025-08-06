@@ -274,7 +274,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                                   alt={relatedPost.titulo}
                                 />
                                 <div className="card-body">
-                                  <h2 className="card-title h5">{truncateText(relatedPost.titulo, 50)}</h2>
+                                  <h2 className="card-title h5" title={relatedPost.titulo}>{relatedPost.titulo}</h2>
                                   <p className="card-text"><small className="text-muted">{formatDate(relatedPost.created_at)}</small></p>
                                 </div>
                               </div>

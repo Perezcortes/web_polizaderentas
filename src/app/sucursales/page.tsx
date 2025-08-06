@@ -8,12 +8,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/parallax';
 import Head from 'next/head';
+import Script from 'next/script';
 import Image from 'next/image';
 import Link from 'next/link';
 import Mapa from '../../components/sucursales/mapa';
 import RecentPosts from '../../components/blog/RecentPosts';
 import { Office } from '../../types/office';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 
 declare global {
