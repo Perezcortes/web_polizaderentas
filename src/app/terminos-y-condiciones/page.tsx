@@ -1,9 +1,6 @@
 'use client';
 
 import Head from 'next/head';
-import Script from "next/script";
-import { useEffect, useState } from 'react';
-import { useReInitVisualScripts } from '../../hooks/useReInitVisualScripts';
 
 export default function TerminosCondiciones() {
   //useReInitVisualScripts();

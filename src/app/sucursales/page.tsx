@@ -8,11 +8,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/parallax';
 import Head from 'next/head';
-import Script from 'next/script';
-import Image from 'next/image';
 import Link from 'next/link';
 import Mapa from '../../components/sucursales/mapa';
 import RecentPosts from '../../components/blog/RecentPosts';
+import Spinner from '../../components/ui/Spinner';
 import { Office } from '../../types/office';
 import './styles.css';
 
@@ -215,12 +214,7 @@ export default function SucursalesPage() {
             {/* Columna derecha: Mapa */}
             <div className="col-lg-7">
               {isLoading ? (
-                <div className="text-center py-5">
-                  <div className="spinner-border text-primary" role="status">
-                    <span className="visually-hidden">Cargando...</span>
-                  </div>
-                  <p className="mt-3">Cargando mapa...</p>
-                </div>
+                <Spinner message="Cargando mapa..." size="3rem" />
               ) : (
                 <Mapa offices={offices} onStateClick={handleStateClick} />
               )}
