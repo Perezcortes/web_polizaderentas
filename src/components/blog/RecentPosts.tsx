@@ -133,7 +133,7 @@ export default function RecentPosts() {
                     );
                 })}
                 <div className="col-lg-12 d-flex justify-content-center">
-                    <Link className="btn-main mt-5" href="/blog">Ver más artículos</Link>
+                    <Link className="btn-main mt-5" href="/blog#ir-a-blog">Ver más artículos</Link>
                 </div>
             </div>
         </div>

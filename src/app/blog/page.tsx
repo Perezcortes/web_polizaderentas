@@ -174,7 +174,7 @@ export default function BlogPage() {
 
       {/* Blog Content Section */}
       <section>
-        <div className="container">
+        <div className="container" id="ir-a-blog">
           <div className="row">
             <div className="col-lg-12">
               <div className="row gx-4">
