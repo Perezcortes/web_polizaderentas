@@ -10,12 +10,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/parallax';
 import 'swiper/css/scrollbar';
-import { useReInitVisualScripts } from '../hooks/useReInitVisualScripts';
+//import { useReInitVisualScripts } from '../hooks/useReInitVisualScripts';
 import RecentPosts from '../components/blog/RecentPosts'; //obtener los posts recientes
 import './styles.css';
 
 export default function Home() {
-  useReInitVisualScripts();
+  //useReInitVisualScripts();
 
   return (
     <>
