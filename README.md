@@ -1,6 +1,6 @@
-# 🏠 Póliza de Rentas - Web Application
+# Póliza de Rentas - Web Application
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnológico
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg" alt="Next.js" width="50" style="margin: 0 10px;"/>
@@ -8,7 +8,7 @@
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="TypeScript" width="50" style="margin: 0 10px;"/>
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" width="50" style="margin: 0 10px;"/>
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg" alt="TailwindCSS" width="50" style="margin: 0 10px;"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" alt="Node.js" width="50" style="margin: 0 10px;"/>
+  <img src="https://www.svgrepo.com/show/303266/nodejs-icon-logo.svg" alt="Node.js" width="50" style="margin: 0 10px;"/>
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" alt="CSS3" width="50" style="margin: 0 10px;"/>
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="HTML5" width="50" style="margin: 0 10px;"/>
 </div>
@@ -19,7 +19,7 @@ Aplicación web desarrollada en Next.js 15.3.5 con App Router, TypeScript y Reac
 
 **Dominio**: Sitio corporativo para empresa de servicios jurídicos inmobiliarios en México.
 
-## 🏗️ Arquitectura del Proyecto
+## Arquitectura del Proyecto
 
 ```
 src/
@@ -87,7 +87,7 @@ src/
 │   ├── NavbarBlack.tsx        # Variante navbar oscuro
 │   ├── NavbarBlack.css
 │   ├── NavbarWrapper.tsx      # HOC para manejo de navbar
-│   ├── PostMetadata.tsx       # Metadatos para posts
+│   ├── PostMetadata.tsx       # Metadatos para posts (No se esta usando)
 │   │
 │   ├── blog/                  # Componentes específicos del blog
 │   │   ├── BlogContent.tsx    # Renderizador de contenido
@@ -110,14 +110,14 @@ src/
 │
 ├── hooks/                     # Custom React Hooks
 │   ├── useHasMounted.ts      # Hook para hidratación
-│   └── useReInitVisualScripts.ts # Re-inicialización de scripts
+│   └── useReInitVisualScripts.ts # Re-inicialización de scripts (No se esta usando)
 │
 ├── lib/                       # Utilidades y configuraciones
 │   ├── api.ts                # Cliente API para blog
 │   ├── utils.ts              # Utilidades generales
 │   └── validateRecaptcha.ts  # Validación server-side reCAPTCHA
 │
-└── types/                     # Definiciones TypeScript
+└── types/                     # Definiciones TypeScript (Interfaces)
     ├── blog-types.ts         # Tipos para sistema de blog
     ├── office.ts             # Tipos para sucursales
     └── wowjs.d.ts           # Declaraciones para WOW.js
@@ -174,7 +174,7 @@ src/
 ### Performance & Analytics
 ```json
 {
-  "@vercel/speed-insights": "^1.2.0" // Métricas de rendimiento
+  "@vercel/speed-insights": "^1.2.0" // Métricas de rendimiento (deploy en Vercel)
 }
 ```
 
@@ -270,7 +270,7 @@ const nextConfig = {
 }
 ```
 
-## 🛠️ Setup de Desarrollo
+## Setup de Desarrollo
 
 ### Prerrequisitos Técnicos
 - **Node.js**: >= 18.17.0
@@ -281,23 +281,23 @@ const nextConfig = {
 
 ```bash
 # 1. Clonar repositorio
-git clone [repository-url]
-cd perezcortes-web_polizaderentas
+https://github.com/fuiyono/web_pdr.git
+cd web_pdr
 
 # 2. Instalar dependencias
-npm install
+npm install (Vienen en package.json)
 
 # 3. Configurar variables de entorno
-cp .env.example .env.local
+cp .env.example .env.local (O crear .env)
 ```
 
 ### Variables de Entorno Requeridas
 
 ```bash
 # API External Blog System
-NEXT_PUBLIC_API_URL=http://localhost:8000/api/posts
-NEXT_PUBLIC_API_KEY=your-api-key-here
-NEXT_PUBLIC_CLOUDFLARE_R2_ENDPOINT=https://pub-7d69744bfc94470c9f3257d29c3a67d3.r2.dev
+NEXT_PUBLIC_API_URL=http://localhost:8000/api/posts (API en laravel)
+NEXT_PUBLIC_API_KEY=your-api-key-here (Token de autenticación muy necesario)
+NEXT_PUBLIC_CLOUDFLARE_R2_ENDPOINT=https://pub-7d69744bfc94470c9f3257d29c3a67d3.r2.dev (Llave para imagenes)
 
 # SMTP Configuration (Contact Form)
 SMTP_HOST=smtp.gmail.com
@@ -309,7 +309,7 @@ CONTACT_EMAIL=contacto@polizaderentas.com
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your-site-key
 RECAPTCHA_SECRET_KEY=your-secret-key
 
-# Analytics (Optional)
+# Analytics (Opcional se incluye en app/layout)
 NEXT_PUBLIC_GA_TRACKING_ID=G-XXXXXXXXXX
 NEXT_PUBLIC_FB_PIXEL_ID=123456789
 ```
@@ -336,7 +336,7 @@ npm run lint
 npm run lint -- --fix
 ```
 
-## 🔄 Sistema de Routing
+## Sistema de Routing
 
 ### App Router Structure
 
@@ -475,7 +475,7 @@ export async function POST(req: NextRequest) {
 }
 ```
 
-## 🎯 Componentes Clave
+## Componentes Clave
 
 ### Homepage Component (`app/page.tsx`)
 
@@ -510,7 +510,7 @@ export default function Home() {
 
 ### Custom Hooks
 
-#### `useReInitVisualScripts.ts`
+#### `useReInitVisualScripts.ts` Solo usar en caso de que los recursos no se esten cargando correctamente
 ```typescript
 // Hook para re-inicializar scripts jQuery legacy
 export function useReInitVisualScripts() {
@@ -522,7 +522,7 @@ export function useReInitVisualScripts() {
 }
 ```
 
-#### `useHasMounted.ts`
+#### `useHasMounted.ts` No se usa, pero si algo no se esta montando bien primero lo podemos usar
 ```typescript
 // Hook para evitar problemas de hidratación
 export function useHasMounted() {
@@ -791,7 +791,7 @@ export type { ComponentProps };
 
 ---
 
-## 📞 Soporte Técnico
+## Soporte Técnico
 
 Para dudas técnicas sobre el código base:
 - Revisar documentación de Next.js 13+ App Router
