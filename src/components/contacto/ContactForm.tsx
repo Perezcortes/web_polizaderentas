@@ -31,10 +31,13 @@ export default function ContactForm({ initialType = 'Propietario', onSubmitSucce
     e.preventDefault();
 
     try {
+      const apiKey = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
       const response = await fetch('https://app.polizaderentas.com/api/offices/contacto', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': `Bearer ${apiKey}`,
+          'Accept': 'application/json'
         },
         body: new URLSearchParams(formData as any).toString()
       });

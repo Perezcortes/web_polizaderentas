@@ -62,8 +62,31 @@ export default function SucursalPage() {
       };
       
       // Primero obtener todas las sucursales
-      const response = await fetch('https://app.polizaderentas.com/api/offices');
-      const offices = await response.json();
+      const apiKey = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
+      const response = await fetch('https://app.polizaderentas.com/api/offices', {
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      // Handle different response formats
+      let offices = data;
+      if (data.data && Array.isArray(data.data)) {
+        offices = data.data;
+      } else if (data.offices && Array.isArray(data.offices)) {
+        offices = data.offices;
+      } else if (!Array.isArray(data)) {
+        console.error('API response is not an array:', data);
+        offices = [];
+      }
       
       // Buscar la sucursal que coincida con el nombre
       const matchingOffice = offices.find((office: Office) => 
@@ -75,7 +98,18 @@ export default function SucursalPage() {
         setFormData(prev => ({ ...prev, id: matchingOffice.id.toString() }));
         
         // Ahora buscar los usuarios de esa sucursal
-        const userResponse = await fetch(`https://app.polizaderentas.com/api/offices/find-by-id/${matchingOffice.id}`);
+        const userResponse = await fetch(`https://app.polizaderentas.com/api/offices/find-by-id/${matchingOffice.id}`, {
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!userResponse.ok) {
+          console.warn(`Failed to fetch users for office ${matchingOffice.id}: ${userResponse.status}`);
+        }
+        
         const userData = await userResponse.json();
         
         if (userData.users) {
@@ -98,10 +132,13 @@ export default function SucursalPage() {
     e.preventDefault();
 
     try {
+      const apiKey = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
       const response = await fetch('https://app.polizaderentas.com/api/offices/contacto', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': `Bearer ${apiKey}`,
+          'Accept': 'application/json'
         },
         body: new URLSearchParams(formData as any).toString()
       });

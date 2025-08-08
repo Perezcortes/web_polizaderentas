@@ -14,8 +14,9 @@ const nextConfig = {
   // Configuración para mejorar estabilidad en rutas dinámicas
   experimental: {
     optimizePackageImports: ['react-icons'],
-    serverComponentsExternalPackages: [], // Evita problemas con dependencias externas
   },
+  // Evita problemas con dependencias externas (migrado desde experimental.serverComponentsExternalPackages)
+  serverExternalPackages: [],
   // Configuración específica para evitar problemas de hidratación
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? {
