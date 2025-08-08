@@ -34,17 +34,22 @@ export default function SucursalesPage() {
     const fetchOffices = async () => {
       try {
         setIsLoading(true);
-        const apiKey = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
+        const token = process.env.NEXT_PUBLIC_API_KEY;
+        if (!token) {
+          throw new Error('API key no configurada');
+        }
         const response = await fetch('https://app.polizaderentas.com/api/offices', {
           headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           }
         });
         
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          const errorData = await response.json().catch(() => ({}));
+          console.error('API Error:', errorData);
+          throw new Error(`HTTP error! status: ${response.status} - ${errorData.message || ''}`);
         }
         
         const data = await response.json();

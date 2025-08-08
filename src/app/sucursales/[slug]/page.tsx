@@ -62,14 +62,7 @@ export default function SucursalPage() {
       };
       
       // Primero obtener todas las sucursales
-      const apiKey = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
-      const response = await fetch('https://app.polizaderentas.com/api/offices', {
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      });
+      const response = await fetch('https://app.polizaderentas.com/api/offices');
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -98,18 +91,7 @@ export default function SucursalPage() {
         setFormData(prev => ({ ...prev, id: matchingOffice.id.toString() }));
         
         // Ahora buscar los usuarios de esa sucursal
-        const userResponse = await fetch(`https://app.polizaderentas.com/api/offices/find-by-id/${matchingOffice.id}`, {
-          headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-        });
-        
-        if (!userResponse.ok) {
-          console.warn(`Failed to fetch users for office ${matchingOffice.id}: ${userResponse.status}`);
-        }
-        
+        const userResponse = await fetch(`https://app.polizaderentas.com/api/offices/find-by-id/${matchingOffice.id}`);
         const userData = await userResponse.json();
         
         if (userData.users) {
@@ -132,13 +114,10 @@ export default function SucursalPage() {
     e.preventDefault();
 
     try {
-      const apiKey = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
       const response = await fetch('https://app.polizaderentas.com/api/offices/contacto', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': `Bearer ${apiKey}`,
-          'Accept': 'application/json'
         },
         body: new URLSearchParams(formData as any).toString()
       });
