@@ -11,6 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './franquicias.module.css';
+import YandexMetrika from '../../components/YandexMetrika';
 
 // Extiende la interfaz Window para incluir jQuery y $
 declare global {
@@ -28,6 +29,16 @@ export default function FranchisesPage() {
         <meta name="description" content="Invierte en el servicio jurídico de mayor crecimiento en México con nuestras franquicias" />
         <link rel="icon" href="/images/icon.png" type="image/gif" sizes="16x16" />
       </Head>
+
+      {/* Yandex Metrika para Franquicias */}
+      <YandexMetrika 
+        counterId={103343770} 
+        options={{
+          clickmap: true,
+          accurateTrackBounce: true,
+          trackLinks: true
+        }}
+      />
 
       {/* Hero Slider */}
       <section className="text-light no-top no-bottom position-relative z-1000">

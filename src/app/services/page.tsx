@@ -8,6 +8,7 @@ import 'swiper/css/pagination';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import YandexMetrika from '../../components/YandexMetrika';
 
 export default function ServicesPage() {
 
@@ -50,6 +51,17 @@ export default function ServicesPage() {
         <title>Servicios - Póliza de Rentas</title>
         <meta name="description" content="Conoce nuestros servicios para propietarios e inquilinos." />
       </Head>
+
+      {/* Yandex Metrika para Servicios */}
+      <YandexMetrika 
+        counterId={103343804} 
+        options={{
+          webvisor: true,
+          clickmap: true,
+          accurateTrackBounce: true,
+          trackLinks: true
+        }}
+      />
 
       <section className="text-light no-top no-bottom position-relative z-1000">
         <div className="v-center">
