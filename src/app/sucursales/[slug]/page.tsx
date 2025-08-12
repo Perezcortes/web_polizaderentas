@@ -61,9 +61,40 @@ export default function SucursalPage() {
           .replace(/ñ/g, 'n');
       };
       
-      // Primero obtener todas las sucursales
-      const response = await fetch('https://app.polizaderentas.com/api/offices');
-      const offices = await response.json();
+      // Obtener el token de autenticación
+      const token = process.env.NEXT_PUBLIC_API_KEY;
+      if (!token) {
+        throw new Error('API key no configurada');
+      }
+      
+      // Primero obtener todas las sucursales con autenticación
+      const response = await fetch('https://app.polizaderentas.com/api/offices', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error('API Error:', errorData);
+        throw new Error(`HTTP error! status: ${response.status} - ${errorData.message || ''}`);
+      }
+      
+      const data = await response.json();
+      console.log('API Response:', data); // Debug log
+      
+      // Handle different response formats
+      let offices = data;
+      if (data.data && Array.isArray(data.data)) {
+        offices = data.data;
+      } else if (data.offices && Array.isArray(data.offices)) {
+        offices = data.offices;
+      } else if (!Array.isArray(data)) {
+        console.error('API response is not an array:', data);
+        offices = [];
+      }
       
       // Buscar la sucursal que coincida con el nombre
       const matchingOffice = offices.find((office: Office) => 
@@ -74,13 +105,26 @@ export default function SucursalPage() {
         setOffice(matchingOffice);
         setFormData(prev => ({ ...prev, id: matchingOffice.id.toString() }));
         
-        // Ahora buscar los usuarios de esa sucursal
-        const userResponse = await fetch(`https://app.polizaderentas.com/api/offices/find-by-id/${matchingOffice.id}`);
-        const userData = await userResponse.json();
+        // Ahora buscar los usuarios de esa sucursal con autenticación
+        const userResponse = await fetch(`https://app.polizaderentas.com/api/offices/find-by-id/${matchingOffice.id}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
         
-        if (userData.users) {
-          setUsers(userData.users);
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          
+          if (userData.users) {
+            setUsers(userData.users);
+          }
+        } else {
+          console.error('Error fetching users:', userResponse.status);
         }
+      } else {
+        console.error('No matching office found for slug:', slug);
       }
     } catch (error) {
       console.error('Error fetching office data:', error);
@@ -98,10 +142,13 @@ export default function SucursalPage() {
     e.preventDefault();
 
     try {
+      const token = process.env.NEXT_PUBLIC_API_KEY;
+      
       const response = await fetch('https://app.polizaderentas.com/api/offices/contacto', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
+          ...(token && { 'Authorization': `Bearer ${token}` })
         },
         body: new URLSearchParams(formData as any).toString()
       });
@@ -130,11 +177,12 @@ export default function SucursalPage() {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Hubo un problema con el envío. Por favor, intenta nuevamente.',
+          text: result.message || 'Hubo un problema con el envío. Por favor, intenta nuevamente.',
           confirmButtonText: 'OK',
         });
       }
     } catch (error) {
+      console.error('Error submitting form:', error);
       Swal.fire({
         icon: 'error',
         title: 'Error',
@@ -212,7 +260,7 @@ export default function SucursalPage() {
                 modules={[Navigation, Pagination, Autoplay, Parallax]}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 direction="horizontal"
-                loop={true}
+                loop={false} // Cambiado a false ya que solo hay un slide
                 speed={1200}
                 parallax={true}
                 pagination={{

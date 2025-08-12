@@ -34,16 +34,52 @@ export default function SucursalesPage() {
     const fetchOffices = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch('https://app.polizaderentas.com/api/offices');
+        const token = process.env.NEXT_PUBLIC_API_KEY;
+        if (!token) {
+          throw new Error('API key no configurada');
+        }
+        const response = await fetch('https://app.polizaderentas.com/api/offices', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          console.error('API Error:', errorData);
+          throw new Error(`HTTP error! status: ${response.status} - ${errorData.message || ''}`);
+        }
+        
         const data = await response.json();
-        setOffices(data);
+        console.log('API Response:', data); // Debug log
+        
+        // Handle different response formats
+        let officesArray = data;
+        if (data.data && Array.isArray(data.data)) {
+          officesArray = data.data;
+        } else if (data.offices && Array.isArray(data.offices)) {
+          officesArray = data.offices;
+        } else if (!Array.isArray(data)) {
+          console.error('API response is not an array:', data);
+          officesArray = [];
+        }
+        
+        setOffices(officesArray);
 
-        // Get unique states and sort them
-        const states = Array.from(new Set(data.map((office: Office) => office.estado))) as string[];
-        states.sort((a, b) => a.localeCompare(b));
-        setUniqueStates(states);
+        // Get unique states and sort them - only if we have valid data
+        if (Array.isArray(officesArray) && officesArray.length > 0) {
+          const states = Array.from(new Set(officesArray.map((office: Office) => office.estado).filter(Boolean))) as string[];
+          states.sort((a, b) => a.localeCompare(b));
+          setUniqueStates(states);
+        } else {
+          setUniqueStates([]);
+        }
       } catch (error) {
         console.error('Error fetching offices:', error);
+        setOffices([]);
+        setUniqueStates([]);
       } finally {
         setIsLoading(false);
       }
@@ -116,7 +152,7 @@ export default function SucursalesPage() {
             modules={[Navigation, Pagination, Autoplay, Parallax]}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             direction="horizontal"
-            loop={true}
+            loop={false} // Disabled because there's only one slide
             speed={1200}
             parallax={true}
             pagination={{
