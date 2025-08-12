@@ -11,7 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './franquicias.module.css';
-import YandexMetrika from '../../components/YandexMetrika';
+import YandexMetrika from '../../components/YandexMetrika'; // Importando el componente Yandex Metrika
 
 // Extiende la interfaz Window para incluir jQuery y $
 declare global {

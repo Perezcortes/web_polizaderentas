@@ -19,6 +19,7 @@ declare global {
   }
 }
 
+// Componente para integrar Yandex Metrika
 export default function YandexMetrika({ 
   counterId, 
   options = {

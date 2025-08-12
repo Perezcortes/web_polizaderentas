@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import YandexMetrika from '../../components/YandexMetrika';
+import YandexMetrika from '../../components/YandexMetrika'; // Importando el componente Yandex Metrika
 
 export default function ServicesPage() {
 
