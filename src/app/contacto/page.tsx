@@ -68,7 +68,7 @@ export default function ContactPage() {
               {/* Mapa */}
               <div className="col-lg-6">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.4002200013833!2d-99.2094382889982!3d19.43830404042254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2021965d6cd41%3A0xbae0eb331a021324!2sSears%20Polanco!5e0!3m2!1ses-419!2smx!4v1711477157778!5m2!1ses-419!2smx"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d559.8838149864216!2d-99.57800805391159!3d19.2634689214598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cd8b1ca6574d57%3A0xe6dea49edd28573f!2sC.%205%20de%20Febrero%202221%2C%20San%20Salvador%20Tizatlali%2C%2052172%20San%20Salvador%20Tizatlalli%2C%20M%C3%A9x.!5e0!3m2!1ses-419!2smx!4v1755107231987!5m2!1ses-419!2smx"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
