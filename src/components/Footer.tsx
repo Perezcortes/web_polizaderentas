@@ -66,7 +66,7 @@ export default function Footer() {
               <div className="de-icon-text">
                 <img src="/images/svg/email-address-svgrepo-com-white.svg" alt="email" />
                 <div className="d-text">
-                  Montes Urales 755 piso 5, oficina 5631, Lomas de Chapultepec, Miguel Hidalgo, CDMX, 11000
+                  5 de Febrero, 2221 oriente, Agrícola Bella Vista, Metepec, Estado de México, 52149
                 </div>
               </div>
 
