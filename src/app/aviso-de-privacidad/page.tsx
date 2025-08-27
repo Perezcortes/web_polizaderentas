@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
 
   return (
     <>
-    <Head>
+      <Head>
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         {/* Open Graph Meta Tags */}
@@ -157,9 +157,27 @@ export default function PrivacyPolicy() {
                   <p>Si usted considera que han sido vulnerados sus derechos respecto de la protección de datos personales, tiene el derecho de acudir a la autoridad correspondiente para defender su ejercicio. La autoridad es el Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI), su sitio web es: www.ifai.mx.</p>
 
                   <h3 className="dorado mt-4">Limitación de Uso y Divulgación de Información</h3>
-                  <p>En nuestro programa de notificación de promociones, ofertas y servicios a través de correo electrónico, sólo POLIZA DE RENTAS tiene acceso a la información recabada. Este tipo de publicidad se realiza mediante avisos y mensajes promocionales de correo electrónico, los cuales sólo serán enviados a usted y a aquellos contactos registrados para tal propósito. Si Usted desea dejar de recibir mensajes promocionales de nuestra parte, puede solicitarlo al correo electrónico info@polizaderentas.com En los correos electrónicos enviados, pueden incluirse ocasionalmente ofertas de terceras partes.</p>
+                  <p>En POLIZA DE RENTAS, nos comprometemos a proteger su privacidad. El uso de la información que nos proporciona se limita estrictamente a la finalidad para la cual fue recabada.</p>
 
-                  <p className="text-right italic">Última actualización: 15/08/2024</p>
+                  <p>No compartimos su información personal con terceros para fines de publicidad o promociones.</p>
+
+                  <p>A continuación, detallamos cómo utilizamos su información según el contexto en el que nos la proporciona:</p>
+
+                  <p><strong>Para la Gestión de Pólizas de Arrendamiento:</strong> Si usted proporciona sus datos al llenar una solicitud como prospecto de inquilino, obligado solidario o propietario, su información será utilizada única y exclusivamente para las siguientes finalidades relacionadas con la gestión de su póliza:</p>
+
+                  <p>Análisis y evaluación de la solicitud.</p>
+
+                  <p>Comunicación sobre el proceso de otorgamiento y firma del contrato.</p>
+
+                  <p>Envío de correos electrónicos y notificaciones para la atención de incidencias y seguimiento de la póliza vigente.</p>
+
+                  <p><strong>Para Fines Informativos y de Marketing:</strong> Si usted proporciona sus datos para registrarse en alguno de nuestros eventos, webinars, o al participar en campañas de marketing, está aceptando que POLIZA DE RENTAS le envíe información única y exclusivamente sobre nuestros propios servicios, promociones y futuros eventos.</p>
+
+                  <p><strong>Opción de Exclusión (Opt-out):</strong></p>
+                  <p>En cualquier momento, si usted desea dejar de recibir mensajes promocionales o informativos de nuestra parte, puede solicitar su baja haciendo clic en el siguiente enlace:</p>
+
+                  <p><a href="#" className="text-blue-600 underline hover:text-[#bea151] transition-colors duration-200">Gestionar mi suscripción</a></p>
+                  <p className="text-right italic">Última actualización: 27/08/2025</p>
                 </div>
               </div>
             </div>
