@@ -47,10 +47,7 @@ export default function SucursalPage() {
     try {
       setLoading(true);
       
-      // Convertir slug de vuelta a formato legible
-      const nombreSucursal = slug.replace(/-/g, ' ');
-      
-      // Función para normalizar texto (quitar acentos y convertir a minúsculas)
+      // Función mejorada para normalizar texto
       const normalizeText = (text: string) => {
         return text.toLowerCase()
           .replace(/[áàäâ]/g, 'a')
@@ -58,8 +55,13 @@ export default function SucursalPage() {
           .replace(/[íìïî]/g, 'i')
           .replace(/[óòöô]/g, 'o')
           .replace(/[úùüû]/g, 'u')
-          .replace(/ñ/g, 'n');
+          .replace(/ñ/g, 'n')
+          .replace(/[-\s]+/g, ' ')
+          .trim();
       };
+      
+      // Convertir slug de vuelta a formato legible
+      const nombreSucursalFromSlug = normalizeText(slug.replace(/-/g, ' '));
       
       // Obtener el token de autenticación
       const token = process.env.NEXT_PUBLIC_API_KEY;
@@ -67,7 +69,7 @@ export default function SucursalPage() {
         throw new Error('API key no configurada');
       }
       
-      // Primero obtener todas las sucursales con autenticación
+      // Obtener todas las sucursales
       const response = await fetch('https://app.polizaderentas.com/api/offices', {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -78,12 +80,10 @@ export default function SucursalPage() {
       
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        console.error('API Error:', errorData);
         throw new Error(`HTTP error! status: ${response.status} - ${errorData.message || ''}`);
       }
       
       const data = await response.json();
-      console.log('API Response:', data); // Debug log
       
       // Handle different response formats
       let offices = data;
@@ -92,21 +92,41 @@ export default function SucursalPage() {
       } else if (data.offices && Array.isArray(data.offices)) {
         offices = data.offices;
       } else if (!Array.isArray(data)) {
-        console.error('API response is not an array:', data);
         offices = [];
       }
       
-      // Buscar la sucursal que coincida con el nombre
-      const matchingOffice = offices.find((office: Office) => 
-        normalizeText(office.nombre_suc.replace(/\s+/g, ' ')) === normalizeText(nombreSucursal)
-      );
+      // Buscar la sucursal con comparación mejorada
+      const matchingOffice = offices.find((office: Office) => {
+        const normalizedOfficeName = normalizeText(office.nombre_suc);
+        return normalizedOfficeName === nombreSucursalFromSlug;
+      });
       
-      if (matchingOffice) {
-        setOffice(matchingOffice);
-        setFormData(prev => ({ ...prev, id: matchingOffice.id.toString() }));
+      // Si no encuentra match exacto, buscar de forma más flexible
+      const flexibleMatch = !matchingOffice ? offices.find((office: Office) => {
+        const normalizedOfficeName = normalizeText(office.nombre_suc);
         
-        // Ahora buscar los usuarios de esa sucursal con autenticación
-        const userResponse = await fetch(`https://app.polizaderentas.com/api/offices/find-by-id/${matchingOffice.id}`, {
+        // Remover palabras comunes para comparación más flexible
+        const removeCommonWords = (text: string) => {
+          return text.replace(/\b(de|del|la|las|el|los|y|e|poliza|rentas)\b/g, '')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+        };
+        
+        const simplifiedOfficeName = removeCommonWords(normalizedOfficeName);
+        const simplifiedSlugName = removeCommonWords(nombreSucursalFromSlug);
+        
+        return simplifiedOfficeName.includes(simplifiedSlugName) || 
+               simplifiedSlugName.includes(simplifiedOfficeName);
+      }) : null;
+      
+      const foundOffice = matchingOffice || flexibleMatch;
+      
+      if (foundOffice) {
+        setOffice(foundOffice);
+        setFormData(prev => ({ ...prev, id: foundOffice.id.toString() }));
+        
+        // Buscar los usuarios de esa sucursal
+        const userResponse = await fetch(`https://app.polizaderentas.com/api/offices/find-by-id/${foundOffice.id}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -116,15 +136,10 @@ export default function SucursalPage() {
         
         if (userResponse.ok) {
           const userData = await userResponse.json();
-          
           if (userData.users) {
             setUsers(userData.users);
           }
-        } else {
-          console.error('Error fetching users:', userResponse.status);
         }
-      } else {
-        console.error('No matching office found for slug:', slug);
       }
     } catch (error) {
       console.error('Error fetching office data:', error);
