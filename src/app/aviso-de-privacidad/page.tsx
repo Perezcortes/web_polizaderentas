@@ -176,7 +176,7 @@ export default function PrivacyPolicy() {
                   <p><strong>Opción de Exclusión (Opt-out):</strong></p>
                   <p>En cualquier momento, si usted desea dejar de recibir mensajes promocionales o informativos de nuestra parte, puede solicitar su baja haciendo clic en el siguiente enlace:</p>
 
-                  <p><a href="#" className="text-blue-600 underline hover:text-[#bea151] transition-colors duration-200">Gestionar mi suscripción</a></p>
+                  <p><a href="https://liga.polizaderentas.com/baja" className="text-blue-600 underline hover:text-[#bea151] transition-colors duration-200">Gestionar mi suscripción</a></p>
                   <p className="text-right italic">Última actualización: 27/08/2025</p>
                 </div>
               </div>
