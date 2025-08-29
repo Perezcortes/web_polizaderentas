@@ -8,7 +8,7 @@ import BlogPostClient from './BlogPostClient';
 import BlogSidebar from '../../../components/blog/BlogSidebar';
 import './styles.css';
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || process.env.API_URL || 'http://localhost:8000/api/posts';
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || process.env.API_URL || 'https://app.polizaderentas.com/api/posts';
 const apiKey = process.env.NEXT_PUBLIC_API_KEY || process.env.API_KEY || 'default-key';
 const cloudflareEndpoint = process.env.NEXT_PUBLIC_CLOUDFLARE_R2_ENDPOINT || process.env.CLOUDFLARE_R2_ENDPOINT || 'https://pub-7d69744bfc94470c9f3257d29c3a67d3.r2.dev';
 

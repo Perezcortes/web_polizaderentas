@@ -10,7 +10,7 @@ import BlogSidebar from '../../components/blog/BlogSidebar';
 import './blog-styles.css';
 
 export default function BlogPage() {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/posts';
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://app.polizaderentas.com/api/posts';
   const apiKey = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
   const cloudflareEndpoint = process.env.NEXT_PUBLIC_CLOUDFLARE_R2_ENDPOINT || 'https://default.endpoint.com';
   const postsPerPage = 5;

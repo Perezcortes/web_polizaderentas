@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
 
   return (
     <>
-    <Head>
+      <Head>
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         {/* Open Graph Meta Tags */}
@@ -40,7 +40,7 @@ export default function PrivacyPolicy() {
               <div className="row wow fadeInUp" data-wow-delay=".2s">
                 <div className="col-lg-12">
                   <h1 className="text-center dorado mb-4">Aviso de Privacidad</h1>
-                  <p><strong className="dorado">POLIZA DE RENTAS, Corporativo Póliza de Rentas, S.A de C.V.</strong>, con domicilio ubicado en Montes Urales 755 piso 5, oficina 5631, Lomas de Chapultepec, Miguel Hidalgo, CDMX, 11000, sus sucursales, despachos afiliados y licenciatarios y/o franquiciatarios, al momento de recabar sus datos personales, es responsable del uso que se les dé a los mismos y de su protección.</p>
+                  <p><strong className="dorado">POLIZA DE RENTAS, Corporativo Póliza de Rentas, S.A de C.V.</strong>, con domicilio ubicado en 5 de Febrero, 2221 oriente, Agrícola Bella Vista, Metepec, Estado de México, 52149, sus sucursales, despachos afiliados y licenciatarios y/o franquiciatarios, al momento de recabar sus datos personales, es responsable del uso que se les dé a los mismos y de su protección.</p>
 
                   <p>Atendiendo el tema de privacidad, en relación y cumplimiento de la <strong className="dorado">Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFDPPP)</strong>, dentro de los artículos 8, 15, 16 y 36 de esta Ley; nuestra Empresa pone a su disposición el siguiente AVISO DE PRIVACIDAD el cual como usuario debe de consentir o rechazar para el manejo de la información que se le requiere.</p>
 
@@ -124,7 +124,7 @@ export default function PrivacyPolicy() {
                   <p>El usuario se compromete a actualizar sus datos personales siempre que estos sean modificados a fin de que POLIZA DE RENTAS pueda brindarle el servicio en condiciones de su eficiencia, eficacia y personalización.</p>
 
                   <h3 className="dorado mt-4">Derechos ARCO</h3>
-                  <p>En todo momento usted tiene derecho a ejercer los derechos ARCO (acceso, rectificación, cancelación, oposición) y a revocar el consentimiento al tratamiento de los datos personales que poseemos dentro de POLIZA DE RENTAS, cualquiera de sus derechos los podrá ejercer poniéndose en contacto en Montes Urales 755 piso 5, oficina 5631, Lomas de Chapultepec, Miguel Hidalgo, CDMX, 11000, en el teléfono 5597230688 y en la dirección electrónica info@polizaderentas.com Su solicitud deberá ir acompañada de los argumentos por los que desea ejercer cualquiera de sus derechos, junto con una identificación oficial del titular de los datos o su apoderado, su petición será atendida en un plazo no mayor a 20 días hábiles.</p>
+                  <p>En todo momento usted tiene derecho a ejercer los derechos ARCO (acceso, rectificación, cancelación, oposición) y a revocar el consentimiento al tratamiento de los datos personales que poseemos dentro de POLIZA DE RENTAS, cualquiera de sus derechos los podrá ejercer poniéndose en contacto en 5 de Febrero, 2221 oriente, Agrícola Bella Vista, Metepec, Estado de México, 52149, en el teléfono 5597230688 y en la dirección electrónica info@polizaderentas.com Su solicitud deberá ir acompañada de los argumentos por los que desea ejercer cualquiera de sus derechos, junto con una identificación oficial del titular de los datos o su apoderado, su petición será atendida en un plazo no mayor a 20 días hábiles.</p>
 
                   <p>La seguridad y la confidencialidad de los datos que los usuarios proporcionen al contratar un servicio estarán protegidos por un servidor seguro bajo el protocolo Secure Socket Layer (SSL), de tal forma que los datos enviados se transmitirán encriptados para asegurar su resguardo.</p>
 
@@ -157,9 +157,27 @@ export default function PrivacyPolicy() {
                   <p>Si usted considera que han sido vulnerados sus derechos respecto de la protección de datos personales, tiene el derecho de acudir a la autoridad correspondiente para defender su ejercicio. La autoridad es el Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI), su sitio web es: www.ifai.mx.</p>
 
                   <h3 className="dorado mt-4">Limitación de Uso y Divulgación de Información</h3>
-                  <p>En nuestro programa de notificación de promociones, ofertas y servicios a través de correo electrónico, sólo POLIZA DE RENTAS tiene acceso a la información recabada. Este tipo de publicidad se realiza mediante avisos y mensajes promocionales de correo electrónico, los cuales sólo serán enviados a usted y a aquellos contactos registrados para tal propósito. Si Usted desea dejar de recibir mensajes promocionales de nuestra parte, puede solicitarlo al correo electrónico info@polizaderentas.com En los correos electrónicos enviados, pueden incluirse ocasionalmente ofertas de terceras partes.</p>
+                  <p>En POLIZA DE RENTAS, nos comprometemos a proteger su privacidad. El uso de la información que nos proporciona se limita estrictamente a la finalidad para la cual fue recabada.</p>
 
-                  <p className="text-right italic">Última actualización: 15/08/2024</p>
+                  <p>No compartimos su información personal con terceros para fines de publicidad o promociones.</p>
+
+                  <p>A continuación, detallamos cómo utilizamos su información según el contexto en el que nos la proporciona:</p>
+
+                  <p><strong>Para la Gestión de Pólizas de Arrendamiento:</strong> Si usted proporciona sus datos al llenar una solicitud como prospecto de inquilino, obligado solidario o propietario, su información será utilizada única y exclusivamente para las siguientes finalidades relacionadas con la gestión de su póliza:</p>
+
+                  <p>Análisis y evaluación de la solicitud.</p>
+
+                  <p>Comunicación sobre el proceso de otorgamiento y firma del contrato.</p>
+
+                  <p>Envío de correos electrónicos y notificaciones para la atención de incidencias y seguimiento de la póliza vigente.</p>
+
+                  <p><strong>Para Fines Informativos y de Marketing:</strong> Si usted proporciona sus datos para registrarse en alguno de nuestros eventos, webinars, o al participar en campañas de marketing, está aceptando que POLIZA DE RENTAS le envíe información única y exclusivamente sobre nuestros propios servicios, promociones y futuros eventos.</p>
+
+                  <p><strong>Opción de Exclusión (Opt-out):</strong></p>
+                  <p>En cualquier momento, si usted desea dejar de recibir mensajes promocionales o informativos de nuestra parte, puede solicitar su baja haciendo clic en el siguiente enlace:</p>
+
+                  <p><a href="https://liga.polizaderentas.com/baja" className="text-blue-600 underline hover:text-[#bea151] transition-colors duration-200">Gestionar mi suscripción</a></p>
+                  <p className="text-right italic">Última actualización: 27/08/2025</p>
                 </div>
               </div>
             </div>

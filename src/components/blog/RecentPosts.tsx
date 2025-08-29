@@ -20,7 +20,7 @@ export default function RecentPosts() {
             try {
                 setLoading(true);
 
-                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/posts';
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://app.polizaderentas.com/api/posts';
                 const apiKey = process.env.NEXT_PUBLIC_API_KEY || 'default-key';
 
                 const response = await fetch(
