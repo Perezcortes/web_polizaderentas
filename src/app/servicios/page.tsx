@@ -12,36 +12,36 @@ import YandexMetrika from '../../components/YandexMetrika'; // Importando el com
 
 export default function ServicesPage() {
 
-  const services = [
+  const servicios = [
     {
       icon: '/images/svg/collaboration-svgrepo-com.svg',
       title: 'Póliza Jurídica',
       desc: 'Nos encargamos de protegerte como propietario y garantizar la seguridad de tu inmueble durante todo el arrendamiento.',
-      link: '/services/poliza_juridica'
+      link: '/servicios/poliza_juridica'
     },
     {
       icon: '/images/svg/embedded-live-content-svgrepo-com.svg',
       title: 'Convenio de Prevención de Conflictos',
       desc: 'Asegura que tu contrato de arrendamiento tenga validez legal mediante un convenio de mediación privada, evitando conflictos antes de que sucedan.',
-      link: '/services/convenio_prevencion'
+      link: '/servicios/convenio_prevencion'
     },
     {
       icon: '/images/svg/lock-svgrepo-com.svg',
       title: 'Convenio de Transacción',
       desc: 'Te apoyamos con un Convenio de Transacción firmado ante Notario Público, brindándote máxima seguridad jurídica.',
-      link: '/services/convenio_transaccion'
+      link: '/servicios/convenio_transaccion'
     },
     {
       icon: '/images/svg/search.svg',
       title: 'Investigación de inquilinos',
       desc: 'Evaluamos la solvencia de cada persona asegurando su capacidad de pago mensual, brindando tranquilidad y seguridad.',
-      link: '/services/investigacion_inquilinos'
+      link: '/servicios/investigacion_inquilinos'
     },
     {
       icon: '/images/svg/firma.svg',
       title: 'Firma electrónica',
       desc: 'Usamos Firma Electrónica Avanzada certificada para contratos de arrendamiento válidos ante la Secretaría de Economía.',
-      link: '/services/firma_electronica'
+      link: '/servicios/firma_electronica'
     }
   ];
 
@@ -114,7 +114,7 @@ export default function ServicesPage() {
       <section id="todos-los-servicios">
         <div className="container">
           <div className="row g-3">
-            {services.map((s, index) => (
+            {servicios.map((s, index) => (
               <div key={index} className="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay={`${index * 0.2}s`}>
                 <div className="p-4 pb-2 bg-grey h-100">
                   <Image src={s.icon} width={80} height={80} alt={s.title} className="mb20" />

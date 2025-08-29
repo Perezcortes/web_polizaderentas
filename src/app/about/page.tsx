@@ -219,7 +219,7 @@ export default function NosotrosPage() {
                     <div className="row text-center justify-content-center">
                         <div className="col-lg-8 mb20 wow fadeInUp" data-wow-delay=".3s">
                             <a className="btn-line mb10" href="/sucursales">Sucursales</a>&nbsp;
-                            <a className="btn-main mb10" href="/services">Adquiere una franquicia</a>
+                            <a className="btn-main mb10" href="/servicios">Adquiere una franquicia</a>
                         </div>
                     </div>
                 </div>

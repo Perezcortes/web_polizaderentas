@@ -5,7 +5,7 @@ export default function ServicesLayout({
 }) {
   return (
     <>
-      {/* Puedes agregar estilos o estructura exclusiva para services */}
+      {/* Puedes agregar estilos o estructura exclusiva para servicios */}
       <main>{children}</main>
     </>
   );

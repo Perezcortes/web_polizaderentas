@@ -46,11 +46,11 @@ export default function Footer() {
                   <h5>Enlaces</h5>
                   <ul>
                     <li><a href="/about">Nosotros</a></li>
-                    <li><a href="/services">Servicios Jurídicos</a></li>
-                    <li><a href="/services/poliza_juridica">Póliza Jurídica</a></li>
-                    <li><a href="/services/convenio_prevencion">Convenio de Prevención de Conflictos</a></li>
-                    <li><a href="/services/convenio_transaccion">Convenio de Transacción</a></li>
-                    <li><a href="/services/investigacion_inquilinos">Investigación de Inquilinos</a></li>
+                    <li><a href="/servicios">Servicios Jurídicos</a></li>
+                    <li><a href="/servicios/poliza_juridica">Póliza Jurídica</a></li>
+                    <li><a href="/servicios/convenio_prevencion">Convenio de Prevención de Conflictos</a></li>
+                    <li><a href="/servicios/convenio_transaccion">Convenio de Transacción</a></li>
+                    <li><a href="/servicios/investigacion_inquilinos">Investigación de Inquilinos</a></li>
                     <li><a href="/sucursales">Sucursales</a></li>
                     <li><a href="/blog">Blog</a></li>
                     <li><a href="/contacto">Contacto</a></li>
@@ -98,7 +98,7 @@ export default function Footer() {
               <div className="col-lg-4">
                 <div className="btn-access-group">
                   <a className="btn-main" href="/sucursales">Sucursales</a>
-                  <a className="btn-main" href="/services/poliza_juridica">Sistema Pólizas</a>
+                  <a className="btn-main" href="/servicios/poliza_juridica">Sistema Pólizas</a>
                 </div>
               </div>
             </div>

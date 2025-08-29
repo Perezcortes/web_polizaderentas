@@ -33,13 +33,13 @@ export default function Navbar() {
                   <li><a className="menu-item" href="/">Inicio</a></li>
                   <li><a className="menu-item" href="/about">Nosotros</a></li>
                   <li>
-                    <a className="menu-item" href="/services">Servicios</a>
+                    <a className="menu-item" href="/servicios">Servicios</a>
                     <ul className="sub-menu" style={{ backgroundColor: '#1E1E1E', borderColor: '#1E1E1E' }}>
-                      <li><a style={{ color: 'white' }} href="/services/investigacion_inquilinos">Investigación de Inquilinos</a></li>
-                      <li><a style={{ color: 'white' }} href="/services/poliza_juridica">Póliza de Protección Jurídica</a></li>
-                      <li><a style={{ color: 'white' }} href="/services/convenio_transaccion">Convenio de transacción</a></li>
-                      <li><a style={{ color: 'white' }} href="/services/convenio_prevencion">Convenio de Prevención de Conflictos</a></li>
-                      <li><a style={{ color: 'white' }} href="/services/firma_electronica">Firma Electrónica</a></li>
+                      <li><a style={{ color: 'white' }} href="/servicios/investigacion_inquilinos">Investigación de Inquilinos</a></li>
+                      <li><a style={{ color: 'white' }} href="/servicios/poliza_juridica">Póliza de Protección Jurídica</a></li>
+                      <li><a style={{ color: 'white' }} href="/servicios/convenio_transaccion">Convenio de transacción</a></li>
+                      <li><a style={{ color: 'white' }} href="/servicios/convenio_prevencion">Convenio de Prevención de Conflictos</a></li>
+                      <li><a style={{ color: 'white' }} href="/servicios/firma_electronica">Firma Electrónica</a></li>
                     </ul>
                   </li>
                   <li><a className="menu-item" href="/sucursales">Sucursales</a></li>
