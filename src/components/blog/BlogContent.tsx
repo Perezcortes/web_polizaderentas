@@ -257,6 +257,7 @@ export default function BlogContent({
                 alt={post.titulo}
                 width={800}
                 height={450}
+                unoptimized
                 className="img-fluid rounded shadow-sm"
                 style={{
                   width: '100%',
