@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
+//Importamos la librería de seguridad
+import DOMPurify from 'isomorphic-dompurify'; 
 import BlogSearchBar from './BlogSearchBar';
 import Spinner from '../ui/Spinner';
 import type { BlogPost, BlogContentProps } from '../../types/blog-types';
@@ -27,6 +29,8 @@ export default function BlogContent({
 
   const truncateHtml = (html: string, maxLength: number) => {
     if (!html) return '';
+    // Nota: Aunque esta función limpia tags para contar caracteres, 
+    // no eliminaba scripts maliciosos. Ahora recibirá HTML ya limpio.
     const textContent = html.replace(/<[^>]*>/g, '');
     if (textContent.length <= maxLength) return html;
 
@@ -207,7 +211,6 @@ export default function BlogContent({
       return <Spinner message={searchTerm ? 'Buscando publicaciones...' : 'Cargando publicaciones...'} />;
     }
 
-
     if (error) {
       return (
         <div className="text-center py-5">
@@ -248,7 +251,7 @@ export default function BlogContent({
         {posts.map((post) => {
           const imageUrl = post.url_img
             ? `${cloudflareEndpoint}/${post.url_img.replace(/^\//, '')}`
-            : '/images/default-blog.jpg';
+            : `${cloudflareEndpoint}/default-blog.jpg`;
 
           return (
             <div key={post.id} className="mb-5 post-item wow fadeInUp">
@@ -257,6 +260,7 @@ export default function BlogContent({
                 alt={post.titulo}
                 width={800}
                 height={450}
+                unoptimized
                 className="img-fluid rounded shadow-sm"
                 style={{
                   width: '100%',
@@ -278,10 +282,11 @@ export default function BlogContent({
                 </span>
               </div>
 
+              {/* 2. AQUÍ ESTÁ EL BLINDAJE: Sanitizar antes de truncar */}
               <div
                 className="post-content"
                 dangerouslySetInnerHTML={{
-                  __html: truncateHtml(post.contenido, 200)
+                  __html: truncateHtml(DOMPurify.sanitize(post.contenido), 200)
                 }}
               />
 
@@ -303,8 +308,8 @@ export default function BlogContent({
       <BlogSearchBar
         onSearch={handleSearch}
         isLoading={loading || isSearching}
-        searchMode="manual" // O "auto" si prefieres búsqueda automática
-        debounceTime={2000} // Solo se usa si searchMode="auto"
+        searchMode="manual"
+        debounceTime={2000}
       />
 
       {renderContent()}

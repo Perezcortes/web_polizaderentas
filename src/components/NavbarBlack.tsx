@@ -51,7 +51,7 @@ export default function NavbarBlack() {
                   <li><a className="menu-item-black" href="/nosotros">Nosotros</a></li>
                   <li className={submenuOpen ? 'active' : ''}>
                     <div className="menu-item-wrapper">
-                      <a href="/services" className="menu-item-black">
+                      <a href="/servicios" className="menu-item-black">
                         Servicios
                       </a>
                       <span 
@@ -75,11 +75,11 @@ export default function NavbarBlack() {
                       </span>
                     </div>
                     <ul className="sub-menu-black">
-                      <li><a href="/services/investigacion_inquilinos">Investigación de Inquilinos</a></li>
-                      <li><a href="/services/poliza_juridica">Póliza de Protección Jurídica</a></li>
-                      <li><a href="/services/convenio_transaccion">Convenio de transacción</a></li>
-                      <li><a href="/services/convenio_prevencion">Convenio de Prevención de Conflictos</a></li>
-                      <li><a href="/services/firma_electronica">Firma Electrónica</a></li>
+                      <li><a href="/servicios/investigacion_inquilinos">Investigación de Inquilinos</a></li>
+                      <li><a href="/servicios/poliza_juridica">Póliza de Protección Jurídica</a></li>
+                      <li><a href="/servicios/convenio_transaccion">Convenio de transacción</a></li>
+                      <li><a href="/servicios/convenio_prevencion">Convenio de Prevención de Conflictos</a></li>
+                      <li><a href="/servicios/firma_electronica">Firma Electrónica</a></li>
                     </ul>
                   </li>
                   <li><a className="menu-item-black" href="/sucursales">Sucursales</a></li>

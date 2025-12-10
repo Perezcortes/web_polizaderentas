@@ -66,7 +66,7 @@ export default function Home() {
                             <p className="fs-4 wow fadeInRight">
                               ¡Prevenir problemas, preveer riesgos y proteger a nuestros clientes! Descubre cómo convertimos la <b>seguridad de tus rentas</b> en una experiencia excepcional para ti.
                             </p>
-                            <Link className="btn-main mb10 mt20" href="/services/poliza_juridica">Conoce más</Link>
+                            <Link className="btn-main mb10 mt20" href="/servicios/poliza_juridica">Conoce más</Link>
                           </div>
                         </div>
                       </div>

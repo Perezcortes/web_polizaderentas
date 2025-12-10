@@ -115,6 +115,46 @@ sudo certbot --nginx -d tu-dominio.com
 
 ## 🔍 Solución de Problemas
 
+### Error 503 - Service Unavailable
+
+Este error indica que Apache no puede conectarse al backend de Next.js. Solución rápida:
+
+```bash
+# Opción 1: Diagnóstico automático
+./diagnose-503.sh
+
+# Opción 2: Recuperación automática
+./fix-503.sh
+
+# Opción 3: Manual
+# Verificar si el servicio está corriendo
+pm2 list
+# o
+ps aux | grep node
+
+# Si no está corriendo, iniciarlo
+pm2 start ecosystem.config.js
+# o
+./start-production.sh
+```
+
+**Causas comunes:**
+- El proceso de Next.js se detuvo
+- El puerto 3000 no está escuchando
+- Problemas de memoria (PM2 reinicia automáticamente)
+- El build está corrupto o desactualizado
+
+**Verificación rápida:**
+```bash
+# Verificar si el puerto está en uso
+lsof -i :3000
+# o
+netstat -tlnp | grep 3000
+
+# Verificar respuesta del servicio
+curl http://localhost:3000/health/check.json
+```
+
 ### Error de build
 ```bash
 # Limpiar cache y reinstalar
@@ -127,10 +167,25 @@ npm run build
 ```bash
 chmod +x deploy.sh
 chmod +x start-production.sh
+chmod +x diagnose-503.sh
+chmod +x fix-503.sh
 ```
 
 ### Puerto ocupado
 ```bash
 # Cambiar puerto en .env.local
 PORT=3001
+# Y actualizar la configuración de Apache para apuntar al nuevo puerto
+```
+
+### El servicio se detiene frecuentemente
+```bash
+# Verificar logs
+pm2 logs poliza-rentas --lines 100
+
+# Verificar uso de memoria
+pm2 monit
+
+# Aumentar límite de memoria en ecosystem.config.js
+max_memory_restart: '2G'
 ```

@@ -13,8 +13,15 @@ const apiKey = process.env.NEXT_PUBLIC_API_KEY || process.env.API_KEY || 'defaul
 const cloudflareEndpoint = process.env.NEXT_PUBLIC_CLOUDFLARE_R2_ENDPOINT || process.env.CLOUDFLARE_R2_ENDPOINT || 'https://pub-7d69744bfc94470c9f3257d29c3a67d3.r2.dev';
 
 // === Helpers ===
+
+// SEGURIDAD: Función para evitar inyección de scripts en JSON-LD
+function safeJsonLd(data: any) {
+  return JSON.stringify(data).replace(/</g, '\\u003c');
+}
+
 function truncateText(text: string, maxLength: number) {
-  return text && text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+  // Limpieza básica de HTML para descripciones
+  return text && text.length > maxLength ? text.replace(/<[^>]*>/g, '').substring(0, maxLength) + '...' : text;
 }
 
 function formatDate(dateString: string) {
@@ -111,7 +118,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   const title = post.meta_titulo || post.titulo;
-  const description = post.meta_descripcion || truncateText(post.contenido.replace(/<[^>]*>/g, ''), 160);
+  const description = post.meta_descripcion || truncateText(post.contenido, 160);
   const keywords = post.palabras_clave_ceo || 'blog, arrendamiento, inquilinos, propietarios, renta segura';
   const imageUrl = post.url_img
     ? `${cloudflareEndpoint}/${post.url_img.replace(/^\//, '')}`
@@ -191,37 +198,40 @@ export default async function BlogDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  // Preparamos los datos JSON-LD de forma segura
+  const jsonLdData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.titulo,
+    "description": post.meta_descripcion || truncateText(post.contenido, 160),
+    "image": post.url_img ? `${cloudflareEndpoint}/${post.url_img.replace(/^\//, '')}` : null,
+    "author": {
+      "@type": "Organization",
+      "name": "Póliza de Rentas"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Póliza de Rentas",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://polizaderentas.com/images/logo.png"
+      }
+    },
+    "datePublished": post.created_at,
+    "dateModified": post.created_at,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://polizaderentas.com/blog/${post.slug}`
+    }
+  };
+
   return (
     <>
-      {/* JSON-LD para SEO estructurado */}
+      {/* FIX: Usar safeJsonLd para prevenir XSS en datos estructurados */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            "headline": post.titulo,
-            "description": post.meta_descripcion || truncateText(post.contenido.replace(/<[^>]*>/g, ''), 160),
-            "image": post.url_img ? `${cloudflareEndpoint}/${post.url_img.replace(/^\//, '')}` : null,
-            "author": {
-              "@type": "Organization",
-              "name": "Póliza de Rentas"
-            },
-            "publisher": {
-              "@type": "Organization",
-              "name": "Póliza de Rentas",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://polizaderentas.com/images/logo.png"
-              }
-            },
-            "datePublished": post.created_at,
-            "dateModified": post.created_at,
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": `https://polizaderentas.com/blog/${post.slug}`
-            }
-          })
+          __html: safeJsonLd(jsonLdData)
         }}
       />
 
@@ -291,7 +301,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                   apiUrl={apiUrl}
                   apiKey={apiKey}
                   cloudflareEndpoint={cloudflareEndpoint}
-                  excludeSlug={slug} // Pasar el slug del post actual para excluirlo
+                  excludeSlug={slug}
                 />
               </div>
             </div>

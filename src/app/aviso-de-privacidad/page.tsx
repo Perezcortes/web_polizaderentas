@@ -154,8 +154,17 @@ export default function PrivacyPolicy() {
                     <li>En nuestra página web.</li>
                   </ul>
 
-                  <p>Si usted considera que han sido vulnerados sus derechos respecto de la protección de datos personales, tiene el derecho de acudir a la autoridad correspondiente para defender su ejercicio. La autoridad es el Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI), su sitio web es: www.ifai.mx.</p>
-
+                  <p>
+                    Si usted considera que han sido vulnerados sus derechos respecto de la protección de datos personales, tiene el derecho de acudir a la autoridad correspondiente para defender su ejercicio. La autoridad es la Secretaría de Anticorrupción y Buen Gobierno, su sitio web es: {' '}
+                    <a
+                      href="https://www.gob.mx/buengobierno"
+                      className="text-blue-600 underline hover:text-[#bea151] transition-colors duration-200"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      https://www.gob.mx/buengobierno
+                    </a>
+                  </p>
                   <h3 className="dorado mt-4">Limitación de Uso y Divulgación de Información</h3>
                   <p>En POLIZA DE RENTAS, nos comprometemos a proteger su privacidad. El uso de la información que nos proporciona se limita estrictamente a la finalidad para la cual fue recabada.</p>
 
@@ -173,11 +182,11 @@ export default function PrivacyPolicy() {
 
                   <p><strong>Para Fines Informativos y de Marketing:</strong> Si usted proporciona sus datos para registrarse en alguno de nuestros eventos, webinars, o al participar en campañas de marketing, está aceptando que POLIZA DE RENTAS le envíe información única y exclusivamente sobre nuestros propios servicios, promociones y futuros eventos.</p>
 
-                  <p><strong>Opción de Exclusión (Opt-out):</strong></p>
-                  <p>En cualquier momento, si usted desea dejar de recibir mensajes promocionales o informativos de nuestra parte, puede solicitar su baja haciendo clic en el siguiente enlace:</p>
+                  <p><strong>Mecanismo de Oposición o Cancelación de datos personales:</strong></p>
+                  <p>En cualquier momento, si usted desea dejar de recibir mensajes promocionales o informativos de nuestra parte, o dar de baja sus datos personales de nuestros sistemas, puede solicitar su baja haciendo clic en el siguiente enlace:</p>
 
                   <p><a href="https://liga.polizaderentas.com/baja" className="text-blue-600 underline hover:text-[#bea151] transition-colors duration-200">Gestionar mi suscripción</a></p>
-                  <p className="text-right italic">Última actualización: 27/08/2025</p>
+                  <p className="text-right italic">Última actualización: 28/10/2025</p>
                 </div>
               </div>
             </div>

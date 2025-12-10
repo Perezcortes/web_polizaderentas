@@ -60,7 +60,7 @@ src/
 │   │   ├── franquicias.module.css # CSS Modules
 │   │   └── page.tsx
 │   │
-│   ├── services/              # Servicios con layout compartido
+│   ├── servicios/              # Servicios con layout compartido
 │   │   ├── layout.tsx         # Layout común para servicios
 │   │   ├── page.tsx           # Página principal de servicios
 │   │   ├── convenio_prevencion/
