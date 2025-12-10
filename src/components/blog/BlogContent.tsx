@@ -248,7 +248,7 @@ export default function BlogContent({
         {posts.map((post) => {
           const imageUrl = post.url_img
             ? `${cloudflareEndpoint}/${post.url_img.replace(/^\//, '')}`
-            : '/images/default-blog.jpg';
+            : `${cloudflareEndpoint}/default-blog.jpg`;
 
           return (
             <div key={post.id} className="mb-5 post-item wow fadeInUp">
@@ -257,6 +257,7 @@ export default function BlogContent({
                 alt={post.titulo}
                 width={800}
                 height={450}
+                unoptimized
                 className="img-fluid rounded shadow-sm"
                 style={{
                   width: '100%',
