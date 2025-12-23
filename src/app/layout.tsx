@@ -5,7 +5,7 @@ import Script from "next/script";
 import NavbarWrapper from "../components/NavbarWrapper";
 import Footer from "../components/Footer";
 import { headers } from "next/headers";
-import { SpeedInsights } from "@vercel/speed-insights/next"; 
+//import { SpeedInsights } from "@vercel/speed-insights/next"; 
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -137,7 +137,7 @@ export default async function RootLayout({
         </Script>
 
         {/* Speed Insights de Vercel */}
-        <SpeedInsights />
+        {/*<SpeedInsights />*/}
       </body>
     </html>
   );
