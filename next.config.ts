@@ -9,21 +9,22 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "placehold.co", // Agregado para los placeholders por si acaso
+        hostname: "placehold.co",
+      },
+      
+      {
+        protocol: "https",
+        hostname: "app.polizaderentas.com",
       },
     ],
   },
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Configuración para mejorar estabilidad en rutas dinámicas
   experimental: {
     optimizePackageImports: ["react-icons"],
   },
-  // Evita problemas con dependencias externas
   serverExternalPackages: [],
-
-  // Configuración específica para evitar problemas de hidratación
   compiler: {
     removeConsole:
       process.env.NODE_ENV === "production"
@@ -32,11 +33,8 @@ const nextConfig: NextConfig = {
           }
         : false,
   },
-
-  // BLINDAJE DE SEGURIDAD
   async headers() {
-    // Definimos la política de seguridad estricta (CSP)
-    // Solo permitimos scripts e imágenes de los servicios que realmente usas (Google, Facebook, Metricool, etc.)
+    // CORRECCIÓN AQUI ABAJO EN frame-src
     const cspHeader = `
       default-src 'self';
       
@@ -50,7 +48,7 @@ const nextConfig: NextConfig = {
       
       connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://tracker.metricool.com https://app.polizaderentas.com https://www.google.com https://vitals.vercel-insights.com;
       
-      frame-src 'self' https://www.google.com https://www.youtube.com;
+      frame-src 'self' https://www.google.com https://www.youtube.com https://www.openstreetmap.org;
       
       object-src 'none';
       base-uri 'self';
@@ -64,7 +62,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Content-Security-Policy",
-            value: cspHeader.replace(/\s{2,}/g, " ").trim(), // Limpia espacios extra
+            value: cspHeader.replace(/\s{2,}/g, " ").trim(),
           },
           {
             key: "X-Content-Type-Options",
@@ -84,7 +82,6 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // Configuración de cache específica para el blog
       {
         source: "/blog/:slug*",
         headers: [
@@ -96,8 +93,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-
-  // Configuración de rewrites para asegurar rutas correctas
   async rewrites() {
     return [
       {

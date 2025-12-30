@@ -48,12 +48,12 @@ export default function SucursalesPage() {
         
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
-          console.error('API Error:', errorData);
+          //console.error('API Error:', errorData);
           throw new Error(`HTTP error! status: ${response.status} - ${errorData.message || ''}`);
         }
         
         const data = await response.json();
-        console.log('API Response:', data); // Debug log
+        //console.log('API Response:', data); // Debug log
         
         // Handle different response formats
         let officesArray = data;
@@ -77,7 +77,7 @@ export default function SucursalesPage() {
           setUniqueStates([]);
         }
       } catch (error) {
-        console.error('Error fetching offices:', error);
+        //console.error('Error fetching offices:', error);
         setOffices([]);
         setUniqueStates([]);
       } finally {
