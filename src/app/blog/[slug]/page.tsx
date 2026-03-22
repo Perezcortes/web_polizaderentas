@@ -254,7 +254,14 @@ export default async function BlogDetailPage({ params }: PageProps) {
                     />
                   )}
 
-                  <h2 className="wow fadeInUp mt-5 mb20 color-dor h3" data-wow-delay=".2s">{post.titulo}</h2>
+                  {/* Se agregó suppressHydrationWarning para evitar el error de hidratación con WOW.js */}
+                  <h2
+                    className="wow fadeInUp mt-5 mb20 color-dor h3"
+                    data-wow-delay=".2s"
+                    suppressHydrationWarning
+                  >
+                    {post.titulo}
+                  </h2>
 
                   <div className="post-meta mb-3">
                     <span className="text-muted">Póliza de Rentas - {formatDate(post.created_at)}</span>
