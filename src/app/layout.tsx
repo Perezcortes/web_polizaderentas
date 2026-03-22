@@ -112,12 +112,12 @@ export default async function RootLayout({
         {/* Scripts personalizados */}
         <Script
           src="https://code.jquery.com/jquery-3.6.0.min.js"
-          strategy="beforeInteractive"
+          strategy="lazyOnload"
         />
-        <Script src="/js/plugins.js" strategy="afterInteractive" />
-        <Script src="/js/designesia.js" strategy="afterInteractive" />
-        <Script src="/js/swiper.js" strategy="afterInteractive" />
-        <Script src="/js/custom-marquee.js" strategy="afterInteractive" />
+        <Script src="/js/plugins.js" strategy="lazyOnload" />
+        <Script src="/js/designesia.js" strategy="lazyOnload" />
+        <Script src="/js/swiper.js" strategy="lazyOnload" />
+        <Script src="/js/custom-marquee.js" strategy="lazyOnload" />
 
         {/* Metricool */}
         <Script id="metricool" strategy="afterInteractive">
