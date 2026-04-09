@@ -66,7 +66,7 @@ export default function Footer() {
               <div className="de-icon-text">
                 <img src="/images/svg/email-address-svgrepo-com-white.svg" alt="email" />
                 <div className="d-text">
-                  5 de Febrero, 2221 oriente, Agrícola Bella Vista, Metepec, Estado de México, 52149
+                  Prolongación 5 de Mayo 1567, Planta Alta, Col. Comisión Federal de Electricidad, Toluca, Estado de México, C.P. 50150
                 </div>
               </div>
 
