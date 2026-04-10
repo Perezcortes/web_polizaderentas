@@ -40,7 +40,7 @@ const nextConfig: NextConfig = {
     const cspHeader = `
       default-src 'self';
       
-      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.google-analytics.com https://www.googletagmanager.com https://connect.facebook.net https://code.jquery.com https://tracker.metricool.com https://www.google.com https://www.gstatic.com https://va.vercel-scripts.com https://www.datadoghq-browser-agent.com; 
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.google-analytics.com https://www.googletagmanager.com https://connect.facebook.net https://code.jquery.com https://tracker.metricool.com https://www.google.com https://www.gstatic.com https://va.vercel-scripts.com; 
       
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
       
@@ -48,7 +48,7 @@ const nextConfig: NextConfig = {
       
       font-src 'self' data: https://fonts.gstatic.com;
       
-      connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://tracker.metricool.com https://app.polizaderentas.com https://www.google.com https://vitals.vercel-insights.com https://*.browser-intake-datadoghq.com;
+      connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://tracker.metricool.com https://app.polizaderentas.com https://www.google.com https://vitals.vercel-insights.com;
       
       frame-src 'self' https://www.google.com https://www.youtube.com https://www.openstreetmap.org;
       
