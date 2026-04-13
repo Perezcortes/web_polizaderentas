@@ -109,15 +109,27 @@ export default async function RootLayout({
           <Footer />
         </div>
 
-        {/* Scripts personalizados */}
+        {/* Scripts personalizados - jQuery y dependencias deben cargar en orden secuencial */}
         <Script
           src="https://code.jquery.com/jquery-3.6.0.min.js"
+          strategy="beforeInteractive"
+        />
+        <Script
+          src="/js/plugins.js"
+          strategy="beforeInteractive"
+        />
+        <Script
+          src="/js/designesia.js"
+          strategy="beforeInteractive"
+        />
+        <Script
+          src="/js/swiper.js"
           strategy="lazyOnload"
         />
-        <Script src="/js/plugins.js" strategy="lazyOnload" />
-        <Script src="/js/designesia.js" strategy="lazyOnload" />
-        <Script src="/js/swiper.js" strategy="lazyOnload" />
-        <Script src="/js/custom-marquee.js" strategy="lazyOnload" />
+        <Script
+          src="/js/custom-marquee.js"
+          strategy="lazyOnload"
+        />
 
         {/* Metricool */}
         <Script id="metricool" strategy="afterInteractive">
