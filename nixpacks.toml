@@ -1,0 +1,16 @@
+# Dokploy / Nixpacks — Next.js (https://nixpacks.com/docs/configuration/file)
+# No establecer NODE_ENV=production aquí: npm ci necesita devDependencies para el build.
+
+[variables]
+NEXT_TELEMETRY_DISABLED = "1"
+NIXPACKS_NODE_VERSION = "20"
+
+[phases.install]
+cmds = ["npm ci"]
+
+[phases.build]
+dependsOn = ["install"]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npm run start"
