@@ -1,5 +1,6 @@
 
 
+.slide-banner-principal,
 .slide-banner-1,
 .slide-banner-2,
 .slide-banner-3 {
@@ -10,16 +11,46 @@
 }
 
 /* Cada fondo diferente */
+.slide-banner-principal {
+  background-image: url('/images/slider/banner-principal.jpg');
+}
+
 .slide-banner-1 {
   background-image: url('/images/slider/banner-1.jpg');
 }
 
 .slide-banner-2 {
-  background-image: url('/images/slider/banner-4.jpg');
+  background-image: url('/images/slider/banner-2.jpg');
 }
 
 .slide-banner-3 {
   background-image: url('/images/slider/banner-5.jpg');
+}
+
+/* Nuevos estilos del banner principal */
+.logo-alianzas-banner {
+  display: block;
+  width: 78%;
+  max-width: 430px;
+  height: auto;
+  margin: 24px auto 18px 0;
+  object-position: left center;
+}
+
+@media (max-width: 575.98px) {
+  .logo-alianzas-banner {
+    width: 88%;
+    max-width: 310px;
+    margin: 18px auto 14px 0;
+  }
+}
+
+/* Ajuste responsivo de flechas del carrusel */
+@media (max-width: 991.98px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    margin-top: 60% !important;
+  }
 }
 
 /* Contenedor responsivo */
