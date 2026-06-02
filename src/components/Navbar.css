@@ -1,25 +1,37 @@
-/* Estilos generales del navbar */
+/* ============================================================
+   Navbar.css — Navbar transparente (páginas con hero oscuro)
+   Convive con public/css/style.css del tema.
+   Conflictos clave resueltos con especificidad alta.
+   ============================================================ */
+
+/* ---- Base ---- */
 .header-full {
-  transition: all 0.4s ease;
-  padding: 20px 0;
+  transition: background 0.3s ease, padding 0.3s ease;
+  padding: 20px 30px;       /* 30px laterales para logo y botón Franquicias */
   position: fixed;
   width: 100%;
-  z-index: 999;
+  box-sizing: border-box;
+  z-index: 1001;            /* > z-1000 del hero slider (z-index: 1000) */
 }
 
-.header-full.transparent {
-  background: transparent;
+/* Desktop: transparente sobre hero */
+@media (min-width: 993px) {
+  .header-full.transparent {
+    background: transparent;
+  }
 }
 
+/* Scroll: fondo oscuro */
 .header-full.smaller {
-  padding: 10px 0;
+  padding: 10px 30px;
   background: rgba(0, 0, 0, 0.9) !important;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos del menú principal */
+/* ---- Menú principal (desktop) ---- */
 #mainmenu {
   display: flex;
+  align-items: stretch;   /* todos los <li> comparten la misma altura */
   margin: 0;
   padding: 0;
 }
@@ -28,29 +40,71 @@
   position: relative;
   list-style: none;
   padding: 0 15px;
+  display: flex;
+  align-items: center;    /* centra verticalmente el contenido del <li> */
 }
 
-#mainmenu > li > a {
+/* Todos los links del menú — misma altura mediante padding vertical */
+#mainmenu > li > a.menu-item,
+#mainmenu > li > .menu-item-wrapper > a.menu-item {
   color: white;
   text-decoration: none;
   font-size: 15px;
   font-weight: 500;
-  transition: all 0.3s ease;
+  padding: 25px 0;
+  display: block;           /* block dentro del flex-item del <li> */
+  transition: color 0.3s ease;
 }
 
-/* Submenús */
+/* Wrapper del item con flecha — flex en desktop, alineado al eje del menú */
+#mainmenu .menu-item-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* Flecha submenu — oculta en desktop */
+#mainmenu .submenu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#mainmenu .submenu-toggle svg {
+  transition: transform 0.3s ease;
+}
+
+#mainmenu .submenu-toggle.rotated svg {
+  transform: rotate(180deg);
+}
+
+/* ---- Ocultar flechas que añade el tema (has-child / menu-item-has-children)
+        Ya tenemos nuestro propio botón de toggle, no necesitamos el ::after del tema ---- */
+#mainmenu > li.has-child::after,
+#mainmenu > li.menu-item-has-children::after {
+  display: none !important;
+}
+
+/* ---- Submenú (desktop: hover) ---- */
 .sub-menu {
   display: none;
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: 100%;              /* desde el borde inferior del <li> flex */
+  left: -15px;            /* compensa el padding lateral del <li> */
   min-width: 220px;
   padding: 15px 0;
-  z-index: 999;
+  z-index: 1002;
   border-radius: 0 0 5px 5px;
 }
 
-#mainmenu > li:hover > .sub-menu {
+#mainmenu > li:hover > .sub-menu,
+#mainmenu > li:hover > .menu-item-wrapper ~ .sub-menu {
   display: block;
 }
 
@@ -62,106 +116,164 @@
   color: white;
   font-size: 14px;
   display: block;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .sub-menu li a:hover {
   color: #ccc;
 }
 
-/* Botón hamburguesa (solo móvil) */
-#menu-btn {
+/* ---- Área derecha (Franquicias + hamburguesa) ---- */
+.header-full .menu_side_area {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+/* ---- Hamburguesa (clase propia para no chocar con #menu-btn del tema) ---- */
+.nav-mobile-toggle {
   display: none;
-  width: 30px;
-  height: 20px;
   position: relative;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  background: transparent;
   cursor: pointer;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
 }
 
-#menu-btn::before,
-#menu-btn::after {
-  content: '';
+.nav-mobile-toggle::before,
+.nav-mobile-toggle::after,
+.nav-mobile-toggle-bar {
+  content: "";
   position: absolute;
-  left: 0;
-  width: 100%;
-  height: 2px;
+  left: 50%;
+  width: 22px;
+  height: 3px;
+  margin-left: -11px;
   background: white;
-  transition: all 0.3s ease;
+  transition: transform 0.25s ease, opacity 0.25s ease, top 0.25s ease;
 }
 
-#menu-btn::before {
-  top: 0;
-}
+.nav-mobile-toggle::before { top: 14px; }
+.nav-mobile-toggle-bar     { top: 21px; }
+.nav-mobile-toggle::after  { top: 28px; }
 
-#menu-btn::after {
-  bottom: 0;
-}
+.nav-mobile-toggle.active .nav-mobile-toggle-bar { opacity: 0; }
+.nav-mobile-toggle.active::before { top: 21px; transform: rotate(45deg); }
+.nav-mobile-toggle.active::after  { top: 21px; transform: rotate(-45deg); }
 
-#menu-btn.active::before {
-  transform: rotate(45deg);
-  top: 9px;
-}
-
-#menu-btn.active::after {
-  transform: rotate(-45deg);
-  bottom: 9px;
-}
-
-/* Estilos para móvil */
+/* ============================================================
+   MOBILE  ≤992px
+   Usamos !important y especificidad alta para ganar al tema
+   que tiene:  .header-col-mid #mainmenu { position: absolute }
+               header, header.fixed { position: inherit; background: #111 }
+   ============================================================ */
 @media (max-width: 992px) {
-  #mainmenu {
+
+  /* 1. Header: fondo oscuro en mobile */
+  .header-full {
+    background: rgba(0, 0, 0, 0.92) !important;
+    padding: 10px 16px;   /* laterales reducidos en móvil */
+  }
+
+  /* 2. Logos */
+  .header-full .logo-main  { display: none !important; }
+  .header-full .logo-mobile { display: block !important; }
+
+  /* 3. Área derecha: mantener flex para que no se rompa el layout */
+  .header-full .menu_side_area {
+    width: auto !important;
+    display: flex !important;
+    position: relative;
+    z-index: 1002;
+    margin-left: auto;
+  }
+
+  /* 4. Botón hamburguesa visible */
+  .nav-mobile-toggle {
+    display: inline-flex;
+  }
+
+  /* 5. Menú principal: FIXED sobre todo.
+        Necesita !important en position para ganar a:
+        .header-col-mid #mainmenu { position: absolute }  (especificidad 1,1,0)
+        y a: header, header.fixed { ... } del tema. */
+  .header-full .header-col-mid #mainmenu {
     display: none;
-    position: fixed;
-    top: 80px;
+    position: fixed !important;
+    top: 60px;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.95);
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.97) !important;
     flex-direction: column;
-    padding: 20px 0;
-    z-index: 998;
+    align-items: flex-start;
+    padding: 10px 0;
+    z-index: 9998;
+    margin: 0;
   }
 
-  #mainmenu.mobile-visible {
+  /* Especificidad extra para ganar: (1,2,0) > tema (1,1,0) */
+  .header-full .header-col-mid #mainmenu.mobile-visible {
     display: flex;
   }
 
-  #mainmenu > li {
-    padding: 10px 20px;
-  }
-
-  .sub-menu {
-    position: static;
-    display: none;
+  /* 6. Items del menú en mobile */
+  .header-full .header-col-mid #mainmenu > li {
     padding: 0;
-    background: transparent !important;
-    border: none !important;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  #mainmenu > li:hover > .sub-menu {
-    display: none;
-  }
-
-  #mainmenu > li:focus-within > .sub-menu,
-  #mainmenu > li.active > .sub-menu {
+  .header-full .header-col-mid #mainmenu > li > a.menu-item,
+  .header-full .header-col-mid #mainmenu > li > .menu-item-wrapper > a.menu-item {
     display: block;
-    padding-left: 20px;
+    padding: 12px 20px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  #menu-btn {
-    display: block;
-    margin-left: 15px;
-  }
-
-  .menu_side_area {
+  /* 7. Wrapper con flecha en mobile */
+  .header-full .header-col-mid #mainmenu .menu-item-wrapper {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
   }
 
-  .logo-main {
-    display: none !important;
+  /* 8. Flecha: visible en mobile */
+  .header-full .header-col-mid #mainmenu .submenu-toggle {
+    display: inline-flex;
+    padding: 12px 16px;
   }
 
-  .logo-mobile {
-    display: block !important;
+  /* 9. Sub-menu en mobile */
+  .header-full .header-col-mid #mainmenu .sub-menu {
+    position: static !important;
+    display: none;
+    background: transparent !important;
+    border: none !important;
+    padding: 0;
+    min-width: unset;
+  }
+
+  /* No mostrar sub-menu al hacer hover en mobile */
+  .header-full .header-col-mid #mainmenu > li:hover > .sub-menu {
+    display: none;
+  }
+
+  /* Mostrar sub-menu cuando el li tiene clase active */
+  .header-full .header-col-mid #mainmenu > li.active > .sub-menu {
+    display: block;
+    padding-left: 20px;
   }
 }
