@@ -56,6 +56,34 @@ export default function Home() {
                 className="swiper"
               >
                 <SwiperSlide>
+                  <div className="swiper-inner slide-banner-principal">
+                    <div className="sw-caption">
+                      <div className="container">
+                        <div className="row gx-5 align-items-center">
+                          <div className="col-lg-7 mb-sm-30 offset-lg-1">
+                            <h1 className="slider-title font-50 d-none d-sm-block">DA EL PASO A UNA RENTA SEGURA</h1>
+                            <h2 className="slider-title font-40 d-block d-sm-none">DA EL PASO A UNA RENTA SEGURA</h2>
+                            <p className="fs-4 wow fadeInRight">
+                              Asegura tu propiedad desde el primer día con Póliza de Rentas y el respaldo financiero de Aseguradora Insurgentes.
+                              Solicita tu asesoría y da el paso a una renta segura.
+                            </p>
+                            <Image 
+                              src="/images/logo-alianzas.png" 
+                              width={430} 
+                              height={100} 
+                              className="logo-alianzas-banner" 
+                              alt="Alianzas"
+                              priority
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="sw-overlay s2"></div>
+                  </div>
+                </SwiperSlide>
+
+                <SwiperSlide>
                   <div className="swiper-inner slide-banner-1">
                     <div className="sw-caption">
                       <div className="container">
@@ -122,10 +150,8 @@ export default function Home() {
                 </SwiperSlide>
               </Swiper>
 
-              <div className="swiper-button-prev d-block d-lg-none mt-60"></div>
-              <div className="swiper-button-next d-block d-lg-none mt-60"></div>
-              <div className="swiper-button-prev d-none d-lg-block"></div>
-              <div className="swiper-button-next d-none d-lg-block"></div>
+              <div className="swiper-button-prev"></div>
+              <div className="swiper-button-next"></div>
               <div className="swiper-pagination"></div>
               <div className="swiper-scrollbar"></div>
             </div>
