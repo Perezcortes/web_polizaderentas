@@ -733,13 +733,13 @@
             }
              return jQuery(this).data('bgimage');
          });
-         $("body,div,section").css('background-size', function() {
+         /*$("body,div,section").css('background-size', function() {
              return 'cover';
          });
 
          $("body,div,section").css('background-repeat', function() {
              return 'no-repeat';
-         });
+         });*/
      }
      /* --------------------------------------------------
       * custom elements

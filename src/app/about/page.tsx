@@ -65,7 +65,7 @@ export default function NosotrosPage() {
                         modules={[Navigation, Pagination, Autoplay, Parallax]}
                         autoplay={{ delay: 3000, disableOnInteraction: false }}
                         direction="horizontal"
-                        loop={true}
+                        loop={false}
                         speed={1200}
                         parallax={true}
                         pagination={{ clickable: true }}

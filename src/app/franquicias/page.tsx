@@ -47,7 +47,7 @@ export default function FranchisesPage() {
             modules={[Navigation, Pagination, Autoplay, Parallax]}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             direction="horizontal"
-            loop={true}
+            loop={false}
             speed={1200}
             parallax={true}
             pagination={{
@@ -231,13 +231,11 @@ export default function FranchisesPage() {
                   src="/images/misc/2.png"
                   className="d-img-2 wow zoomIn"
                   data-wow-delay=".5s"
-                  data-jarallax-element="100"
                   alt="logo"
                 />
                 <div
                   className="d-img-3 bg-color wow zoomIn"
                   data-wow-delay=".6s"
-                  data-jarallax-element="-50"
                 ></div>
               </div>
             </div>

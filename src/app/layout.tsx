@@ -57,15 +57,26 @@ export default async function RootLayout({
         <link rel="stylesheet" href="/css/mdb.min.css" />
         <link rel="stylesheet" href="/css/mdb.rtl.min.css" />
         <link rel="stylesheet" href="/css/plugins.css" />
-        <link rel="stylesheet" href="/css/swiper.css" />
         <link rel="stylesheet" href="/css/style.css" />
         <link rel="stylesheet" href="/css/coloring.css" />
         <link rel="stylesheet" href="/css/estilos.css" />
         <link rel="stylesheet" href="/css/colors/scheme-01.css" />
       </head>
+      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning={true}
       >
+        {/* Cargan antes de que React interactúe */}
+        <Script
+          src="https://code.jquery.com/jquery-3.6.0.min.js"
+          strategy="beforeInteractive"
+        />
+        <Script
+          src="/js/plugins.js"
+          strategy="beforeInteractive"
+        />
+
         {/* Facebook Pixel */}
         <Script id="fb-pixel" strategy="afterInteractive">
           {`
@@ -109,22 +120,10 @@ export default async function RootLayout({
           <Footer />
         </div>
 
-        {/* Scripts personalizados - jQuery y dependencias deben cargar en orden secuencial */}
-        <Script
-          src="https://code.jquery.com/jquery-3.6.0.min.js"
-          strategy="beforeInteractive"
-        />
-        <Script
-          src="/js/plugins.js"
-          strategy="beforeInteractive"
-        />
+        {/* Esperan a que termine la carga de React */}
         <Script
           src="/js/designesia.js"
-          strategy="beforeInteractive"
-        />
-        <Script
-          src="/js/swiper.js"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
         />
         <Script
           src="/js/custom-marquee.js"
