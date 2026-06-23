@@ -5,6 +5,10 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, Parallax } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 import BlogContent from '../../components/blog/BlogContent';
 import BlogSidebar from '../../components/blog/BlogSidebar';
 import './blog-styles.css';
@@ -70,18 +74,11 @@ export default function BlogPage() {
             modules={[Navigation, Pagination, Autoplay, Parallax]}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             direction="horizontal"
-            loop={true}
+            loop={false}
             speed={1200}
             parallax={true}
-            pagination={{
-              el: '.swiper-pagination',
-              type: 'fraction',
-              clickable: true
-            }}
-            navigation={{
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-            }}
+            pagination={true}
+            navigation={true}
             className="swiper"
           >
             {/* Slide 1 */}
@@ -162,13 +159,6 @@ export default function BlogPage() {
               </div>
             </SwiperSlide>
           </Swiper>
-
-          <div className="swiper-pagination"></div>
-          <div className="swiper-button-prev d-block d-lg-none mt-60"></div>
-          <div className="swiper-button-next d-block d-lg-none mt-60"></div>
-          <div className="swiper-button-prev d-none d-lg-block"></div>
-          <div className="swiper-button-next d-none d-lg-block"></div>
-          <div className="swiper-scrollbar"></div>
         </div>
       </section>
 

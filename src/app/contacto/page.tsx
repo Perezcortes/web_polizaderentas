@@ -23,18 +23,6 @@ export default function ContactPage() {
         <link rel="icon" href="/images/icon.png" type="image/gif" sizes="16x16" />
       </Head>
 
-      {/* Cargar jQuery con mayor control */}
-      <Script
-        id="jquery-js"
-        src="https://code.jquery.com/jquery-3.6.0.min.js"
-        strategy="beforeInteractive"
-        onLoad={() => {
-          if (typeof window !== 'undefined' && window.jQuery && !window.$) {
-            window.$ = window.jQuery;
-          }
-        }}
-      />
-
       {/* Script de SweetAlert2 */}
       <Script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" strategy="lazyOnload" />
 
@@ -98,13 +86,11 @@ export default function ContactPage() {
                   src="images/misc/2.png"
                   className="d-img-2 wow zoomIn"
                   data-wow-delay=".5s"
-                  data-jarallax-element="100"
                   alt="logo"
                 />
                 <div
                   className="d-img-3 bg-color wow zoomIn"
                   data-wow-delay=".6s"
-                  data-jarallax-element="-50"
                 ></div>
               </div>
             </div>

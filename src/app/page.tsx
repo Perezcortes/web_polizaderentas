@@ -48,11 +48,8 @@ export default function Home() {
                 loop={true}
                 speed={1200}
                 parallax={true}
-                pagination={{ el: '.swiper-pagination', type: 'fraction', clickable: true }}
-                navigation={{
-                  nextEl: '.swiper-button-next',
-                  prevEl: '.swiper-button-prev',
-                }}
+                pagination={true}
+                navigation={true}
                 className="swiper"
               >
                 <SwiperSlide>
@@ -149,11 +146,6 @@ export default function Home() {
                   </div>
                 </SwiperSlide>
               </Swiper>
-
-              <div className="swiper-button-prev"></div>
-              <div className="swiper-button-next"></div>
-              <div className="swiper-pagination"></div>
-              <div className="swiper-scrollbar"></div>
             </div>
           </section>
 
@@ -289,13 +281,11 @@ export default function Home() {
                       src="images/misc/2.png"
                       className="shadow-sm d-img-2 wow zoomIn"
                       data-wow-delay=".5s"
-                      data-jarallax-element="100"
                       alt="logo"
                     />
                     <div
                       className="d-img-3 bg-color wow zoomIn"
                       data-wow-delay=".6s"
-                      data-jarallax-element="-50"
                     ></div>
                   </div>
                 </div>

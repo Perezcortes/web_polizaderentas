@@ -21,7 +21,7 @@ export default function InvestigacionInquilinosPage() {
           <div className="v-center">
             <div className="swiper">
               <div className="swiper-wrapper">
-                <div className="swiper-slide" data-jarallax-element="150">
+                <div className="swiper-slide">
                   <div
                     className="swiper-inner"
                     style={{

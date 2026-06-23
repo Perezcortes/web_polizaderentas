@@ -31,7 +31,7 @@
 /* ---- Menú principal (desktop) ---- */
 #mainmenu {
   display: flex;
-  align-items: stretch;   /* todos los <li> comparten la misma altura */
+  align-items: center; /* Alinea los LI al centro */
   margin: 0;
   padding: 0;
 }
@@ -41,25 +41,35 @@
   list-style: none;
   padding: 0 15px;
   display: flex;
-  align-items: center;    /* centra verticalmente el contenido del <li> */
+  align-items: center;
 }
 
-/* Todos los links del menú — misma altura mediante padding vertical */
+/* Anulamos márgenes invisibles que empujaban el texto hacia arriba */
+#mainmenu .menu-item-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 0 !important; 
+  padding: 0 !important;
+}
+
+/* Todos los links del menú — Idénticos y sincronizados */
 #mainmenu > li > a.menu-item,
 #mainmenu > li > .menu-item-wrapper > a.menu-item {
   color: white;
   text-decoration: none;
   font-size: 15px;
   font-weight: 500;
-  padding: 25px 0;
-  display: block;           /* block dentro del flex-item del <li> */
-  transition: color 0.3s ease;
-}
-
-/* Wrapper del item con flecha — flex en desktop, alineado al eje del menú */
-#mainmenu .menu-item-wrapper {
+  padding: 25px 0 !important; 
+  margin: 0 !important;
   display: flex;
   align-items: center;
+  line-height: 1; 
+  transition: padding 0.3s ease, color 0.3s ease;
+}
+
+.header-full.smaller #mainmenu > li > a.menu-item,
+.header-full.smaller #mainmenu > li > .menu-item-wrapper > a.menu-item {
+  padding: 10px 0 !important;
 }
 
 /* Flecha submenu — oculta en desktop */
